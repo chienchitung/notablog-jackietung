@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+
+# Package manager lockfiles
+pnpm-lock.yaml
+yarn.lock
+notablog-starter/cache
+notablog-starter/public
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Sass
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Project
+*.log
+dist/
+typedoc/
+test/renderer/*.html
+
+# Lint cache
+.eslintcache
