@@ -313,6 +313,26 @@
       </div>
     </article>
 
+    <!-- 浮動目錄 -->
+    <aside class="TOC" id="toc">
+      <button class="TOC__Close" id="tocClose" aria-label="隱藏目錄">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="TOC__Header">
+        <h3 class="TOC__Title">目錄</h3>
+        <button class="TOC__Toggle" id="tocToggle" aria-label="切換目錄">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M6 8L10 12L14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="TOC__Nav" id="tocNav">
+        <!-- 目錄項目將由 JavaScript 動態生成 -->
+      </nav>
+    </aside>
+
     <footer class="Footer">
   <div class="Container">
     <div class="Footer__Content">
@@ -496,10 +516,31 @@
 
   </div>
 
+  <!-- 重新開啟目錄按鈕（固定在視窗右下） -->
+  <button class="TOC__Trigger" id="tocTrigger" aria-label="顯示目錄">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
   <style>
     .Post {
       margin-top: 60px;
       margin-bottom: 80px;
+    }
+
+    /* 桌面版：为文章添加右侧边距，避免被目录遮蔽 */
+    @media (min-width: 1200px) {
+      .Post {
+        margin-right: 150px;
+        padding-right: 16px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body.toc-hidden .Post {
+        margin-right: 0;
+        padding-right: 0;
+      }
     }
 
     .Post__Header {
@@ -635,6 +676,470 @@
       border-radius: 0 8px 8px 0;
       font-style: normal;
     }
+
+    /* ========== 浮動目錄樣式 ========== */
+    .TOC {
+      position: fixed;
+      top: 120px;
+      right: max(24px, calc((100vw - var(--max-width)) / 2 - 280px));
+      width: 260px;
+      max-height: calc(100vh - 160px);
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .TOC.hidden {
+      opacity: 0;
+      transform: translateX(100%);
+      pointer-events: none;
+    }
+
+    /* 關閉按鈕 */
+    .TOC__Close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      color: var(--color-text-gray);
+      transition: all 0.2s;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+      z-index: 10;
+    }
+
+    .TOC__Close:hover {
+      background: var(--color-hover);
+      color: var(--color-text-default);
+      opacity: 1;
+    }
+
+    /* 重新開啟目錄按鈕 - 側邊欄設計 */
+    .TOC__Trigger {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: #ffffff;
+      border: none;
+      border-radius: 12px 0 0 12px;
+      box-shadow: -4px 4px 20px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #1f2937;
+      font-weight: 700;
+      font-size: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 999;
+    }
+
+    .TOC__Trigger.visible {
+      display: flex;
+    }
+
+    .TOC__Trigger:hover {
+      box-shadow: -6px 6px 32px rgba(0, 0, 0, 0.2);
+      transform: translateY(-50%) scale(1.08);
+      background: #f9fafb;
+    }
+
+    .TOC__Trigger:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .TOC__Trigger svg {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+    }
+
+    .TOC__Trigger__Text {
+      display: none;
+    }
+
+    .TOC__Trigger__Hint {
+      display: none;
+    }
+
+    .TOC__Header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    .TOC__Title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text-default);
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+
+    .TOC__Toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--color-text-gray);
+      transition: all 0.2s;
+      border-radius: 4px;
+    }
+
+    .TOC__Toggle:hover {
+      background: var(--color-hover);
+      color: var(--color-text-default);
+    }
+
+    .TOC__Toggle svg {
+      transition: transform 0.3s;
+    }
+
+    .TOC.collapsed .TOC__Toggle svg {
+      transform: rotate(-90deg);
+    }
+
+    .TOC__Nav {
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: calc(100vh - 240px);
+      scrollbar-width: thin;
+      scrollbar-color: #d1d5db transparent;
+    }
+
+    .TOC__Nav::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .TOC__Nav::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .TOC__Nav::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 2px;
+    }
+
+    .TOC__Nav::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
+
+    /* 目录打开时的过渡动画 */
+    @media (min-width: 1200px) {
+      .TOC {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
+    .TOC__Item {
+      display: block;
+      padding: 6px 0 6px 12px;
+      color: var(--color-text-gray);
+      text-decoration: none;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .TOC__Item:hover {
+      color: var(--color-primary);
+      border-left-color: var(--color-primary);
+      background: rgba(37, 99, 235, 0.04);
+    }
+
+    .TOC__Item.active {
+      color: var(--color-primary);
+      font-weight: 600;
+      border-left-color: var(--color-primary);
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    /* 標題層級縮進 */
+    .TOC__Item[data-level="2"] {
+      padding-left: 12px;
+    }
+
+    .TOC__Item[data-level="3"] {
+      padding-left: 24px;
+      font-size: 0.8125rem;
+    }
+
+    .TOC__Item[data-level="4"],
+    .TOC__Item[data-level="5"],
+    .TOC__Item[data-level="6"] {
+      padding-left: 36px;
+      font-size: 0.75rem;
+    }
+
+    /* 大螢幕優化 */
+    @media (min-width: 1440px) {
+      .TOC {
+        right: max(48px, calc((100vw - var(--max-width)) / 2 - 320px));
+        width: 280px;
+      }
+    }
+
+    /* 中等螢幕 - 移動目錄到內容下方 */
+    @media (max-width: 1200px) {
+      .TOC {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        transform: none;
+        opacity: 1;
+      }
+
+      .TOC.hidden {
+        display: none;
+      }
+
+      .TOC__Close {
+        display: none;
+      }
+
+      .TOC__Trigger {
+        display: none !important;
+      }
+
+      .TOC__Toggle {
+        display: block;
+      }
+
+      .TOC.collapsed .TOC__Nav {
+        display: none;
+      }
+
+      .TOC__Nav {
+        max-height: 400px;
+      }
+    }
+
+    /* 小螢幕優化 */
+    @media (max-width: 768px) {
+      .Post {
+        margin-right: 0;
+        padding-right: 0;
+      }
+
+      .TOC {
+        padding: 16px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+      }
+
+      .TOC__Item {
+        font-size: 0.8125rem;
+      }
+
+      .TOC__Item[data-level="3"] {
+        padding-left: 16px;
+      }
+
+      .TOC__Item[data-level="4"],
+      .TOC__Item[data-level="5"],
+      .TOC__Item[data-level="6"] {
+        padding-left: 24px;
+      }
+
+      .TOC__Trigger {
+        display: none !important;
+      }
+    }
+
+    /* 平板優化 */
+    @media (max-width: 1200px) {
+      .TOC__Trigger {
+        display: none !important;
+      }
+    }
   </style>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // 等待 DOM 加載完成
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTOC);
+      } else {
+        initTOC();
+      }
+
+      function initTOC() {
+        const content = document.querySelector('.Post__Content');
+        const tocNav = document.getElementById('tocNav');
+        const tocContainer = document.getElementById('toc');
+        const tocToggle = document.getElementById('tocToggle');
+        const tocClose = document.getElementById('tocClose');
+        const tocTrigger = document.getElementById('tocTrigger');
+
+        if (!content || !tocNav || !tocContainer) return;
+
+        // 提取所有標題
+        const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        
+        if (headings.length === 0) {
+          tocContainer.style.display = 'none';
+          return;
+        }
+
+        // 檢查是否為桌面版
+        const isDesktop = () => window.innerWidth > 1200;
+
+        // 隱藏目錄功能（桌面版）
+        if (tocClose && tocTrigger) {
+          tocClose.addEventListener('click', function() {
+            if (isDesktop()) {
+              tocContainer.classList.add('hidden');
+              document.body.classList.add('toc-hidden');
+              tocTrigger.classList.add('visible');
+            }
+          });
+
+          tocTrigger.addEventListener('click', function() {
+            if (isDesktop()) {
+              tocTrigger.classList.remove('visible');
+              tocContainer.classList.remove('hidden');
+              document.body.classList.remove('toc-hidden');
+            }
+          });
+        }
+
+        // 響應式調整
+        window.addEventListener('resize', function() {
+          if (!isDesktop()) {
+            tocContainer.classList.remove('hidden');
+            document.body.classList.remove('toc-hidden');
+            if (tocTrigger) {
+              tocTrigger.classList.remove('visible');
+            }
+          } else {
+            // 桌面版確保按鈕狀態正確
+            if (tocContainer.classList.contains('hidden')) {
+              tocTrigger.classList.add('visible');
+            }
+          }
+        });
+
+        // 為每個標題添加 ID（如果沒有的話）
+        const tocItems = [];
+        headings.forEach((heading, index) => {
+          if (!heading.id) {
+            heading.id = `heading-${index}`;
+          }
+
+          const level = parseInt(heading.tagName.substring(1));
+          const text = heading.textContent.trim();
+
+          tocItems.push({
+            id: heading.id,
+            text: text,
+            level: level,
+            element: heading
+          });
+        });
+
+        // 生成目錄 HTML
+        let tocHTML = '';
+        tocItems.forEach(item => {
+          tocHTML += `
+            <a href="#${item.id}" 
+               class="TOC__Item" 
+               data-level="${item.level}"
+               data-target="${item.id}">
+              ${item.text}
+            </a>
+          `;
+        });
+        tocNav.innerHTML = tocHTML;
+
+        // 平滑滾動
+        const tocLinks = tocNav.querySelectorAll('.TOC__Item');
+        tocLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 100;
+              window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+              });
+
+              // 更新 URL hash（不觸發跳轉）
+              history.pushState(null, null, `#${targetId}`);
+            }
+          });
+        });
+
+        // 滾動監聽 - 高亮當前標題
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            window.requestAnimationFrame(function() {
+              updateActiveHeading(headings, tocLinks);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+
+        // 初始化時設定活動標題
+        updateActiveHeading(headings, tocLinks);
+
+        // 折疊/展開功能（移動端）
+        if (tocToggle) {
+          tocToggle.addEventListener('click', function() {
+            tocContainer.classList.toggle('collapsed');
+          });
+        }
+      }
+
+      function updateActiveHeading(headings, tocLinks) {
+        const scrollPosition = window.scrollY + 120;
+
+        let activeIndex = -1;
+        headings.forEach((heading, index) => {
+          const headingTop = heading.offsetTop;
+          if (scrollPosition >= headingTop - 50) {
+            activeIndex = index;
+          }
+        });
+
+        tocLinks.forEach((link, index) => {
+          if (index === activeIndex) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    })();
+  </script>
 
 </html>
