@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build && node bin/cli.js generate notablog-starter",
+  "outputDirectory": "notablog-starter/public",
+  "installCommand": "npm install --legacy-peer-deps"
+}
