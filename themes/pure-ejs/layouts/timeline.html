@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head.html', { fontSize: 20, favicon: siteMeta.iconUrl }) %>
+  <title><%= post.title %>&nbsp;|&nbsp;<%= siteMeta.title %></title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="<%= post.title %>">
+  <% if (post.description) { %>
+    <meta name="description" content="<%= post.descriptionPlain %>">
+    <meta property="og:description" content="<%= post.descriptionPlain %>">
+  <% } %>
+  <% if (post.iconUrl) { %>
+    <meta property="og:image" content="<%= post.iconUrl %>">
+  <% } %>
+</head>
+
+  <%- include('partials/navbar.html', { siteMeta }) %>
+  
+  <div class="Timeline">
+    <header class="Timeline__Header">
+      <h1 class="Timeline__Title"><%= post.title %></h1>
+      <% if (post.description) { %>
+        <p class="Timeline__Desc"><%= post.description %></p>
+      <% } %>
+    </header>
+
+    <div class="Timeline__Content">
+      <%- post.contentHTML %>
+    </div>
+
+    <%- include('partials/footer.html', { siteMeta }) %>
+  </div>
+
+  <style>
+    /* Timeline page styling - Single column vertical layout */
+    .Timeline {
+      margin-top: 40px;
+      margin-bottom: 80px;
+      padding: 0 60px;
+      max-width: 1400px; /* Increased from 900px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .Timeline__Header {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .Timeline__Title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-text-default);
+      margin-bottom: 12px;
+    }
+
+    .Timeline__Desc {
+      font-size: 1.1rem;
+      color: var(--color-text-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Remove all container constraints */
+    .Timeline__Content .PageRoot {
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    .Timeline__Content .CollectionInline {
+      max-width: none !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .Timeline__Content .Table {
+      display: block;
+      width: 100%;
+      overflow: visible;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* Single column vertical layout */
+    .Timeline__Content table {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      width: 100%;
+      border: none;
+    }
+
+    .Timeline__Content thead {
+      display: none !important;
+    }
+
+    .Timeline__Content tbody {
+      display: contents;
+    }
+
+    /* Horizontal card layout with wider proportions */
+    .Timeline__Content tr {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      grid-template-rows: auto auto 1fr auto; /* 4 rows: tags, title, description (flexible), button */
+      column-gap: 32px; /* Gap between image and content */
+      row-gap: 8px; /* Smaller gap between content rows */
+      background: white;
+      border: none;
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      min-height: 280px; /* Ensure enough height for content */
+    }
+
+    .Timeline__Content tr:hover {
+      transform: translateX(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* Placeholder image on the left - spans all rows */
+    .Timeline__Content tr::before {
+      content: '';
+      grid-column: 1;
+      grid-row: 1 / 5; /* Span all 4 rows */
+      width: 240px;
+      height: 100%; /* Fill available height */
+      min-height: 240px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 8px;
+    }
+
+    .Timeline__Content tr:nth-child(2)::before {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .Timeline__Content tr:nth-child(3)::before {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .Timeline__Content tr:nth-child(4)::before {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    /* Cell base styles */
+    .Timeline__Content td {
+      display: block;
+      border: none !important;
+      padding: 0;
+      margin: 0;
+      min-width: 0;
+    }
+
+    /* Col 2: Tags - top right */
+    .Timeline__Content td:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+      margin-bottom: 4px; /* Reduced from 8px for tighter spacing */
+    }
+    
+    .Timeline__Content td:nth-child(2) .SemanticString,
+    .Timeline__Content td:nth-child(2) .Pill {
+      display: inline-flex;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Col 1: Title - middle right */
+    .Timeline__Content td:nth-child(1) {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 12px; /* Increased spacing between title and description */
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      overflow: visible !important; /* Ensure no overflow clipping */
+      max-height: none !important; /* Remove any height limit */
+      line-clamp: unset !important; /* Remove line truncation */
+      -webkit-line-clamp: unset !important; /* Remove line truncation */
+    }
+
+    .Timeline__Content td:nth-child(1) a {
+      text-decoration: none;
+      color: var(--color-text-default);
+      pointer-events: none;
+      cursor: default;
+      display: inline;
+    }
+
+    /* Remove default styling from title content */
+    .Timeline__Content td:nth-child(1) * {
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: inherit !important;
+      overflow: visible !important;
+      max-height: none !important;
+      line-clamp: unset !important;
+      -webkit-line-clamp: unset !important;
+    }
+
+    /* Col 3: Description - bottom right */
+    .Timeline__Content td:nth-child(3) {
+      grid-column: 2;
+      grid-row: 3;
+      font-size: 0.85rem;
+      color: var(--color-text-gray);
+      line-height: 1.5;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      overflow: visible !important;
+      max-height: none !important;
+      line-clamp: unset !important;
+      -webkit-line-clamp: unset !important;
+      margin-bottom: 16px; /* Space before READ MORE */
+    }
+
+    /* Ensure all description content is visible */
+    .Timeline__Content td:nth-child(3) * {
+      overflow: visible !important;
+      max-height: none !important;
+      line-clamp: unset !important;
+      -webkit-line-clamp: unset !important;
+    }
+
+    /* Col 4: URL - at the end */
+    .Timeline__Content td:nth-child(4) {
+      grid-column: 2;
+      grid-row: 4;
+      margin-top: 16px;
+    }
+
+    .Timeline__Content td:nth-child(4) a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      background: transparent;
+      color: transparent;
+      padding: 0;
+      font-size: 0;
+      font-weight: 800;
+      transition: opacity 0.2s;
+    }
+    
+    .Timeline__Content td:nth-child(4) a::after {
+      content: "READ MORE →";
+      color: var(--color-primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .Timeline__Content td:nth-child(4) a:hover::after {
+      opacity: 0.7;
+    }
+
+    /* Responsive - Mobile & Tablet */
+    @media (max-width: 1200px) {
+      .Timeline {
+        padding: 0 16px;
+      }
+
+      .Timeline__Header {
+        margin-bottom: 32px;
+      }
+
+      .Timeline__Title {
+        font-size: 1.5rem;
+      }
+
+      .Timeline__Content table {
+        gap: 20px;
+      }
+
+      /* CRITICAL: Reset all table cell styles from theme.css for mobile */
+      .Timeline__Content .Table > table td,
+      .Timeline__Content .Table > table td.Table__CellTitle,
+      .Timeline__Content .Table > table td.Table__CellText,
+      .Timeline__Content .Table > table td.Table__CellSelect {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        overflow: visible !important;
+        word-break: break-word !important;
+      }
+
+      /* Force flexbox on tr for RELIABLE vertical stacking */
+      .Timeline__Content .Table > table > tbody > tr,
+      .Timeline__Content table > tbody > tr,
+      .Timeline__Content tr {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 16px !important;
+        min-height: auto !important;
+        gap: 0 !important;
+      }
+
+      /* Placeholder image - first in visual order */
+      .Timeline__Content tr::before {
+        order: 1 !important;
+        width: 100% !important;
+        height: 140px !important;
+        min-height: 140px !important;
+        margin-bottom: 16px !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* Col 1 (name/title): Third in visual order */
+      .Timeline__Content td:nth-child(1),
+      .Timeline__Content .Table__CellTitle {
+        order: 3 !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        line-height: 1.4 !important;
+        margin-bottom: 12px !important;
+        color: var(--color-text-default) !important;
+      }
+
+      /* Col 2 (tags): Second in visual order - RESTORE STYLES */
+      .Timeline__Content td:nth-child(2),
+      .Timeline__Content .Table__CellSelect {
+        order: 2 !important;
+        margin-bottom: 8px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+      }
+
+      .Timeline__Content td:nth-child(2) .SemanticString,
+      .Timeline__Content td:nth-child(2) .Pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        background: #e0e7ff !important;
+        color: #3730a3 !important;
+        padding: 4px 12px !important;
+        border-radius: 12px !important;
+        font-size: 0.7rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+      }
+
+      /* Col 3 (description): Fourth in visual order */
+      .Timeline__Content td:nth-child(3) {
+        order: 4 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+        color: var(--color-text-gray) !important;
+        margin-bottom: 16px !important;
+      }
+
+      /* Col 4 (URL): Fifth in visual order */
+      .Timeline__Content td:nth-child(4) {
+        order: 5 !important;
+        margin-top: 8px !important;
+      }
+
+      /* Col 5 (image): Hidden */
+      .Timeline__Content td:nth-child(5) {
+        display: none !important;
+      }
+
+      /* Reset ALL inner content */
+      .Timeline__Content td *,
+      .Timeline__Content td a,
+      .Timeline__Content td span,
+      .Timeline__Content td strong {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        max-height: none !important;
+        display: inline !important;
+      }
+
+      /* Re-style the link specifically */
+      .Timeline__Content td:nth-child(4) a {
+        display: inline-flex !important;
+      }
+    }
+
+    /* Hide elements */
+    .Timeline__Content td > * { border: none !important; }
+    .Timeline__Content td:empty { display: none; }
+    .Timeline__Content .PageRoot > h3 { display: none !important; }
+    .Timeline__Content .CollectionInline > h3 { display: none !important; }
+    .Timeline__Content h3 { display: none !important; }
+  </style>
+
+</html>

@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+<link rel="shortcut icon" href="img/site-icon.png" type="image/png">
+<link rel="icon" href="img/site-icon.png" type="image/png">
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>董建祺 Jackie Tung | Data & Strategy Expert</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="董建祺 Jackie Tung | Data & Strategy Expert">
+  <meta property="og:description" content="協助企業從數據中挖掘線索，提出可行的解決方案。專注於流程制度建立、數據策略規劃與商業分析。">
+  
+    <meta property="og:image" content="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;attachment:c079ebd5-8886-4a6c-8995-d04851d68224:IMG_0406.png&lt;/text&gt;&lt;/svg&gt;">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <nav class="Navbar">
+  <div class="Container Navbar__Content">
+    <a href="index.html" class="Navbar__Logo">
+      
+        <img class="Navbar__LogoIcon" src="img/profile-icon.png" alt="Profile">
+      
+      <span class="Navbar__LogoText">JT用數據說故事</span>
+    </a>
+    
+    <button class="Navbar__Toggle" aria-label="Toggle navigation">
+      <span class="Navbar__ToggleIcon"></span>
+    </button>
+
+    <div class="Navbar__Links">
+      <!-- <a href="index.html" class="Navbar__Link Navbar__Link--Active">Home</a> -->
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          <a href="about.html" class="Navbar__Link" >
+            關於我
+            
+          </a>
+        
+      
+        
+          
+          <a href="publications.html" class="Navbar__Link" >
+            著作
+            
+          </a>
+        
+      
+        
+          
+          <a href="speech.html" class="Navbar__Link" >
+            演講
+            
+          </a>
+        
+      
+        
+          
+          <a href="training.html" class="Navbar__Link" >
+            課程培訓
+            
+          </a>
+        
+      
+        
+          
+          <a href="https://www.jtdatastoryteller.com/" class="Navbar__Link" target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;>
+            部落格
+            
+              <!-- Type: string Value: https://www.jtdatastoryteller.com/ -->
+            
+          </a>
+        
+      
+        
+          
+          <a href="side-project.html" class="Navbar__Link" >
+            個人專案
+            
+          </a>
+        
+      
+        
+      
+    </div>
+  </div>
+</nav>
+
+<style>
+.Navbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+.Navbar__Content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Navbar__Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-default);
+  gap: 12px;
+  position: relative;
+  z-index: 102; /* Ensure logo is above menu overlay if needed */
+}
+
+.Navbar__LogoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Navbar__Links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.Navbar__Link {
+  text-decoration: none;
+  color: var(--color-text-default-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.Navbar__Link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.Navbar__Link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.Navbar__Link:hover {
+  color: var(--color-primary);
+}
+
+/* Hamburger Toggle */
+.Navbar__Toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 102;
+}
+
+.Navbar__ToggleIcon {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.Navbar__ToggleIcon::before,
+.Navbar__ToggleIcon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  transition: transform 0.3s, top 0.3s;
+  left: 0;
+}
+
+.Navbar__ToggleIcon::before { top: -8px; }
+.Navbar__ToggleIcon::after { top: 8px; }
+
+/* Active Toggle State (X shape) */
+.Navbar__Toggle--Active .Navbar__ToggleIcon { background-color: transparent; }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::before { top: 0; transform: rotate(45deg); }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::after { top: 0; transform: rotate(-45deg); }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .Navbar__Toggle {
+    display: block;
+  }
+
+  .Navbar__Links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    z-index: 101;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    pointer-events: none; /* Prevent clicks when hidden */
+  }
+
+  .Navbar__Links--Active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .Navbar__Link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-default);
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.Navbar__Toggle');
+    const links = document.querySelector('.Navbar__Links');
+    
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('Navbar__Toggle--Active');
+        links.classList.toggle('Navbar__Links--Active');
+        
+        // Prevent body scroll when menu is open
+        if (links.classList.contains('Navbar__Links--Active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close menu when a link is clicked
+      links.querySelectorAll('.Navbar__Link').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('Navbar__Toggle--Active');
+          links.classList.remove('Navbar__Links--Active');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  });
+</script>
+  
+  <div class="GlobalLayout">
+    
+    <!-- Hero Section -->
+    <header class="HeroSection">
+      <div class="Container HeroGrid">
+        <div class="HeroContent">
+          <div class="HeroBadge">Data Analyst & AI Builder</div>
+          <h1 class="HeroTitle">用數據洞察<br><span class="TextGradient">驅動商業成長</span></h1>
+          <p class="HeroDesc">
+            嗨，我是董建祺 (Jackie Tung)。我擅長將複雜的數據轉化為可執行的商業策略，協助企業拆解陌生問題，找出最佳解決方案。
+          </p>
+          <div class="HeroActions">
+            <a href="#contact" class="Btn Btn--primary Btn--lg">合作洽詢</a>
+            <a href="stories.html" class="Btn Btn--outline Btn--lg">更多關於我的故事 →</a>
+          </div>
+        </div>
+        <div class="HeroVisual">
+          
+            <div class="AvatarWrapper">
+                <img src="img/jackie.jpg" onerror="this.src='data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;attachment:c079ebd5-8886-4a6c-8995-d04851d68224:IMG_0406.png&lt;/text&gt;&lt;/svg&gt;'" alt="Jackie Tung">
+            </div>
+          
+          <!-- Decor elements -->
+          <div class="DecorCircle"></div>
+          <div class="DecorDot"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Selling Points / Value Proposition -->
+    <section class="Section FeatureSection">
+      <div class="Container">
+        <div class="SectionHeader text-center">
+            <h2 class="SectionTitle">核心優勢與價值</h2>
+            <p class="SectionSubtitle">結合企管與資料科學雙重背景， 為連結商業與技術的關鍵橋樑。</p>
+        </div>
+        <div class="Grid Grid--3">
+            <div class="FeatureCard">
+                <div class="FeatureIcon">
+                    <!-- Data Strategy Icon -->
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <h3 class="FeatureTitle">數據策略規劃</h3>
+                <p class="FeatureDesc">不只是看數字，而是從繁雜數據中挖掘商業線索。曾協助 IKEA 北亞區透過個人化工具創造 460 萬美元額外營收。</p>
+            </div>
+            <div class="FeatureCard">
+                <div class="FeatureIcon">
+                    <!-- Process/Workflow Icon -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="6" height="6" rx="1"></rect>
+                        <rect x="16" y="5" width="6" height="6" rx="1"></rect>
+                        <rect x="9" y="15" width="6" height="6" rx="1"></rect>
+                        <path d="M5 11v2a2 2 0 0 0 2 2h2"></path>
+                        <path d="M19 11v2a2 2 0 0 1-2 2h-2"></path>
+                    </svg>
+                </div>
+                <h3 class="FeatureTitle">複雜問題拆解</h3>
+                <p class="FeatureDesc">擅長面對陌生挑戰，將抽象問題轉化為結構化的分析流程。從無到有建立預測模型與自動化儀表板。</p>
+            </div>
+            <div class="FeatureCard">
+                <div class="FeatureIcon">
+                    <!-- Briefcase Icon -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                </div>
+                <h3 class="FeatureTitle">商業落地執行</h3>
+                <p class="FeatureDesc">具備高度執行力，能領導跨職能團隊 (UX/PM) 進行 A/B 測試與產品優化，確保策略能真正落地產生價值。</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Teaser -->
+    <section class="Section AboutSection">
+      <div class="Container">
+        <div class="AboutGrid">
+            <div class="AboutContent">
+                <h2 class="SectionTitle">關於我</h2>
+                <p>擁有五年以上實務經驗，橫跨零售、電商與電信產業。我的職涯始終圍繞著「解決問題」與「創造價值」。</p>
+                <p>目前擔任傢俱零售業的數位成長分析師，過去曾在遠時數位科技與 Circles.Life 服務。除了工作，我也熱愛閱讀商業書籍與自助旅行，這些經歷培養了我廣闊的國際視野。</p>
+                <a href="about.html" class="Btn Btn--text">閱讀更多 →</a>
+            </div>
+            <div class="AboutStats">
+                <div class="StatItem">
+                    <div class="StatNumber">US$4.6M</div>
+                    <div class="StatLabel">額外營收創造</div>
+                </div>
+                <div class="StatItem">
+                    <div class="StatNumber">60%</div>
+                    <div class="StatLabel">作業效率提升</div>
+                </div>
+                <div class="StatItem">
+                    <div class="StatNumber">30+</div>
+                    <div class="StatLabel">A/B 測試實戰</div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="Section ContactSection" id="contact">
+      <div class="Container">
+        <div class="FormCard">
+             <!-- Success Message Container (Hidden by default) -->
+             <div id="form-success-message" style="display: none; text-align: center; padding: 40px 0;">
+                 <div style="font-size: 4rem; margin-bottom: 24px;">🎉</div>
+                 <h2 class="FormTitle">訊息已成功送出！</h2>
+                 <p class="FormSubtitle">謝謝您的來信，我已經收到您的訊息，會盡快回覆您。</p>
+                 <button type="button" id="back-to-form-btn" class="Btn Btn--outline" style="margin-top: 32px;">發送另一則訊息</button>
+             </div>
+
+             <form id="contact-form" action="https://formspree.io/f/mojjjree" method="POST" class="ContactForm">
+                <div class="FormHeader">
+                    <h2 class="FormTitle">聯絡我</h2>
+                    <p class="FormSubtitle">歡迎填寫表單，我將盡快回覆您</p>
+                </div>
+                
+                <div class="FormGrid">
+                    <div class="FormGroup">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" placeholder="請輸入姓名" required>
+                    </div>
+                    <div class="FormGroup">
+                        <label for="email">電子郵件</label>
+                        <input type="email" id="email" name="email" placeholder="請輸入電子郵件" required>
+                    </div>
+                </div>
+                
+                <div class="FormGroup">
+                    <label for="subject">主旨</label>
+                    <input type="text" id="subject" name="subject" placeholder="請輸入主旨" required>
+                </div>
+                
+                <div class="FormGroup">
+                    <label for="message">訊息</label>
+                    <textarea id="message" name="message" placeholder="請輸入訊息" rows="6" required></textarea>
+                </div>
+                
+                <button type="submit" class="Btn Btn--submit">送出訊息</button>
+            </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Articles Preview Removed -->
+    
+    <footer class="Footer">
+  <div class="Container">
+    <div class="Footer__Content">
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="ScrollTopBtn" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+      </button>
+
+      <div class="Footer__Links">
+        
+          
+        
+          
+        
+          
+        
+          
+            <a href="about.html" class="Footer__Link">關於我</a>
+          
+        
+          
+            <a href="publications.html" class="Footer__Link">著作</a>
+          
+        
+          
+            <a href="speech.html" class="Footer__Link">演講</a>
+          
+        
+          
+            <a href="training.html" class="Footer__Link">課程培訓</a>
+          
+        
+          
+            <a href="https://www.jtdatastoryteller.com/" class="Footer__Link">部落格</a>
+          
+        
+          
+            <a href="side-project.html" class="Footer__Link">個人專案</a>
+          
+        
+          
+        
+      </div>
+
+      <div class="Footer__Social">
+        <a href="https://www.linkedin.com/in/chien-chi-tung/" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+        <a href="https://www.threads.com/@jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Threads">
+           <svg width="24" height="24" viewBox="0 0 448 512" fill="currentColor">
+              <path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8 29.2 14.1 50.6 35.2 61.8 61.4 15.7 36.5 17.2 95.8-30.3 143.2-36.2 36.2-80.3 52.5-142.6 53l-.3 0c-70.2-.5-124.1-24.1-160.4-70.2-32.3-41-48.9-98.1-49.5-169.6l0-.5C17 184.3 33.6 127.2 65.9 86.2 102.2 40.1 156.2 16.5 226.4 16l.3 0c70.3 .5 124.9 24 162.3 69.9 18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4-29.2-35.8-73-54.2-130.5-54.6-57 .5-100.1 18.8-128.2 54.4-26.2 33.3-39.8 81.5-40.3 143.2 .5 61.7 14.1 109.9 40.3 143.3 28 35.6 71.2 53.9 128.2 54.4 51.4-.4 85.4-12.6 113.7-40.9 32.3-32.2 31.7-71.8 21.4-95.9-6.1-14.2-17.1-26-31.9-34.9-3.7 26.9-11.8 48.3-24.7 64.8-17.1 21.8-41.4 33.6-72.7 35.3-23.6 1.3-46.3-4.4-63.9-16-20.8-13.8-33-34.8-34.3-59.3-2.5-48.3 35.7-83 95.2-86.4 21.1-1.2 40.9-.3 59.2 2.8-2.4-14.8-7.3-26.6-14.6-35.2-10-11.7-25.6-17.7-46.2-17.8l-.7 0c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1l.8 0c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2 .1 0zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3 25.6-1.4 54.6-11.4 59.5-73.2-13.2-2.9-27.8-4.4-43.4-4.4-4.8 0-9.6 .1-14.4 .4-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"/></svg>
+         </a>
+         <a href="https://www.instagram.com/jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Instagram">
+           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="Footer__Copyright">
+        &copy; JT用數據說故事 2026</a>
+      </div>
+
+      <div class="Footer__Attribution">
+        Built with <a href="https://github.com/dragonman225/notablog" target="_blank" rel="noopener noreferrer">Notablog</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.Footer {
+  padding: 60px 0 40px;
+  background-color: var(--color-bg-light);
+  border-top: 1px solid var(--color-border);
+  margin-top: 80px;
+}
+
+.Footer__Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.Footer__Links {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Footer__Link {
+  color: var(--color-text-default);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.Footer__Link:hover {
+  color: var(--color-primary);
+}
+
+.Footer__Social {
+  display: flex;
+  gap: 24px;
+}
+
+.SocialIcon {
+  color:var(--color-text-gray);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SocialIcon:hover {
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.Footer__Copyright {
+  color: var(--color-text-gray);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.Footer__Copyright a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.Footer__Copyright a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.Footer__Attribution {
+  color: var(--color-text-gray);
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.Footer__Attribution a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s;
+}
+
+.Footer__Attribution a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.ScrollTopBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-default);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  margin-bottom: 8px; /* Spacing from the next element */
+}
+
+.ScrollTopBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  color: var(--color-primary);
+}
+</style>
+
+  </div>
+
+<script>
+    // AJAX Form Submission
+    window.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById("contact-form");
+        var successMessage = document.getElementById("form-success-message");
+        var backBtn = document.getElementById("back-to-form-btn");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.createElement("div"); // For error handling if needed
+            var originalBtnContent = form.querySelector('button[type="submit"]').innerHTML;
+            var submitBtn = form.querySelector('button[type="submit"]');
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "傳送中...";
+
+            var data = new FormData(event.target);
+            
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    form.style.display = "none";
+                    successMessage.style.display = "block";
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert("Oops! There was a problem submitting your form");
+                        }
+                    })
+                }
+            }).catch(error => {
+                alert("Oops! There was a problem submitting your form");
+            }).finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            });
+        }
+        
+        if(form) {
+            form.addEventListener("submit", handleSubmit);
+        }
+
+        if(backBtn) {
+            backBtn.addEventListener("click", function() {
+                successMessage.style.display = "none";
+                form.style.display = "block";
+            });
+        }
+    });
+</script>
+
+<style>
+/* 
+   LANDING PAGE CSS 
+   ----------------
+   Style Overrides for specific Landing Page look
+*/
+
+:root {
+    --lp-primary: #2c3e50;
+    --lp-accent: #3498db;
+    --lp-bg-light: #f8f9fa;
+    --lp-text: #2c3e50;
+    --lp-text-light: #5f6c7b;
+    --lp-input-border: #e2e8f0;
+    --lp-input-focus: #3498db;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.GlobalLayout { overflow-x: hidden; }
+
+/* Buttons */
+.Btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+}
+
+.Btn--lg {
+    padding: 14px 32px;
+    font-size: 1.1rem;
+}
+
+.Btn--primary {
+    background: var(--lp-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+}
+
+.Btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.4);
+    opacity: 1;
+}
+
+.Btn--outline {
+    border: 2px solid var(--lp-primary);
+    color: var(--lp-primary);
+    background: transparent;
+}
+
+.Btn--outline:hover {
+    background: var(--lp-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
+}
+
+.Btn--text {
+    color: var(--lp-primary);
+    font-weight: 700;
+    padding: 0;
+}
+
+.Btn--white {
+    background: white;
+    color: var(--lp-primary);
+}
+
+.Btn--white:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.Btn--submit {
+    background: #3b82f6; /* Blue matching the image */
+    color: white;
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    margin-top: 16px;
+}
+
+.Btn--submit:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+
+/* HERO SECTION */
+.HeroSection {
+    padding: 100px 0 60px;
+    background: linear-gradient(135deg, #fff 0%, #f7f9fc 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.HeroGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.HeroBadge {
+    display: inline-block;
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--lp-accent);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.HeroTitle {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: var(--lp-primary);
+}
+
+.TextGradient {
+    background: linear-gradient(120deg, #2c3e50, #3498db);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.HeroDesc {
+    font-size: 1.2rem;
+    color: var(--lp-text-light);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.HeroActions {
+    display: flex;
+    gap: 16px;
+}
+
+.HeroVisual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.AvatarWrapper {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    z-index: 2;
+}
+
+.AvatarWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transform: rotate(-3deg);
+    transition: transform 0.5s ease;
+}
+
+.AvatarWrapper:hover img {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.DecorCircle {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-radius: 50%;
+    opacity: 0.5;
+    z-index: 1;
+    filter: blur(40px);
+}
+
+/* SECTIONS */
+.Section {
+    padding: 100px 0;
+}
+
+.SectionHeader {
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.SectionTitle {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--lp-primary);
+}
+
+.SectionSubtitle {
+    font-size: 1.1rem;
+    color: var(--lp-text-light);
+}
+
+/* Feature Grid */
+.Grid { display: grid; gap: 32px; }
+.Grid--3 { grid-template-columns: repeat(3, 1fr); }
+
+.FeatureCard {
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.FeatureCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    border-color: transparent;
+}
+
+.FeatureIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: var(--lp-bg-light);
+    color: var(--lp-accent);
+    border-radius: 50%;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.FeatureCard:hover .FeatureIcon {
+    background: var(--lp-accent);
+    color: white;
+    transform: scale(1.1);
+}
+
+.FeatureTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--lp-primary);
+}
+
+.FeatureDesc {
+    font-size: 1rem;
+    color: var(--lp-text-light);
+    line-height: 1.6;
+}
+
+/* About Section */
+.AboutSection {
+    background-color: var(--lp-bg-light);
+}
+
+.AboutGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.AboutStats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.StatItem {
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.StatItem:first-child { grid-column: 1 / -1; }
+
+.StatNumber {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--lp-accent);
+    margin-bottom: 8px;
+}
+
+.StatLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lp-text-light);
+    text-transform: uppercase;
+}
+
+/* Contact Form Section */
+.ContactSection {
+    padding-bottom: 80px;
+    background-color: white;
+}
+
+.FormCard {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.03);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px;
+}
+
+.FormHeader {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.FormTitle {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--lp-primary);
+    margin-bottom: 8px;
+}
+
+.FormSubtitle {
+    color: var(--lp-text-light);
+}
+
+.FormGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.FormGroup {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.FormGroup label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--lp-primary);
+    margin-bottom: 8px;
+}
+
+.FormGroup input,
+.FormGroup textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 2px solid var(--lp-input-border);
+    border-radius: 8px;
+    background: #fdfdfd;
+    transition: all 0.2s ease;
+    color: var(--lp-primary);
+    font-family: inherit;
+}
+
+.FormGroup input:focus,
+.FormGroup textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    background: white;
+}
+
+.FormGroup input::placeholder,
+.FormGroup textarea::placeholder {
+    color: #cbd5e1;
+}
+
+/* Responsive */
+/* Responsive - Tablet & Mobile */
+@media (max-width: 1024px) {
+    .HeroGrid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .HeroContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .HeroDesc {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .HeroActions {
+        justify-content: center;
+    }
+
+    .AvatarWrapper {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
+    }
+    
+    .AboutGrid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .AboutContent {
+        max-width: 100%;
+    }
+    
+    /* Tablet: 2 Columns for features */
+    .Grid--3 {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Handle the 3rd item in 2-column grid */
+    .Grid--3 > :last-child {
+        grid-column: span 2;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .FormGrid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .FormCard {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Mobile: 1 Column */
+    .Grid--3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .Grid--3 > :last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+}
+</style>
+</body>
+
+</html>

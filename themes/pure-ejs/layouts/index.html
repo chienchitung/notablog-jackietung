@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <%- include('partials/head.html', { fontSize: 20, favicon: siteMeta.iconUrl }) %>
+  <title>董建祺 Jackie Tung | Data & Strategy Expert</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="董建祺 Jackie Tung | Data & Strategy Expert">
+  <meta property="og:description" content="協助企業從數據中挖掘線索，提出可行的解決方案。專注於流程制度建立、數據策略規劃與商業分析。">
+  <% if (siteMeta.iconUrl) { %>
+    <meta property="og:image" content="<%= siteMeta.iconUrl %>">
+  <% } %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <%- include('partials/navbar.html', { siteMeta }) %>
+  
+  <div class="GlobalLayout">
+    
+    <!-- Hero Section -->
+    <header class="HeroSection">
+      <div class="Container HeroGrid">
+        <div class="HeroContent">
+          <div class="HeroBadge">Data Analyst & AI Builder</div>
+          <h1 class="HeroTitle">用數據洞察<br><span class="TextGradient">驅動商業成長</span></h1>
+          <p class="HeroDesc">
+            嗨，我是董建祺 (Jackie Tung)。我擅長將複雜的數據轉化為可執行的商業策略，協助企業拆解陌生問題，找出最佳解決方案。
+          </p>
+          <div class="HeroActions">
+            <a href="#contact" class="Btn Btn--primary Btn--lg">合作洽詢</a>
+            <a href="stories.html" class="Btn Btn--outline Btn--lg">更多關於我的故事 →</a>
+          </div>
+        </div>
+        <div class="HeroVisual">
+          <% if (siteMeta.iconUrl) { %>
+            <div class="AvatarWrapper">
+                <img src="img/jackie.jpg" onerror="this.src='<%= siteMeta.iconUrl %>'" alt="Jackie Tung">
+            </div>
+          <% } %>
+          <!-- Decor elements -->
+          <div class="DecorCircle"></div>
+          <div class="DecorDot"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Selling Points / Value Proposition -->
+    <section class="Section FeatureSection">
+      <div class="Container">
+        <div class="SectionHeader text-center">
+            <h2 class="SectionTitle">核心優勢與價值</h2>
+            <p class="SectionSubtitle">結合企管與資料科學雙重背景， 為連結商業與技術的關鍵橋樑。</p>
+        </div>
+        <div class="Grid Grid--3">
+            <div class="FeatureCard">
+                <div class="FeatureIcon">
+                    <!-- Data Strategy Icon -->
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <h3 class="FeatureTitle">數據策略規劃</h3>
+                <p class="FeatureDesc">不只是看數字，而是從繁雜數據中挖掘商業線索。曾協助 IKEA 北亞區透過個人化工具創造 460 萬美元額外營收。</p>
+            </div>
+            <div class="FeatureCard">
+                <div class="FeatureIcon">
+                    <!-- Process/Workflow Icon -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="6" height="6" rx="1"></rect>
+                        <rect x="16" y="5" width="6" height="6" rx="1"></rect>
+                        <rect x="9" y="15" width="6" height="6" rx="1"></rect>
+                        <path d="M5 11v2a2 2 0 0 0 2 2h2"></path>
+                        <path d="M19 11v2a2 2 0 0 1-2 2h-2"></path>
+                    </svg>
+                </div>
+                <h3 class="FeatureTitle">複雜問題拆解</h3>
+                <p class="FeatureDesc">擅長面對陌生挑戰，將抽象問題轉化為結構化的分析流程。從無到有建立預測模型與自動化儀表板。</p>
+            </div>
+            <div class="FeatureCard">
+                <div class="FeatureIcon">
+                    <!-- Briefcase Icon -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                </div>
+                <h3 class="FeatureTitle">商業落地執行</h3>
+                <p class="FeatureDesc">具備高度執行力，能領導跨職能團隊 (UX/PM) 進行 A/B 測試與產品優化，確保策略能真正落地產生價值。</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Teaser -->
+    <section class="Section AboutSection">
+      <div class="Container">
+        <div class="AboutGrid">
+            <div class="AboutContent">
+                <h2 class="SectionTitle">關於我</h2>
+                <p>擁有五年以上實務經驗，橫跨零售、電商與電信產業。我的職涯始終圍繞著「解決問題」與「創造價值」。</p>
+                <p>目前擔任傢俱零售業的數位成長分析師，過去曾在遠時數位科技與 Circles.Life 服務。除了工作，我也熱愛閱讀商業書籍與自助旅行，這些經歷培養了我廣闊的國際視野。</p>
+                <a href="about.html" class="Btn Btn--text">閱讀更多關於我的故事 →</a>
+            </div>
+            <div class="AboutStats">
+                <div class="StatItem">
+                    <div class="StatNumber">US$4.6M</div>
+                    <div class="StatLabel">額外營收創造</div>
+                </div>
+                <div class="StatItem">
+                    <div class="StatNumber">60%</div>
+                    <div class="StatLabel">作業效率提升</div>
+                </div>
+                <div class="StatItem">
+                    <div class="StatNumber">30+</div>
+                    <div class="StatLabel">A/B 測試實戰</div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="Section ContactSection" id="contact">
+      <div class="Container">
+        <div class="FormCard">
+             <!-- Success Message Container (Hidden by default) -->
+             <div id="form-success-message" style="display: none; text-align: center; padding: 40px 0;">
+                 <div style="font-size: 4rem; margin-bottom: 24px;">🎉</div>
+                 <h2 class="FormTitle">訊息已成功送出！</h2>
+                 <p class="FormSubtitle">謝謝您的來信，我已經收到您的訊息，會盡快回覆您。</p>
+                 <button type="button" id="back-to-form-btn" class="Btn Btn--outline" style="margin-top: 32px;">發送另一則訊息</button>
+             </div>
+
+             <form id="contact-form" action="https://formspree.io/f/mojjjree" method="POST" class="ContactForm">
+                <div class="FormHeader">
+                    <h2 class="FormTitle">聯絡我</h2>
+                    <p class="FormSubtitle">歡迎填寫表單，我將盡快回覆您</p>
+                </div>
+                
+                <div class="FormGrid">
+                    <div class="FormGroup">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" placeholder="請輸入姓名" required>
+                    </div>
+                    <div class="FormGroup">
+                        <label for="email">電子郵件</label>
+                        <input type="email" id="email" name="email" placeholder="請輸入電子郵件" required>
+                    </div>
+                </div>
+                
+                <div class="FormGroup">
+                    <label for="subject">主旨</label>
+                    <input type="text" id="subject" name="subject" placeholder="請輸入主旨" required>
+                </div>
+                
+                <div class="FormGroup">
+                    <label for="message">訊息</label>
+                    <textarea id="message" name="message" placeholder="請輸入訊息" rows="6" required></textarea>
+                </div>
+                
+                <button type="submit" class="Btn Btn--submit">送出訊息</button>
+            </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Articles Preview Removed -->
+    
+    <%- include('partials/footer.html', { siteMeta }) %>
+  </div>
+
+<script>
+    // AJAX Form Submission
+    window.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById("contact-form");
+        var successMessage = document.getElementById("form-success-message");
+        var backBtn = document.getElementById("back-to-form-btn");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.createElement("div"); // For error handling if needed
+            var originalBtnContent = form.querySelector('button[type="submit"]').innerHTML;
+            var submitBtn = form.querySelector('button[type="submit"]');
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "傳送中...";
+
+            var data = new FormData(event.target);
+            
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    form.style.display = "none";
+                    successMessage.style.display = "block";
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert("Oops! There was a problem submitting your form");
+                        }
+                    })
+                }
+            }).catch(error => {
+                alert("Oops! There was a problem submitting your form");
+            }).finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            });
+        }
+        
+        if(form) {
+            form.addEventListener("submit", handleSubmit);
+        }
+
+        if(backBtn) {
+            backBtn.addEventListener("click", function() {
+                successMessage.style.display = "none";
+                form.style.display = "block";
+            });
+        }
+    });
+</script>
+
+<style>
+/* 
+   LANDING PAGE CSS 
+   ----------------
+   Style Overrides for specific Landing Page look
+*/
+
+:root {
+    --lp-primary: #2c3e50;
+    --lp-accent: #3498db;
+    --lp-bg-light: #f8f9fa;
+    --lp-text: #2c3e50;
+    --lp-text-light: #5f6c7b;
+    --lp-input-border: #e2e8f0;
+    --lp-input-focus: #3498db;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.GlobalLayout { overflow-x: hidden; }
+
+/* Buttons */
+.Btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+}
+
+.Btn--lg {
+    padding: 14px 32px;
+    font-size: 1.1rem;
+}
+
+.Btn--primary {
+    background: var(--lp-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+}
+
+.Btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.4);
+    opacity: 1;
+}
+
+.Btn--outline {
+    border: 2px solid var(--lp-primary);
+    color: var(--lp-primary);
+    background: transparent;
+}
+
+.Btn--outline:hover {
+    background: var(--lp-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
+}
+
+.Btn--text {
+    color: var(--lp-primary);
+    font-weight: 700;
+    padding: 0;
+}
+
+.Btn--white {
+    background: white;
+    color: var(--lp-primary);
+}
+
+.Btn--white:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.Btn--submit {
+    background: #3b82f6; /* Blue matching the image */
+    color: white;
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    margin-top: 16px;
+}
+
+.Btn--submit:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+
+/* HERO SECTION */
+.HeroSection {
+    padding: 100px 0 60px;
+    background: linear-gradient(135deg, #fff 0%, #f7f9fc 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.HeroGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.HeroBadge {
+    display: inline-block;
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--lp-accent);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.HeroTitle {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: var(--lp-primary);
+}
+
+.TextGradient {
+    background: linear-gradient(120deg, #2c3e50, #3498db);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.HeroDesc {
+    font-size: 1.2rem;
+    color: var(--lp-text-light);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.HeroActions {
+    display: flex;
+    gap: 16px;
+}
+
+.HeroVisual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.AvatarWrapper {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    z-index: 2;
+}
+
+.AvatarWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transform: rotate(-3deg);
+    transition: transform 0.5s ease;
+}
+
+.AvatarWrapper:hover img {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.DecorCircle {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-radius: 50%;
+    opacity: 0.5;
+    z-index: 1;
+    filter: blur(40px);
+}
+
+/* SECTIONS */
+.Section {
+    padding: 100px 0;
+}
+
+.SectionHeader {
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.SectionTitle {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--lp-primary);
+}
+
+.SectionSubtitle {
+    font-size: 1.1rem;
+    color: var(--lp-text-light);
+}
+
+/* Feature Grid */
+.Grid { display: grid; gap: 32px; }
+.Grid--3 { grid-template-columns: repeat(3, 1fr); }
+
+.FeatureCard {
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.FeatureCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    border-color: transparent;
+}
+
+.FeatureIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: var(--lp-bg-light);
+    color: var(--lp-accent);
+    border-radius: 50%;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.FeatureCard:hover .FeatureIcon {
+    background: var(--lp-accent);
+    color: white;
+    transform: scale(1.1);
+}
+
+.FeatureTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--lp-primary);
+}
+
+.FeatureDesc {
+    font-size: 1rem;
+    color: var(--lp-text-light);
+    line-height: 1.6;
+}
+
+/* About Section */
+.AboutSection {
+    background-color: var(--lp-bg-light);
+}
+
+.AboutGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.AboutStats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.StatItem {
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.StatItem:first-child { grid-column: 1 / -1; }
+
+.StatNumber {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--lp-accent);
+    margin-bottom: 8px;
+}
+
+.StatLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lp-text-light);
+    text-transform: uppercase;
+}
+
+/* Contact Form Section */
+.ContactSection {
+    padding-bottom: 80px;
+    background-color: white;
+}
+
+.FormCard {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.03);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px;
+}
+
+.FormHeader {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.FormTitle {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--lp-primary);
+    margin-bottom: 8px;
+}
+
+.FormSubtitle {
+    color: var(--lp-text-light);
+}
+
+.FormGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.FormGroup {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.FormGroup label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--lp-primary);
+    margin-bottom: 8px;
+}
+
+.FormGroup input,
+.FormGroup textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 2px solid var(--lp-input-border);
+    border-radius: 8px;
+    background: #fdfdfd;
+    transition: all 0.2s ease;
+    color: var(--lp-primary);
+    font-family: inherit;
+}
+
+.FormGroup input:focus,
+.FormGroup textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    background: white;
+}
+
+.FormGroup input::placeholder,
+.FormGroup textarea::placeholder {
+    color: #cbd5e1;
+}
+
+/* Responsive */
+/* Responsive - Tablet & Mobile */
+@media (max-width: 1024px) {
+    .HeroGrid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .HeroContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .HeroDesc {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .HeroActions {
+        justify-content: center;
+    }
+
+    .AvatarWrapper {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
+    }
+    
+    .AboutGrid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .AboutContent {
+        max-width: 100%;
+    }
+    
+    /* Tablet: 2 Columns for features */
+    .Grid--3 {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Handle the 3rd item in 2-column grid */
+    .Grid--3 > :last-child {
+        grid-column: span 2;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .FormGrid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .FormCard {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Mobile: 1 Column */
+    .Grid--3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .Grid--3 > :last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+}
+</style>
+</body>
+
+</html>

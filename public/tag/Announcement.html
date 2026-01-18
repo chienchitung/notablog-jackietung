@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="../">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+<link rel="shortcut icon" href="img/site-icon.png" type="image/png">
+<link rel="icon" href="img/site-icon.png" type="image/png">
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>#Announcement | JT用數據說故事</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="#Announcement | JT用數據說故事">
+  <meta name="description" content="Posts with tag #Announcement">
+  <meta property="og:description" content="Posts with tag #Announcement">
+</head>
+
+<body>
+  <nav class="Navbar">
+  <div class="Container Navbar__Content">
+    <a href="index.html" class="Navbar__Logo">
+      
+        <img class="Navbar__LogoIcon" src="img/profile-icon.png" alt="Profile">
+      
+      <span class="Navbar__LogoText">JT用數據說故事</span>
+    </a>
+    
+    <button class="Navbar__Toggle" aria-label="Toggle navigation">
+      <span class="Navbar__ToggleIcon"></span>
+    </button>
+
+    <div class="Navbar__Links">
+      <!-- <a href="index.html" class="Navbar__Link Navbar__Link--Active">Home</a> -->
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          <a href="about.html" class="Navbar__Link" >
+            關於我
+            
+          </a>
+        
+      
+        
+          
+          <a href="publications.html" class="Navbar__Link" >
+            著作
+            
+          </a>
+        
+      
+        
+          
+          <a href="speech.html" class="Navbar__Link" >
+            演講
+            
+          </a>
+        
+      
+        
+          
+          <a href="training.html" class="Navbar__Link" >
+            課程培訓
+            
+          </a>
+        
+      
+        
+          
+          <a href="https://www.jtdatastoryteller.com/" class="Navbar__Link" target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;>
+            部落格
+            
+              <!-- Type: string Value: https://www.jtdatastoryteller.com/ -->
+            
+          </a>
+        
+      
+        
+          
+          <a href="side-project.html" class="Navbar__Link" >
+            個人專案
+            
+          </a>
+        
+      
+        
+      
+    </div>
+  </div>
+</nav>
+
+<style>
+.Navbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+.Navbar__Content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Navbar__Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-default);
+  gap: 12px;
+  position: relative;
+  z-index: 102; /* Ensure logo is above menu overlay if needed */
+}
+
+.Navbar__LogoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Navbar__Links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.Navbar__Link {
+  text-decoration: none;
+  color: var(--color-text-default-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.Navbar__Link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.Navbar__Link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.Navbar__Link:hover {
+  color: var(--color-primary);
+}
+
+/* Hamburger Toggle */
+.Navbar__Toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 102;
+}
+
+.Navbar__ToggleIcon {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.Navbar__ToggleIcon::before,
+.Navbar__ToggleIcon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  transition: transform 0.3s, top 0.3s;
+  left: 0;
+}
+
+.Navbar__ToggleIcon::before { top: -8px; }
+.Navbar__ToggleIcon::after { top: 8px; }
+
+/* Active Toggle State (X shape) */
+.Navbar__Toggle--Active .Navbar__ToggleIcon { background-color: transparent; }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::before { top: 0; transform: rotate(45deg); }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::after { top: 0; transform: rotate(-45deg); }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .Navbar__Toggle {
+    display: block;
+  }
+
+  .Navbar__Links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    z-index: 101;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    pointer-events: none; /* Prevent clicks when hidden */
+  }
+
+  .Navbar__Links--Active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .Navbar__Link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-default);
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.Navbar__Toggle');
+    const links = document.querySelector('.Navbar__Links');
+    
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('Navbar__Toggle--Active');
+        links.classList.toggle('Navbar__Links--Active');
+        
+        // Prevent body scroll when menu is open
+        if (links.classList.contains('Navbar__Links--Active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close menu when a link is clicked
+      links.querySelectorAll('.Navbar__Link').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('Navbar__Toggle--Active');
+          links.classList.remove('Navbar__Links--Active');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  });
+</script>
+  
+  <div class="Container GlobalTagLayout">
+    <header class="TagHeader">
+      <h1 class="TagHeader__Title">#Announcement</h1>
+      <p class="TagHeader__Subtitle">Explore all posts tagged with #Announcement</p>
+    </header>
+
+    <div class="TagArticleList">
+      <div class="ArticleList">
+
+  <article class="ArticleItem">
+    <div class="ArticleItem__Date">
+       Sat, Feb 15, 2020
+    </div>
+    
+    <div class="ArticleItem__Content">
+      <h3 class="ArticleItem__Title">
+        <a href="welcome.html">Welcome to Notablog</a>
+      </h3>
+
+      
+        <p class="ArticleItem__Desc">
+          <span class="SemanticStringArray"><span class="SemanticString"><mark class="SemanticString__Fragment SemanticString__Fragment--HighlightedColor SemanticString__Fragment--ColorBlue"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Notablog</strong></mark></span><span class="SemanticString"> can generate a blog from a </span><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><a class="SemanticString__Fragment SemanticString__Fragment--Link" href="https://www.notion.so/">Notion</a></em></span><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"> table.</em></span></span>
+        </p>
+      
+
+      <div class="ArticleItem__Meta">
+        <div class="ArticleItem__Tags">
+          
+            <a href="tag/Announcement.html" class="Tag Tag--blue">Announcement</a>
+          
+        </div>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<style>
+.ArticleList {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.ArticleItem {
+  display: block;
+}
+
+.ArticleItem__Date {
+  font-size: 0.875rem;
+  color: var(--color-text-gray);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.ArticleItem__Title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.ArticleItem__Title a {
+  text-decoration: none;
+  color: var(--color-text-default);
+  transition: color 0.15s;
+}
+
+.ArticleItem__Title a:hover {
+  color: var(--color-primary);
+}
+
+.ArticleItem__Desc {
+  color: var(--color-text-default-light);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+  max-width: 65ch;
+}
+
+.ArticleItem__Meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ArticleItem__Tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.Tag {
+  display: inline-flex;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background-color: var(--color-bg-gray);
+  color: var(--color-text-default-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.15s;
+}
+
+.Tag:hover {
+  background-color: var(--color-hover);
+  color: var(--color-primary);
+}
+
+/* Notion Colors override for tags */
+.Tag--gray { background: var(--color-bg-gray); color: var(--color-text-default); }
+.Tag--brown { background: var(--color-bg-brown); color: var(--color-text-brown); }
+.Tag--orange { background: var(--color-bg-orange); color: var(--color-text-orange); }
+.Tag--yellow { background: var(--color-bg-yellow); color: var(--color-text-yellow); }
+.Tag--green { background: var(--color-bg-green); color: var(--color-text-green); }
+.Tag--blue { background: var(--color-bg-blue); color: var(--color-text-blue); }
+.Tag--purple { background: var(--color-bg-purple); color: var(--color-text-purple); }
+.Tag--pink { background: var(--color-bg-pink); color: var(--color-text-pink); }
+.Tag--red { background: var(--color-bg-red); color: var(--color-text-red); }
+</style>
+    </div>
+    
+    <footer class="Footer">
+  <div class="Container">
+    <div class="Footer__Content">
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="ScrollTopBtn" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+      </button>
+
+      <div class="Footer__Links">
+        
+          
+        
+          
+        
+          
+        
+          
+            <a href="about.html" class="Footer__Link">關於我</a>
+          
+        
+          
+            <a href="publications.html" class="Footer__Link">著作</a>
+          
+        
+          
+            <a href="speech.html" class="Footer__Link">演講</a>
+          
+        
+          
+            <a href="training.html" class="Footer__Link">課程培訓</a>
+          
+        
+          
+            <a href="https://www.jtdatastoryteller.com/" class="Footer__Link">部落格</a>
+          
+        
+          
+            <a href="side-project.html" class="Footer__Link">個人專案</a>
+          
+        
+          
+        
+      </div>
+
+      <div class="Footer__Social">
+        <a href="https://www.linkedin.com/in/chien-chi-tung/" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+        <a href="https://www.threads.com/@jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Threads">
+           <svg width="24" height="24" viewBox="0 0 448 512" fill="currentColor">
+              <path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8 29.2 14.1 50.6 35.2 61.8 61.4 15.7 36.5 17.2 95.8-30.3 143.2-36.2 36.2-80.3 52.5-142.6 53l-.3 0c-70.2-.5-124.1-24.1-160.4-70.2-32.3-41-48.9-98.1-49.5-169.6l0-.5C17 184.3 33.6 127.2 65.9 86.2 102.2 40.1 156.2 16.5 226.4 16l.3 0c70.3 .5 124.9 24 162.3 69.9 18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4-29.2-35.8-73-54.2-130.5-54.6-57 .5-100.1 18.8-128.2 54.4-26.2 33.3-39.8 81.5-40.3 143.2 .5 61.7 14.1 109.9 40.3 143.3 28 35.6 71.2 53.9 128.2 54.4 51.4-.4 85.4-12.6 113.7-40.9 32.3-32.2 31.7-71.8 21.4-95.9-6.1-14.2-17.1-26-31.9-34.9-3.7 26.9-11.8 48.3-24.7 64.8-17.1 21.8-41.4 33.6-72.7 35.3-23.6 1.3-46.3-4.4-63.9-16-20.8-13.8-33-34.8-34.3-59.3-2.5-48.3 35.7-83 95.2-86.4 21.1-1.2 40.9-.3 59.2 2.8-2.4-14.8-7.3-26.6-14.6-35.2-10-11.7-25.6-17.7-46.2-17.8l-.7 0c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1l.8 0c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2 .1 0zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3 25.6-1.4 54.6-11.4 59.5-73.2-13.2-2.9-27.8-4.4-43.4-4.4-4.8 0-9.6 .1-14.4 .4-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"/></svg>
+         </a>
+         <a href="https://www.instagram.com/jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Instagram">
+           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="Footer__Copyright">
+        &copy; JT用數據說故事 2026</a>
+      </div>
+
+      <div class="Footer__Attribution">
+        Powered by <a href="https://github.com/dragonman225/notablog" target="_blank" rel="noopener noreferrer">Notablog</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.Footer {
+  padding: 60px 0 40px;
+  background-color: var(--color-bg-light);
+  border-top: 1px solid var(--color-border);
+  margin-top: 80px;
+}
+
+.Footer__Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.Footer__Links {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Footer__Link {
+  color: var(--color-text-default);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.Footer__Link:hover {
+  color: var(--color-primary);
+}
+
+.Footer__Social {
+  display: flex;
+  gap: 24px;
+}
+
+.SocialIcon {
+  color:var(--color-text-gray);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SocialIcon:hover {
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.Footer__Copyright {
+  color: var(--color-text-gray);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.Footer__Copyright a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.Footer__Copyright a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.Footer__Attribution {
+  color: var(--color-text-gray);
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.Footer__Attribution a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s;
+}
+
+.Footer__Attribution a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.ScrollTopBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-default);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  margin-bottom: 8px; /* Spacing from the next element */
+}
+
+.ScrollTopBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  color: var(--color-primary);
+}
+</style>
+
+  </div>
+
+<style>
+/* Layout Container */
+.GlobalTagLayout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+/* Header Styling */
+.TagHeader {
+  margin-top: 80px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.TagHeader__Title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-text-default);
+  margin-bottom: 16px;
+}
+
+.TagHeader__Subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-gray);
+}
+
+/* 
+ * UX Design: Card Layout Override 
+ * Targeting the structure within articleList.html 
+ */
+.TagArticleList .ArticleList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Tighter gap for cards */
+}
+
+.TagArticleList .ArticleItem {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid transparent;
+}
+
+.TagArticleList .ArticleItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-color: var(--color-border);
+}
+
+/* Adjust article typography for cards */
+.TagArticleList .ArticleItem__Title {
+  margin-top: 4px;
+}
+
+.TagArticleList .ArticleItem__Date {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .TagHeader {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .TagHeader__Title {
+    font-size: 2.2rem;
+  }
+  
+  .TagArticleList .ArticleItem {
+    padding: 24px;
+  }
+}
+</style>
+</body>
+
+</html>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+<link rel="shortcut icon" href="img/site-icon.png" type="image/png">
+<link rel="icon" href="img/site-icon.png" type="image/png">
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>從知道到做到：如何用蓋洛普 IDP 打造個人成長計畫（實作篇）&nbsp;|&nbsp;JT用數據說故事</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="從知道到做到：如何用蓋洛普 IDP 打造個人成長計畫（實作篇）">
+  
+    <meta name="description" content="本文透過實際的 IDP 範例，示範如何運用 Name It、Claim It、Aim It 三部曲，將抽象的個人天賦轉化為具體的職涯行動方案，幫助你制定高執行力的個人發展計畫。">
+    <meta property="og:description" content="本文透過實際的 IDP 範例，示範如何運用 Name It、Claim It、Aim It 三部曲，將抽象的個人天賦轉化為具體的職涯行動方案，幫助你制定高執行力的個人發展計畫。">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+  <nav class="Navbar">
+  <div class="Container Navbar__Content">
+    <a href="index.html" class="Navbar__Logo">
+      
+        <img class="Navbar__LogoIcon" src="img/profile-icon.png" alt="Profile">
+      
+      <span class="Navbar__LogoText">JT用數據說故事</span>
+    </a>
+    
+    <button class="Navbar__Toggle" aria-label="Toggle navigation">
+      <span class="Navbar__ToggleIcon"></span>
+    </button>
+
+    <div class="Navbar__Links">
+      <!-- <a href="index.html" class="Navbar__Link Navbar__Link--Active">Home</a> -->
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          <a href="about.html" class="Navbar__Link" >
+            關於我
+            
+          </a>
+        
+      
+        
+          
+          <a href="publications.html" class="Navbar__Link" >
+            著作
+            
+          </a>
+        
+      
+        
+          
+          <a href="speech.html" class="Navbar__Link" >
+            演講
+            
+          </a>
+        
+      
+        
+          
+          <a href="training.html" class="Navbar__Link" >
+            課程培訓
+            
+          </a>
+        
+      
+        
+          
+          <a href="https://www.jtdatastoryteller.com/" class="Navbar__Link" target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;>
+            部落格
+            
+              <!-- Type: string Value: https://www.jtdatastoryteller.com/ -->
+            
+          </a>
+        
+      
+        
+          
+          <a href="side-project.html" class="Navbar__Link" >
+            個人專案
+            
+          </a>
+        
+      
+        
+      
+    </div>
+  </div>
+</nav>
+
+<style>
+.Navbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+.Navbar__Content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Navbar__Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-default);
+  gap: 12px;
+  position: relative;
+  z-index: 102; /* Ensure logo is above menu overlay if needed */
+}
+
+.Navbar__LogoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Navbar__Links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.Navbar__Link {
+  text-decoration: none;
+  color: var(--color-text-default-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.Navbar__Link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.Navbar__Link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.Navbar__Link:hover {
+  color: var(--color-primary);
+}
+
+/* Hamburger Toggle */
+.Navbar__Toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 102;
+}
+
+.Navbar__ToggleIcon {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.Navbar__ToggleIcon::before,
+.Navbar__ToggleIcon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  transition: transform 0.3s, top 0.3s;
+  left: 0;
+}
+
+.Navbar__ToggleIcon::before { top: -8px; }
+.Navbar__ToggleIcon::after { top: 8px; }
+
+/* Active Toggle State (X shape) */
+.Navbar__Toggle--Active .Navbar__ToggleIcon { background-color: transparent; }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::before { top: 0; transform: rotate(45deg); }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::after { top: 0; transform: rotate(-45deg); }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .Navbar__Toggle {
+    display: block;
+  }
+
+  .Navbar__Links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    z-index: 101;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    pointer-events: none; /* Prevent clicks when hidden */
+  }
+
+  .Navbar__Links--Active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .Navbar__Link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-default);
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.Navbar__Toggle');
+    const links = document.querySelector('.Navbar__Links');
+    
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('Navbar__Toggle--Active');
+        links.classList.toggle('Navbar__Links--Active');
+        
+        // Prevent body scroll when menu is open
+        if (links.classList.contains('Navbar__Links--Active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close menu when a link is clicked
+      links.querySelectorAll('.Navbar__Link').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('Navbar__Toggle--Active');
+          links.classList.remove('Navbar__Links--Active');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  });
+</script>
+  
+  <div class="Container GlobalLayout">
+    <article class="Post">
+      <header class="Post__Header">
+        
+
+        <h1 class="Post__Title">從知道到做到：如何用蓋洛普 IDP 打造個人成長計畫（實作篇）</h1>
+
+        
+          <div class="Post__Meta">
+            
+              <span class="Post__Date">Sat, Jan 17, 2026</span>
+            
+            
+            <div class="Post__Tags">
+              
+                <a href="tag/Web.html" class="Tag Tag--green">Web</a>
+              
+            </div>
+          </div>
+        
+      </header>
+
+      <div class="Post__Content">
+        <article id="https://www.notion.so/2eb34b42936980fc993be648284fb09d" class="PageRoot"><div id="https://www.notion.so/2eb34b429369803babf2ea78780fc250" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">在</span><span class="SemanticString"><a class="SemanticString__Fragment SemanticString__Fragment--Link" href="https://www.jtdatastoryteller.com/p/career-exploration-from-strengths">上一篇文章</a></span><span class="SemanticString">中，我介紹了什麼是蓋洛普測驗。如果您還沒做過測驗，建議可以先閱讀那篇文章，建立基本概念。</span></span></p></div><div id="https://www.notion.so/2eb34b42936980e6b0b0d620f58b103c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/2eb34b42936980529e15c54425d178b5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">今天要跟大家進一步分享「實作篇」。當知道自己的天賦後，下一步該怎麼做呢？我將透過蓋洛普教練提供的模板，展示我如何進行練習。</span></span></p></div><div id="https://www.notion.so/2eb34b42936980598903fd97cc27ea62" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">在職場上，我們每年在制定 KPI 的同時，通常也需要制定「個人發展計畫」（Individual Development Plan, IDP）。這份計畫的目的不僅是為了達成工作目標，更是透過內外部資源來發展自身能力。</span></span></p></div><div id="https://www.notion.so/2eb34b429369804bb395e4e74846f083" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我們常聽到要「發揮優勢」，但具體該如何將測驗報告中抽象的「天賦主題」，轉化為每天可執行的行動方案？在這篇實作練習中，我將示範如何運用蓋洛普的 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Name It（命名）、Claim It（理解）、Aim It（目標導向）</strong></span><span class="SemanticString"> 三部曲，制定一份具備高執行力的個人 IDP。</span></span></p></div><div id="https://www.notion.so/2eb34b42936980d68f84f61c7a0e7ad1" class="Divider"></div><h2 id="https://www.notion.so/2eb34b4293698041bf4be3b206227b39" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/2eb34b4293698041bf4be3b206227b39"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">第一步：確立目標 (Define Your Goal)</span></span></h2><div id="https://www.notion.so/2eb34b42936980aeaa6ee162910580fd" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">一份有效的優勢練習，必須建立在「具體的目標」之上。天賦就像是工具箱裡的工具，若沒有要修繕的對象（目標），工具便無用武之地。</span></span></p></div><div id="https://www.notion.so/2eb34b429369802e9de5f75c6687da96" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">在這次練習中，我設定了一個非常明確的短期目標提供範例給你作為參考：</span></span></p></div><blockquote id="https://www.notion.so/2eb34b42936980b8ac73f1479c46baba" class="ColorfulBlock ColorfulBlock--ColorDefault Quote"><span class="SemanticStringArray"><span class="SemanticString">目標：「接下來 6 個月，可以完成論文前三章」。</span></span></blockquote><div id="https://www.notion.so/2eb34b4293698091b7f4eda5bc63ad9b" class="ColorfulBlock ColorfulBlock--BgGray Callout"><div class="Callout__Icon"><div class="Icon">💡</div></div><p class="Callout__Content"><span class="SemanticStringArray"></span><div id="https://www.notion.so/2eb34b429369805a948ad97a23dc8beb" class="ColorfulBlock ColorfulBlock--BgGray Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">練習重點： 在開始練習前，請先寫下目前職涯中最重要的一個目標。它可能是完成一個專案、轉換跑道、或是學習一項新技能。</span></span></p></div></p></div><pre id="https://www.notion.so/2eb34b429369807c9269c4e9cd1f73b1" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+
+df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv</span></span></span></code></pre><div id="https://www.notion.so/2eb34b429369808f8bd1e6ae399086f8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">url</code></span></span></p></div><div id="https://www.notion.so/2eb34b429369808aba98ea727a728d95" class="ColorfulBlock ColorfulBlock--BgGray Callout"><div class="Callout__Icon"><div class="Icon">💡</div></div><p class="Callout__Content"><span class="SemanticStringArray"></span><div id="https://www.notion.so/2eb34b429369801ead52ca6579a92391" class="ColorfulBlock ColorfulBlock--BgGray Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">接著，我們需要從個人的天賦報告中，挑選出最能幫助達成上述目標的優勢主題。這不僅是列出名稱，更要寫下「這個天賦對我的意義是什麼？」，也就是 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Claim It</strong></span><span class="SemanticString"> 的過程。</span></span></p></div></p></div><h2 id="https://www.notion.so/2eb34b42936980d99bfeed18ff6b3ca5" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/2eb34b42936980d99bfeed18ff6b3ca5"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">第二步：命名與理解 (Name It &amp; Claim It)</span></span></h2><div id="https://www.notion.so/2eb34b429369804c89cdd442c681b73c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">接著，我們需要從個人的天賦報告中，挑選出最能幫助達成上述目標的優勢主題。這不僅是列出名稱，更要寫下「這個天賦對我的意義是什麼？」，也就是 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Claim It</strong></span><span class="SemanticString"> 的過程。</span></span></p></div><div id="https://www.notion.so/2eb34b42936980f1ae75e323264814d3" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">針對我的論文目標，我挑選了以下三個天賦，並寫下我的個人洞察：</span></span></p></div><h3 id="https://www.notion.so/2eb34b42936980c5b137e14237513d99" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2eb34b42936980c5b137e14237513d99"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">1. 學習 (Learner)</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/2eb34b4293698073a2fdf026f1e31d06" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Name It：</strong></span><span class="SemanticString"> 學習</span></span></li><li id="https://www.notion.so/2eb34b429369809a85b9f6d03590855d" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Claim It (個人洞察)：</strong></span><span class="SemanticString"> 我發現當自己對某個議題或領域有興趣時，會想要深入了解，並學習該領域的知識 。這對於論文初期的文獻探討至關重要。</span></span></li></ul><h3 id="https://www.notion.so/2eb34b429369802abb67e0d2e8dc2871" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2eb34b429369802abb67e0d2e8dc2871"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">2. 統籌 (Arranger)</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/2eb34b429369801490f4c1fa353ebbdf" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Name It：</strong></span><span class="SemanticString"> 統籌</span></span></li><li id="https://www.notion.so/2eb34b42936980aea6ddc5cd0e696865" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Claim It (個人洞察)：</strong></span><span class="SemanticString"> 面對工作與學業的雙重壓力，我意識到自己能夠兼顧並同時多工處理不同的任務，即便遇到複雜情況也能迎刃而解 。這是支撐我在有限時間內推進進度的關鍵。</span></span></li></ul><h3 id="https://www.notion.so/2eb34b42936980f08ab2cba1c24c53df" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2eb34b42936980f08ab2cba1c24c53df"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">3. 成就 (Achiever)</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/2eb34b42936980a5bed2cfb8471d9a9d" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Name It：</strong></span><span class="SemanticString"> 成就</span></span></li><li id="https://www.notion.so/2eb34b4293698065a4f3fc5172d4e564" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Claim It (個人洞察)：</strong></span><span class="SemanticString"> 當確定一個目標後，我就會使命必達，不論是平日或週末 。完成任務時，我會感受到一股強烈的成就感，這是我持續推進進度的內在動力 。</span></span></li></ul><div id="https://www.notion.so/2eb34b42936980a3971ff786c88ddf1d" class="ColorfulBlock ColorfulBlock--BgGray Callout"><div class="Callout__Icon"><div class="Icon">💡</div></div><p class="Callout__Content"><span class="SemanticStringArray"></span><div id="https://www.notion.so/2eb34b429369808fb9ecc975fd859da0" class="ColorfulBlock ColorfulBlock--BgGray Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">練習重點： 不要只看報告上的官方定義。試著回想過去的成功經驗，寫下「我曾經如何運用這個天賦解決問題？」。這能讓天賦真正成為您自己的武器。</span></span></p></div></p></div><h2 id="https://www.notion.so/2eb34b42936980a4bd57ededd59dbef6" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/2eb34b42936980a4bd57ededd59dbef6"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">第三步：目標導向與行動 (Aim It)</span></span></h2><div id="https://www.notion.so/2eb34b429369806abd73c1d2dc85c737" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">最後一步是最關鍵的 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Aim It</strong></span><span class="SemanticString">，將天賦轉化為具體的行動步驟。在 IDP 中，我們需要針對目標的不同階段，有意識地安排特定的天賦上場。</span></span></p></div><div id="https://www.notion.so/2eb34b4293698012973ce73452e3d28a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我將撰寫論文的 6 個月時程拆解為三個階段，並明確標示每個階段運用的優勢：</span></span></p></div><h3 id="https://www.notion.so/2eb34b429369807f8f86c2240bf391b2" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2eb34b429369807f8f86c2240bf391b2"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">第一階段（前 2 個月）：奠定基礎</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/2eb34b429369800e96c0f730c6be103c" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">運用優勢：</strong></span><span class="SemanticString"> 學習、統籌</span></span></li><li id="https://www.notion.so/2eb34b42936980d2999ddbb69391f0f0" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">關鍵行動：</strong></span></span><ol class="NumberedListWrapper"><li id="https://www.notion.so/2eb34b429369809d877af25b2bb2ed10" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">研讀相關文獻，確認研究主題是否自己感興趣，以及是否可以做且有貢獻 。（運用「學習」天賦進行深度探索）</span></span></li><li id="https://www.notion.so/2eb34b42936980939b50d62666f57890" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">學習及熟練教學的軟體，以輔助數位學習使用 。（運用「學習」天賦掌握工具）</span></span></li></ol></li></ul><h3 id="https://www.notion.so/2eb34b4293698092a976d3ee5d16e950" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2eb34b4293698092a976d3ee5d16e950"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">第二階段（中 2 個月）：設計與開發</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/2eb34b42936980a3ac17d52423d1273d" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">運用優勢：</strong></span><span class="SemanticString"> 學習、統籌</span></span></li><li id="https://www.notion.so/2eb34b42936980f6a3cfde522f8df720" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">關鍵行動：</strong></span></span><ol class="NumberedListWrapper"><li id="https://www.notion.so/2eb34b42936980118d3fc2951ea5391b" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">設計研究實驗 。（運用「統籌」天賦處理複雜架構）</span></span></li><li id="https://www.notion.so/2eb34b429369807a91f9dc3305f5f74c" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">開發數位學習內容 。</span></span></li></ol></li></ul><h3 id="https://www.notion.so/2eb34b4293698000bef1e04d769b4704" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2eb34b4293698000bef1e04d769b4704"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">第三階段（後 2 個月）：執行與驗收</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/2eb34b42936980f497c5f16a0628eb1b" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">運用優勢：</strong></span><span class="SemanticString"> 學習、統籌、成就</span></span></li><li id="https://www.notion.so/2eb34b429369809ba82ec4482e4acf3f" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">關鍵行動：</strong></span></span><ol class="NumberedListWrapper"><li id="https://www.notion.so/2eb34b429369806eb316db04e88f5159" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">確認數位學習的實驗時間，進行控制組及對照組的實驗 。</span></span></li><li id="https://www.notion.so/2eb34b42936980349f97faa41d233e12" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">確認實驗前後測的結果 。（運用「成就」天賦衝刺完成，享受達標的滿足感）</span></span></li></ol></li></ul><div id="https://www.notion.so/2eb34b42936980a1a71df08bd64380b0" class="ColorfulBlock ColorfulBlock--BgGray Callout"><div class="Callout__Icon"><div class="Icon">💡</div></div><p class="Callout__Content"><span class="SemanticStringArray"></span><div id="https://www.notion.so/2eb34b429369803f94e0f4b7ced4bf81" class="ColorfulBlock ColorfulBlock--BgGray Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">練習重點： 觀察你的行動計畫，是否每一個步驟都能對應到個人的某項優勢？例如，如果你有「溝通」天賦，在行動計畫中應該包含「與利害關係人訪談」或「發表成果」的步驟，而不僅僅是埋頭苦幹。</span></span></p></div></p></div><h2 id="https://www.notion.so/2eb34b4293698046a817fe9b40508efa" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/2eb34b4293698046a817fe9b40508efa"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">▍結語</span></span></h2><div id="https://www.notion.so/2eb34b42936980f0b2dee3c73d07afff" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">透過我的案例，可以看到「天賦練習」並非空泛的心靈雞湯，而是高度結構化的策略規劃：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/2eb34b42936980919dede1f31f6842fc" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">鎖定目標</strong></span><span class="SemanticString">（論文前三章）</span></span></li><li id="https://www.notion.so/2eb34b4293698028869bec051c76df2d" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">盤點武器</strong></span><span class="SemanticString">（學習、統籌、成就）</span></span></li><li id="https://www.notion.so/2eb34b429369809fa604cc646b9379a3" class="NumberedList" value="3"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">擬定戰略</strong></span><span class="SemanticString">（分階段並指派特定天賦執行任務）</span></span></li></ol><div id="https://www.notion.so/2eb34b429369805ca141c1d5ae75c324" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">當下次感到職涯迷惘或專案卡關時，不妨拿出這份 IDP 表格，試著用你的天賦優勢為自己擬定一份作戰計畫吧！</span></span></p></div><div id="https://www.notion.so/2eb34b42936980778c10ed2abada4423" class="Divider"></div></article>
+      </div>
+    </article>
+
+    <footer class="Footer">
+  <div class="Container">
+    <div class="Footer__Content">
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="ScrollTopBtn" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+      </button>
+
+      <div class="Footer__Links">
+        
+          
+        
+          
+        
+          
+        
+          
+            <a href="about.html" class="Footer__Link">關於我</a>
+          
+        
+          
+            <a href="publications.html" class="Footer__Link">著作</a>
+          
+        
+          
+            <a href="speech.html" class="Footer__Link">演講</a>
+          
+        
+          
+            <a href="training.html" class="Footer__Link">課程培訓</a>
+          
+        
+          
+            <a href="https://www.jtdatastoryteller.com/" class="Footer__Link">部落格</a>
+          
+        
+          
+            <a href="side-project.html" class="Footer__Link">個人專案</a>
+          
+        
+          
+        
+      </div>
+
+      <div class="Footer__Social">
+        <a href="https://www.linkedin.com/in/chien-chi-tung/" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+        <a href="https://www.threads.com/@jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Threads">
+           <svg width="24" height="24" viewBox="0 0 448 512" fill="currentColor">
+              <path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8 29.2 14.1 50.6 35.2 61.8 61.4 15.7 36.5 17.2 95.8-30.3 143.2-36.2 36.2-80.3 52.5-142.6 53l-.3 0c-70.2-.5-124.1-24.1-160.4-70.2-32.3-41-48.9-98.1-49.5-169.6l0-.5C17 184.3 33.6 127.2 65.9 86.2 102.2 40.1 156.2 16.5 226.4 16l.3 0c70.3 .5 124.9 24 162.3 69.9 18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4-29.2-35.8-73-54.2-130.5-54.6-57 .5-100.1 18.8-128.2 54.4-26.2 33.3-39.8 81.5-40.3 143.2 .5 61.7 14.1 109.9 40.3 143.3 28 35.6 71.2 53.9 128.2 54.4 51.4-.4 85.4-12.6 113.7-40.9 32.3-32.2 31.7-71.8 21.4-95.9-6.1-14.2-17.1-26-31.9-34.9-3.7 26.9-11.8 48.3-24.7 64.8-17.1 21.8-41.4 33.6-72.7 35.3-23.6 1.3-46.3-4.4-63.9-16-20.8-13.8-33-34.8-34.3-59.3-2.5-48.3 35.7-83 95.2-86.4 21.1-1.2 40.9-.3 59.2 2.8-2.4-14.8-7.3-26.6-14.6-35.2-10-11.7-25.6-17.7-46.2-17.8l-.7 0c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1l.8 0c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2 .1 0zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3 25.6-1.4 54.6-11.4 59.5-73.2-13.2-2.9-27.8-4.4-43.4-4.4-4.8 0-9.6 .1-14.4 .4-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"/></svg>
+         </a>
+         <a href="https://www.instagram.com/jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Instagram">
+           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="Footer__Copyright">
+        &copy; JT用數據說故事 2026</a>
+      </div>
+
+      <div class="Footer__Attribution">
+        Powered by <a href="https://github.com/dragonman225/notablog" target="_blank" rel="noopener noreferrer">Notablog</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.Footer {
+  padding: 60px 0 40px;
+  background-color: var(--color-bg-light);
+  border-top: 1px solid var(--color-border);
+  margin-top: 80px;
+}
+
+.Footer__Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.Footer__Links {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Footer__Link {
+  color: var(--color-text-default);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.Footer__Link:hover {
+  color: var(--color-primary);
+}
+
+.Footer__Social {
+  display: flex;
+  gap: 24px;
+}
+
+.SocialIcon {
+  color:var(--color-text-gray);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SocialIcon:hover {
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.Footer__Copyright {
+  color: var(--color-text-gray);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.Footer__Copyright a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.Footer__Copyright a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.Footer__Attribution {
+  color: var(--color-text-gray);
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.Footer__Attribution a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s;
+}
+
+.Footer__Attribution a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.ScrollTopBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-default);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  margin-bottom: 8px; /* Spacing from the next element */
+}
+
+.ScrollTopBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  color: var(--color-primary);
+}
+</style>
+
+  </div>
+
+  <style>
+    .Post {
+      margin-top: 60px;
+      margin-bottom: 80px;
+    }
+
+    .Post__Header {
+      margin-bottom: 48px;
+    }
+
+    .Post__CoverWrapper {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    /* When there's a cover, wrapper has positioning context */
+    .Post__CoverWrapper:has(.Post__Cover) {
+      margin-bottom: 64px; /* Extra space for overlapping icon */
+    }
+
+    .Post__Cover {
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+      height: 300px;
+    }
+
+    .Post__Cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Icon without cover - static positioning */
+    .Post__Icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 24px;
+    }
+
+    /* Icon with cover - absolute positioning */
+    .Post__CoverWrapper:has(.Post__Cover) .Post__Icon {
+      position: absolute;
+      bottom: -40px;
+      left: 32px;
+      margin-bottom: 0;
+    }
+
+    .Post__Icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .Post__Title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-text-default);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .Post__Meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .Post__Date {
+      color: var(--color-text-gray);
+      font-size: 0.95rem;
+    }
+
+    .Post__Tags {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Container for the post content - The "White Box" */
+    .Post__Content {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--color-text-default);
+      background-color: #ffffff;
+      padding: 48px; 
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      /* Better CJK text handling */
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+    
+    /* Ensure paragraphs flow naturally */
+    .Post__Content p,
+    .Post__Content .Text__Content {
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* Responsive adjustments for the card */
+    @media (max-width: 768px) {
+      .Post__Content {
+        padding: 24px;
+        border-radius: 12px;
+      }
+    }
+    
+    /* Adjustments for Notion Content */
+    .Post__Content img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    
+    .Post__Content h1, .Post__Content h2, .Post__Content h3 {
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+    
+    /* First heading should have no top margin */
+    .Post__Content h1:first-child,
+    .Post__Content h2:first-child,
+    .Post__Content h3:first-child {
+      margin-top: 0;
+    }
+
+    /* Blockquotes as Highlights (Matching Profile) */
+    .Post__Content blockquote {
+      background: var(--color-bg-light, #f8f9fa);
+      border-left: 4px solid var(--color-primary, #2c3e50);
+      margin: 24px 0;
+      padding: 16px 24px;
+      border-radius: 0 8px 8px 0;
+      font-style: normal;
+    }
+  </style>
+
+</html>

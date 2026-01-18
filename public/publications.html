@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+<link rel="shortcut icon" href="img/site-icon.png" type="image/png">
+<link rel="icon" href="img/site-icon.png" type="image/png">
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>著作&nbsp;|&nbsp;JT用數據說故事</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="著作">
+  
+  
+</head>
+
+  <nav class="Navbar">
+  <div class="Container Navbar__Content">
+    <a href="index.html" class="Navbar__Logo">
+      
+        <img class="Navbar__LogoIcon" src="img/profile-icon.png" alt="Profile">
+      
+      <span class="Navbar__LogoText">JT用數據說故事</span>
+    </a>
+    
+    <button class="Navbar__Toggle" aria-label="Toggle navigation">
+      <span class="Navbar__ToggleIcon"></span>
+    </button>
+
+    <div class="Navbar__Links">
+      <!-- <a href="index.html" class="Navbar__Link Navbar__Link--Active">Home</a> -->
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          <a href="about.html" class="Navbar__Link" >
+            關於我
+            
+          </a>
+        
+      
+        
+          
+          <a href="publications.html" class="Navbar__Link" >
+            著作
+            
+          </a>
+        
+      
+        
+          
+          <a href="speech.html" class="Navbar__Link" >
+            演講
+            
+          </a>
+        
+      
+        
+          
+          <a href="training.html" class="Navbar__Link" >
+            課程培訓
+            
+          </a>
+        
+      
+        
+          
+          <a href="https://www.jtdatastoryteller.com/" class="Navbar__Link" target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;>
+            部落格
+            
+              <!-- Type: string Value: https://www.jtdatastoryteller.com/ -->
+            
+          </a>
+        
+      
+        
+          
+          <a href="side-project.html" class="Navbar__Link" >
+            個人專案
+            
+          </a>
+        
+      
+        
+      
+    </div>
+  </div>
+</nav>
+
+<style>
+.Navbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+.Navbar__Content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Navbar__Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-default);
+  gap: 12px;
+  position: relative;
+  z-index: 102; /* Ensure logo is above menu overlay if needed */
+}
+
+.Navbar__LogoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Navbar__Links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.Navbar__Link {
+  text-decoration: none;
+  color: var(--color-text-default-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.Navbar__Link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.Navbar__Link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.Navbar__Link:hover {
+  color: var(--color-primary);
+}
+
+/* Hamburger Toggle */
+.Navbar__Toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 102;
+}
+
+.Navbar__ToggleIcon {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.Navbar__ToggleIcon::before,
+.Navbar__ToggleIcon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  transition: transform 0.3s, top 0.3s;
+  left: 0;
+}
+
+.Navbar__ToggleIcon::before { top: -8px; }
+.Navbar__ToggleIcon::after { top: 8px; }
+
+/* Active Toggle State (X shape) */
+.Navbar__Toggle--Active .Navbar__ToggleIcon { background-color: transparent; }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::before { top: 0; transform: rotate(45deg); }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::after { top: 0; transform: rotate(-45deg); }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .Navbar__Toggle {
+    display: block;
+  }
+
+  .Navbar__Links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    z-index: 101;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    pointer-events: none; /* Prevent clicks when hidden */
+  }
+
+  .Navbar__Links--Active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .Navbar__Link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-default);
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.Navbar__Toggle');
+    const links = document.querySelector('.Navbar__Links');
+    
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('Navbar__Toggle--Active');
+        links.classList.toggle('Navbar__Links--Active');
+        
+        // Prevent body scroll when menu is open
+        if (links.classList.contains('Navbar__Links--Active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close menu when a link is clicked
+      links.querySelectorAll('.Navbar__Link').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('Navbar__Toggle--Active');
+          links.classList.remove('Navbar__Links--Active');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  });
+</script>
+  
+  <div class="Timeline">
+    <header class="Timeline__Header">
+      <h1 class="Timeline__Title">著作</h1>
+      
+    </header>
+
+    <div class="Timeline__Content">
+      <article id="https://www.notion.so/2eb34b42936980229d50d6c26cb5f4db" class="PageRoot PageRoot--FullWidth"><div id="https://www.notion.so/2eb34b429369805a9da3e439859680d1" class="CollectionInline"><h3><a class="Anchor" href="#https://www.notion.so/2eb34b429369805a9da3e439859680d1"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Untitled</span></span></h3><div class="Table"><table><thead><tr><th style="width:280px">name</th><th style="width:127px">tags</th><th style="width:427px">description</th><th style="width:200px">URL</th><th style="width:200px">image</th></tr></thead><tbody><tr><td class="Table__CellTitle"><a href="https://www.notion.so/2eb34b42936980ba9223eb6f2cd8bb2d"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Enhancing Home Furnishing App Usability: A Text Mining Approach Using BERT and Large Language Models</strong></span></span></a></td><td class="Table__CellSelect"><span class="Pill Pill--ColorGray">國際研討會論文</span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString">本研究針對 IKEA、特力屋（Test Rite）及宜得利（Nitori）三大家居品牌 App，運用文字探勘技術，比較「微調 BERT 模型」與「大型語言模型（LLM）提示工程」在情感分類與標註上的成效。本研究建立一套自動化評估框架，協助業者從大規模反饋中快速提取洞察，以優化 App 功能並提升使用者體驗。</span></span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString"><a class="SemanticString__Fragment SemanticString__Fragment--Link" href="https://ieeexplore.ieee.org/document/11159395">https://ieeexplore.ieee.org/document/11159395</a></span></span></td><td class="Table__CellText"><span class="SemanticStringArray"></span></td></tr><tr><td class="Table__CellTitle"><a href="https://www.notion.so/2eb34b42936980d7a93fe4bd6b050192"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Integrating AI Tutors in Game-Based Learning to Enhance Excel Education</strong></span></span></a></td><td class="Table__CellSelect"><span class="Pill Pill--ColorGray">國際研討會論文</span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString">本研究開發了一款結合生成式 AI 的數位學習遊戲。系統採用「鷹架理論」，整合了作為適應性鷹架的 AI 導師與固定學習內容，降低認知負荷並提升學習動機。研究將透過實驗，比較在遊戲式學習中整合 GenAI 與否，對學生學習成效與動機的影響。</span></span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString"><a class="SemanticString__Fragment SemanticString__Fragment--Link" href="https://ieeexplore.ieee.org/abstract/document/11208010">https://ieeexplore.ieee.org/abstract/document/11208010</a></span></span></td><td class="Table__CellText"><span class="SemanticStringArray"></span></td></tr><tr><td class="Table__CellTitle"><a href="https://www.notion.so/2eb34b429369802384d2c0771c5b1f8b"><span class="SemanticStringArray"><span class="SemanticString">結合 AI 助教的鷹架式數位遊戲式學習系統：以 Excel 教育為例</span></span></a></td><td class="Table__CellSelect"><span class="Pill Pill--ColorPink">碩士論文</span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString">針對大學生缺乏實用 Excel 技能的現況，本研究開發結合 生成式 AI（GenAI） 的遊戲化學習系統《Excel Master》。系統應用鷹架理論，整合 AI 助教（軟鷹架） 與教學內容（硬鷹架），透過情境任務提供個別化輔助。經 10 位使用者測試分析，證實該系統具可行性，能有效提升學習動機與技能掌握，系統仍有優化空間，成果可作為未來 Excel 數位教學模式之參考。</span></span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString"><a class="SemanticString__Fragment SemanticString__Fragment--Link" href="https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=jC133y/record?r1=1&amp;h1=0">https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=jC133y/record?r1=1&amp;h1=0</a></span></span></td><td class="Table__CellText"><span class="SemanticStringArray"></span></td></tr><tr><td class="Table__CellTitle"><a href="https://www.notion.so/2ec34b4293698024926fcc140f0ab5db"><span class="SemanticStringArray"><span class="SemanticString">個人社群影響力量表之建構</span></span></a></td><td class="Table__CellSelect"><span class="Pill Pill--ColorPink">碩士論文</span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString">本研究基於兩級傳播理論，針對社群意見領袖提出新概念「粉力」。透過訪談與 300 份問卷調查，開發出一份具備良好信效度的量表，包含連結強度、同質性、內容持續性、內容易讀性、人格強度等五大構面（共 21 題）。此研究成果建構了個人社群影響力的評估工具，可作為行銷人員篩選合作對象的具體準則。</span></span></td><td class="Table__CellText"><span class="SemanticStringArray"><span class="SemanticString"><a class="SemanticString__Fragment SemanticString__Fragment--Link" href="https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=jC133y/record?r1=2&amp;h1=1">https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd=jC133y/record?r1=2&amp;h1=1</a></span></span></td><td class="Table__CellText"><span class="SemanticStringArray"></span></td></tr></tbody></table></div></div><div id="https://www.notion.so/2eb34b42936980c6af55e60ab4a0bf82" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
+    </div>
+
+    <footer class="Footer">
+  <div class="Container">
+    <div class="Footer__Content">
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="ScrollTopBtn" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+      </button>
+
+      <div class="Footer__Links">
+        
+          
+        
+          
+        
+          
+        
+          
+            <a href="about.html" class="Footer__Link">關於我</a>
+          
+        
+          
+            <a href="publications.html" class="Footer__Link">著作</a>
+          
+        
+          
+            <a href="speech.html" class="Footer__Link">演講</a>
+          
+        
+          
+            <a href="training.html" class="Footer__Link">課程培訓</a>
+          
+        
+          
+            <a href="https://www.jtdatastoryteller.com/" class="Footer__Link">部落格</a>
+          
+        
+          
+            <a href="side-project.html" class="Footer__Link">個人專案</a>
+          
+        
+          
+        
+      </div>
+
+      <div class="Footer__Social">
+        <a href="https://www.linkedin.com/in/chien-chi-tung/" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+        <a href="https://www.threads.com/@jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Threads">
+           <svg width="24" height="24" viewBox="0 0 448 512" fill="currentColor">
+              <path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8 29.2 14.1 50.6 35.2 61.8 61.4 15.7 36.5 17.2 95.8-30.3 143.2-36.2 36.2-80.3 52.5-142.6 53l-.3 0c-70.2-.5-124.1-24.1-160.4-70.2-32.3-41-48.9-98.1-49.5-169.6l0-.5C17 184.3 33.6 127.2 65.9 86.2 102.2 40.1 156.2 16.5 226.4 16l.3 0c70.3 .5 124.9 24 162.3 69.9 18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4-29.2-35.8-73-54.2-130.5-54.6-57 .5-100.1 18.8-128.2 54.4-26.2 33.3-39.8 81.5-40.3 143.2 .5 61.7 14.1 109.9 40.3 143.3 28 35.6 71.2 53.9 128.2 54.4 51.4-.4 85.4-12.6 113.7-40.9 32.3-32.2 31.7-71.8 21.4-95.9-6.1-14.2-17.1-26-31.9-34.9-3.7 26.9-11.8 48.3-24.7 64.8-17.1 21.8-41.4 33.6-72.7 35.3-23.6 1.3-46.3-4.4-63.9-16-20.8-13.8-33-34.8-34.3-59.3-2.5-48.3 35.7-83 95.2-86.4 21.1-1.2 40.9-.3 59.2 2.8-2.4-14.8-7.3-26.6-14.6-35.2-10-11.7-25.6-17.7-46.2-17.8l-.7 0c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1l.8 0c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2 .1 0zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3 25.6-1.4 54.6-11.4 59.5-73.2-13.2-2.9-27.8-4.4-43.4-4.4-4.8 0-9.6 .1-14.4 .4-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"/></svg>
+         </a>
+         <a href="https://www.instagram.com/jt.datastoryteller" target="_blank" rel="noopener noreferrer" class="SocialIcon" title="Instagram">
+           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="Footer__Copyright">
+        &copy; JT用數據說故事 2026</a>
+      </div>
+
+      <div class="Footer__Attribution">
+        Powered by <a href="https://github.com/dragonman225/notablog" target="_blank" rel="noopener noreferrer">Notablog</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.Footer {
+  padding: 60px 0 40px;
+  background-color: var(--color-bg-light);
+  border-top: 1px solid var(--color-border);
+  margin-top: 80px;
+}
+
+.Footer__Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.Footer__Links {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Footer__Link {
+  color: var(--color-text-default);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.Footer__Link:hover {
+  color: var(--color-primary);
+}
+
+.Footer__Social {
+  display: flex;
+  gap: 24px;
+}
+
+.SocialIcon {
+  color:var(--color-text-gray);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SocialIcon:hover {
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.Footer__Copyright {
+  color: var(--color-text-gray);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.Footer__Copyright a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.Footer__Copyright a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.Footer__Attribution {
+  color: var(--color-text-gray);
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.Footer__Attribution a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s;
+}
+
+.Footer__Attribution a:hover {
+  border-bottom-color: var(--color-text-gray);
+}
+
+.ScrollTopBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-default);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  margin-bottom: 8px; /* Spacing from the next element */
+}
+
+.ScrollTopBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  color: var(--color-primary);
+}
+</style>
+
+  </div>
+
+  <style>
+    /* Timeline page styling - Single column vertical layout */
+    .Timeline {
+      margin-top: 40px;
+      margin-bottom: 80px;
+      padding: 0 60px;
+      max-width: 1400px; /* Increased from 900px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .Timeline__Header {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .Timeline__Title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-text-default);
+      margin-bottom: 12px;
+    }
+
+    .Timeline__Desc {
+      font-size: 1.1rem;
+      color: var(--color-text-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Remove all container constraints */
+    .Timeline__Content .PageRoot {
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    .Timeline__Content .CollectionInline {
+      max-width: none !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .Timeline__Content .Table {
+      display: block;
+      width: 100%;
+      overflow: visible;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* Single column vertical layout */
+    .Timeline__Content table {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      width: 100%;
+      border: none;
+    }
+
+    .Timeline__Content thead {
+      display: none !important;
+    }
+
+    .Timeline__Content tbody {
+      display: contents;
+    }
+
+    /* Horizontal card layout with wider proportions */
+    .Timeline__Content tr {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      grid-template-rows: auto auto 1fr auto; /* 4 rows: tags, title, description (flexible), button */
+      column-gap: 32px; /* Gap between image and content */
+      row-gap: 8px; /* Smaller gap between content rows */
+      background: white;
+      border: none;
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      min-height: 280px; /* Ensure enough height for content */
+    }
+
+    .Timeline__Content tr:hover {
+      transform: translateX(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* Placeholder image on the left - spans all rows */
+    .Timeline__Content tr::before {
+      content: '';
+      grid-column: 1;
+      grid-row: 1 / 5; /* Span all 4 rows */
+      width: 240px;
+      height: 100%; /* Fill available height */
+      min-height: 240px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 8px;
+    }
+
+    .Timeline__Content tr:nth-child(2)::before {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .Timeline__Content tr:nth-child(3)::before {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .Timeline__Content tr:nth-child(4)::before {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    /* Cell base styles */
+    .Timeline__Content td {
+      display: block;
+      border: none !important;
+      padding: 0;
+      margin: 0;
+      min-width: 0;
+    }
+
+    /* Col 2: Tags - top right */
+    .Timeline__Content td:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+      margin-bottom: 4px; /* Reduced from 8px for tighter spacing */
+    }
+    
+    .Timeline__Content td:nth-child(2) .SemanticString,
+    .Timeline__Content td:nth-child(2) .Pill {
+      display: inline-flex;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Col 1: Title - middle right */
+    .Timeline__Content td:nth-child(1) {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 12px; /* Increased spacing between title and description */
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      overflow: visible !important; /* Ensure no overflow clipping */
+      max-height: none !important; /* Remove any height limit */
+      line-clamp: unset !important; /* Remove line truncation */
+      -webkit-line-clamp: unset !important; /* Remove line truncation */
+    }
+
+    .Timeline__Content td:nth-child(1) a {
+      text-decoration: none;
+      color: var(--color-text-default);
+      pointer-events: none;
+      cursor: default;
+      display: inline;
+    }
+
+    /* Remove default styling from title content */
+    .Timeline__Content td:nth-child(1) * {
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: inherit !important;
+      overflow: visible !important;
+      max-height: none !important;
+      line-clamp: unset !important;
+      -webkit-line-clamp: unset !important;
+    }
+
+    /* Col 3: Description - bottom right */
+    .Timeline__Content td:nth-child(3) {
+      grid-column: 2;
+      grid-row: 3;
+      font-size: 0.85rem;
+      color: var(--color-text-gray);
+      line-height: 1.5;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      overflow: visible !important;
+      max-height: none !important;
+      line-clamp: unset !important;
+      -webkit-line-clamp: unset !important;
+      margin-bottom: 16px; /* Space before READ MORE */
+    }
+
+    /* Ensure all description content is visible */
+    .Timeline__Content td:nth-child(3) * {
+      overflow: visible !important;
+      max-height: none !important;
+      line-clamp: unset !important;
+      -webkit-line-clamp: unset !important;
+    }
+
+    /* Col 4: URL - at the end */
+    .Timeline__Content td:nth-child(4) {
+      grid-column: 2;
+      grid-row: 4;
+      margin-top: 16px;
+    }
+
+    .Timeline__Content td:nth-child(4) a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      background: transparent;
+      color: transparent;
+      padding: 0;
+      font-size: 0;
+      font-weight: 800;
+      transition: opacity 0.2s;
+    }
+    
+    .Timeline__Content td:nth-child(4) a::after {
+      content: "READ MORE →";
+      color: var(--color-primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .Timeline__Content td:nth-child(4) a:hover::after {
+      opacity: 0.7;
+    }
+
+    /* Responsive - Mobile & Tablet */
+    @media (max-width: 1200px) {
+      .Timeline {
+        padding: 0 16px;
+      }
+
+      .Timeline__Header {
+        margin-bottom: 32px;
+      }
+
+      .Timeline__Title {
+        font-size: 1.5rem;
+      }
+
+      .Timeline__Content table {
+        gap: 20px;
+      }
+
+      /* CRITICAL: Reset all table cell styles from theme.css for mobile */
+      .Timeline__Content .Table > table td,
+      .Timeline__Content .Table > table td.Table__CellTitle,
+      .Timeline__Content .Table > table td.Table__CellText,
+      .Timeline__Content .Table > table td.Table__CellSelect {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        overflow: visible !important;
+        word-break: break-word !important;
+      }
+
+      /* Force flexbox on tr for RELIABLE vertical stacking */
+      .Timeline__Content .Table > table > tbody > tr,
+      .Timeline__Content table > tbody > tr,
+      .Timeline__Content tr {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 16px !important;
+        min-height: auto !important;
+        gap: 0 !important;
+      }
+
+      /* Placeholder image - first in visual order */
+      .Timeline__Content tr::before {
+        order: 1 !important;
+        width: 100% !important;
+        height: 140px !important;
+        min-height: 140px !important;
+        margin-bottom: 16px !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* Col 1 (name/title): Third in visual order */
+      .Timeline__Content td:nth-child(1),
+      .Timeline__Content .Table__CellTitle {
+        order: 3 !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        line-height: 1.4 !important;
+        margin-bottom: 12px !important;
+        color: var(--color-text-default) !important;
+      }
+
+      /* Col 2 (tags): Second in visual order - RESTORE STYLES */
+      .Timeline__Content td:nth-child(2),
+      .Timeline__Content .Table__CellSelect {
+        order: 2 !important;
+        margin-bottom: 8px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+      }
+
+      .Timeline__Content td:nth-child(2) .SemanticString,
+      .Timeline__Content td:nth-child(2) .Pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        background: #e0e7ff !important;
+        color: #3730a3 !important;
+        padding: 4px 12px !important;
+        border-radius: 12px !important;
+        font-size: 0.7rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+      }
+
+      /* Col 3 (description): Fourth in visual order */
+      .Timeline__Content td:nth-child(3) {
+        order: 4 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+        color: var(--color-text-gray) !important;
+        margin-bottom: 16px !important;
+      }
+
+      /* Col 4 (URL): Fifth in visual order */
+      .Timeline__Content td:nth-child(4) {
+        order: 5 !important;
+        margin-top: 8px !important;
+      }
+
+      /* Col 5 (image): Hidden */
+      .Timeline__Content td:nth-child(5) {
+        display: none !important;
+      }
+
+      /* Reset ALL inner content */
+      .Timeline__Content td *,
+      .Timeline__Content td a,
+      .Timeline__Content td span,
+      .Timeline__Content td strong {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        max-height: none !important;
+        display: inline !important;
+      }
+
+      /* Re-style the link specifically */
+      .Timeline__Content td:nth-child(4) a {
+        display: inline-flex !important;
+      }
+    }
+
+    /* Hide elements */
+    .Timeline__Content td > * { border: none !important; }
+    .Timeline__Content td:empty { display: none; }
+    .Timeline__Content .PageRoot > h3 { display: none !important; }
+    .Timeline__Content .CollectionInline > h3 { display: none !important; }
+    .Timeline__Content h3 { display: none !important; }
+  </style>
+
+</html>

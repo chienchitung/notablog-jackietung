@@ -1,0 +1,212 @@
+<nav class="Navbar">
+  <div class="Container Navbar__Content">
+    <a href="index.html" class="Navbar__Logo">
+      <% if (siteMeta.iconUrl) { %>
+        <img class="Navbar__LogoIcon" src="img/profile-icon.png" alt="Profile">
+      <% } %>
+      <span class="Navbar__LogoText"><%= siteMeta.title %></span>
+    </a>
+    
+    <button class="Navbar__Toggle" aria-label="Toggle navigation">
+      <span class="Navbar__ToggleIcon"></span>
+    </button>
+
+    <div class="Navbar__Links">
+      <!-- <a href="index.html" class="Navbar__Link Navbar__Link--Active">Home</a> -->
+      <% siteMeta.pages.forEach(function(page) { %>
+        <% if (page.publish && page.inMenu) { %>
+          <% const isExternal = /^https?:\/\//.test(page.url); %>
+          <a href="<%= page.url %>" class="Navbar__Link" <%= isExternal ? 'target="_blank" rel="noopener noreferrer"' : '' %>>
+            <%= page.title %>
+            <% if (isExternal) { %>
+              <!-- Type: <%= typeof page.url %> Value: <%= page.url %> -->
+            <% } %>
+          </a>
+        <% } %>
+      <% }) %>
+    </div>
+  </div>
+</nav>
+
+<style>
+.Navbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+.Navbar__Content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Navbar__Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-text-default);
+  gap: 12px;
+  position: relative;
+  z-index: 102; /* Ensure logo is above menu overlay if needed */
+}
+
+.Navbar__LogoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Navbar__Links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.Navbar__Link {
+  text-decoration: none;
+  color: var(--color-text-default-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.Navbar__Link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.Navbar__Link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.Navbar__Link:hover {
+  color: var(--color-primary);
+}
+
+/* Hamburger Toggle */
+.Navbar__Toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 102;
+}
+
+.Navbar__ToggleIcon {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.Navbar__ToggleIcon::before,
+.Navbar__ToggleIcon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-default);
+  transition: transform 0.3s, top 0.3s;
+  left: 0;
+}
+
+.Navbar__ToggleIcon::before { top: -8px; }
+.Navbar__ToggleIcon::after { top: 8px; }
+
+/* Active Toggle State (X shape) */
+.Navbar__Toggle--Active .Navbar__ToggleIcon { background-color: transparent; }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::before { top: 0; transform: rotate(45deg); }
+.Navbar__Toggle--Active .Navbar__ToggleIcon::after { top: 0; transform: rotate(-45deg); }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .Navbar__Toggle {
+    display: block;
+  }
+
+  .Navbar__Links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    z-index: 101;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    pointer-events: none; /* Prevent clicks when hidden */
+  }
+
+  .Navbar__Links--Active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .Navbar__Link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-default);
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.Navbar__Toggle');
+    const links = document.querySelector('.Navbar__Links');
+    
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('Navbar__Toggle--Active');
+        links.classList.toggle('Navbar__Links--Active');
+        
+        // Prevent body scroll when menu is open
+        if (links.classList.contains('Navbar__Links--Active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close menu when a link is clicked
+      links.querySelectorAll('.Navbar__Link').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('Navbar__Toggle--Active');
+          links.classList.remove('Navbar__Links--Active');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  });
+</script>
