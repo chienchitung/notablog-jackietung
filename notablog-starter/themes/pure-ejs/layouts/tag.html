@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="../">
+  <%- include('partials/head.html', { fontSize: 20, favicon: siteMeta.iconUrl }) %>
+  <title>#<%= tagName %> | <%= siteMeta.title %></title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="#<%= tagName %> | <%= siteMeta.title %>">
+  <meta name="description" content="Posts with tag #<%= tagName %>">
+  <meta property="og:description" content="Posts with tag #<%= tagName %>">
+</head>
+
+<body>
+  <%- include('partials/navbar.html', { siteMeta }) %>
+  
+  <div class="Container GlobalTagLayout">
+    <header class="TagHeader">
+      <h1 class="TagHeader__Title">#<%= tagName %></h1>
+      <p class="TagHeader__Subtitle">Explore all posts tagged with #<%= tagName %></p>
+    </header>
+
+    <div class="TagArticleList">
+      <%- include('partials/articleList.html', {
+        pages: pages.filter(page => page.publish) 
+      }) %>
+    </div>
+    
+    <%- include('partials/footer.html', { siteMeta }) %>
+  </div>
+
+<style>
+/* Layout Container */
+.GlobalTagLayout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+/* Header Styling */
+.TagHeader {
+  margin-top: 80px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.TagHeader__Title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-text-default);
+  margin-bottom: 16px;
+}
+
+.TagHeader__Subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-gray);
+}
+
+/* 
+ * UX Design: Card Layout Override 
+ * Targeting the structure within articleList.html 
+ */
+.TagArticleList .ArticleList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Tighter gap for cards */
+}
+
+.TagArticleList .ArticleItem {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid transparent;
+}
+
+.TagArticleList .ArticleItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-color: var(--color-border);
+}
+
+/* Adjust article typography for cards */
+.TagArticleList .ArticleItem__Title {
+  margin-top: 4px;
+}
+
+.TagArticleList .ArticleItem__Date {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .TagHeader {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .TagHeader__Title {
+    font-size: 2.2rem;
+  }
+  
+  .TagArticleList .ArticleItem {
+    padding: 24px;
+  }
+}
+</style>
+</body>
+
+</html>

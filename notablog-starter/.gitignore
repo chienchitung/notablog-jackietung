@@ -1,0 +1,13 @@
+# Cache files
+cache/
+
+# System files
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Dependencies (if any)
+node_modules/

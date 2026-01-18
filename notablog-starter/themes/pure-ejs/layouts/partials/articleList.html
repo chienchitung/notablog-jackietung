@@ -1,0 +1,113 @@
+<div class="ArticleList">
+<% pages.forEach(function(page) { %>
+  <article class="ArticleItem">
+    <div class="ArticleItem__Date">
+       <%= page.dateString %>
+    </div>
+    
+    <div class="ArticleItem__Content">
+      <h3 class="ArticleItem__Title">
+        <a href="<%= page.url %>"><%= page.title %></a>
+      </h3>
+
+      <% if (page.descriptionHTML) { %>
+        <p class="ArticleItem__Desc">
+          <%- page.descriptionHTML %>
+        </p>
+      <% } %>
+
+      <div class="ArticleItem__Meta">
+        <div class="ArticleItem__Tags">
+          <% page.tags.forEach(function(tag) { %>
+            <a href="tag/<%= tag.value %>.html" class="Tag Tag--<%= tag.color %>"><%= tag.value %></a>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </article>
+<% }) %>
+</div>
+
+<style>
+.ArticleList {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.ArticleItem {
+  display: block;
+}
+
+.ArticleItem__Date {
+  font-size: 0.875rem;
+  color: var(--color-text-gray);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.ArticleItem__Title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.ArticleItem__Title a {
+  text-decoration: none;
+  color: var(--color-text-default);
+  transition: color 0.15s;
+}
+
+.ArticleItem__Title a:hover {
+  color: var(--color-primary);
+}
+
+.ArticleItem__Desc {
+  color: var(--color-text-default-light);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+  max-width: 65ch;
+}
+
+.ArticleItem__Meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ArticleItem__Tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.Tag {
+  display: inline-flex;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background-color: var(--color-bg-gray);
+  color: var(--color-text-default-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.15s;
+}
+
+.Tag:hover {
+  background-color: var(--color-hover);
+  color: var(--color-primary);
+}
+
+/* Notion Colors override for tags */
+.Tag--gray { background: var(--color-bg-gray); color: var(--color-text-default); }
+.Tag--brown { background: var(--color-bg-brown); color: var(--color-text-brown); }
+.Tag--orange { background: var(--color-bg-orange); color: var(--color-text-orange); }
+.Tag--yellow { background: var(--color-bg-yellow); color: var(--color-text-yellow); }
+.Tag--green { background: var(--color-bg-green); color: var(--color-text-green); }
+.Tag--blue { background: var(--color-bg-blue); color: var(--color-text-blue); }
+.Tag--purple { background: var(--color-bg-purple); color: var(--color-text-purple); }
+.Tag--pink { background: var(--color-bg-pink); color: var(--color-text-pink); }
+.Tag--red { background: var(--color-bg-red); color: var(--color-text-red); }
+</style>
