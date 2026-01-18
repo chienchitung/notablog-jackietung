@@ -11,7 +11,7 @@
     "notablog": "bin/cli.js"
   },
   "scripts": {
-    "build": "npm run build:module && npm run build:doc",
+    "build": "npm run build:module",
     "build:module": "rm -rf dist && rollup -c && tsc --emitDeclarationOnly",
     "build:doc": "npm run build:dependency-graph",
     "build:dependency-graph": "npx depcruise --exclude '^node_modules' --output-type dot --prefix 'https://github.com/dragonman225/notablog/tree/master/' src/index.ts | dot -T svg > assets/deps_graph.svg",
