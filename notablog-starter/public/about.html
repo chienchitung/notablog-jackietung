@@ -22,7 +22,7 @@
 <link rel="icon" href="img/site-icon.png" type="image/png">
 <style>
   :root {
-    font-size: 20px;
+    font-size: 18px;
   }
 </style>
   <title>關於我 | JT用數據說故事</title>
@@ -561,9 +561,46 @@
         padding: 24px;
         border-radius: 12px;
     }
+    
+    .ProfileTitle {
+        font-size: 2rem;
+    }
+    
+    .ProfileDesc {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 390px) {
+    .NotionContent {
+        padding: 16px;
+        border-radius: 8px;
+    }
+    
+    .ProfileTitle {
+        font-size: 1.75rem;
+    }
+    
+    .ProfileDesc {
+        font-size: 1rem;
+    }
+    
+    .ProfileIcon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 16px;
+    }
 }
 
 /* Headings */
+.NotionContent h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--color-text-default);
+}
+
 .NotionContent h2 {
     font-size: 1.8rem;
     font-weight: 700;

@@ -57,6 +57,19 @@ body {
   padding: 0 24px;
 }
 
+/* Responsive Container */
+@media only screen and (max-width: 768px) {
+  .Container {
+    padding: 0 16px;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .Container {
+    padding: 0 12px;
+  }
+}
+
 .GlobalLayout {
     display: flex;
     flex-direction: column;
@@ -188,6 +201,23 @@ p {
   margin: 0; /* Remove all paragraph margins */
   line-height: 1.6;
   padding-top: 0; /* Remove padding for better alignment */
+  min-width: 0; /* Prevent overflow */
+  word-wrap: break-word;
+}
+
+/* Mobile optimization for Callout */
+@media only screen and (max-width: 680px) {
+  .Callout {
+    padding: 12px 16px;
+    margin: 12px 0;
+  }
+  
+  .Callout__Icon {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    margin-right: 10px;
+  }
 }
 
 /* Fix "highlighted text" issue by ensuring inner blocks don't have their own backgrounds */
@@ -563,21 +593,45 @@ pre.Code .SemanticString__Fragment--Commented {
 .ColumnList {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px; /* Modern gap property for better spacing */
 }
 
 .Column {
-  padding: 12px 0;
+  padding: 12px;
   word-break: break-word;
+  min-width: 0; /* Prevent flex items from overflowing */
+  flex: 1;
+  box-sizing: border-box;
 }
 
 .Column:not(:first-child) {
-  margin-left: var(--column-spacing);
+  margin-left: 0; /* Remove old margin, using gap instead */
 }
 
+/* Tablet */
+@media only screen and (max-width: 1024px) {
+  .ColumnList {
+    gap: 12px;
+  }
+  
+  .Column {
+    flex: 1 1 calc(50% - 12px); /* 2 columns on tablet */
+    min-width: calc(50% - 12px);
+  }
+}
+
+/* Mobile */
 @media only screen and (max-width: 680px) {
+  .ColumnList {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
   .Column {
     width: 100% !important;
     margin-left: 0 !important;
+    flex: 1 1 100%;
+    min-width: 100%;
   }
 }
 
