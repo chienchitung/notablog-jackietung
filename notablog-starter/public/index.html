@@ -61,52 +61,32 @@
       
         
           
-          <a href="about.html" class="Navbar__Link" >
-            關於我
-            
-          </a>
+          <a href="about.html" class="Navbar__Link" >關於我</a>
         
       
         
           
-          <a href="publications.html" class="Navbar__Link" >
-            著作
-            
-          </a>
+          <a href="publications.html" class="Navbar__Link" >著作</a>
         
       
         
           
-          <a href="speech.html" class="Navbar__Link" >
-            演講
-            
-          </a>
+          <a href="speech.html" class="Navbar__Link" >演講</a>
         
       
         
           
-          <a href="training.html" class="Navbar__Link" >
-            課程培訓
-            
-          </a>
+          <a href="training.html" class="Navbar__Link" >課程培訓</a>
         
       
         
           
-          <a href="https://www.jtdatastoryteller.com/" class="Navbar__Link" target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;>
-            部落格
-            
-              <!-- Type: string Value: https://www.jtdatastoryteller.com/ -->
-            
-          </a>
+          <a href="https://www.jtdatastoryteller.com/" class="Navbar__Link" target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;>部落格</a>
         
       
         
           
-          <a href="side-project.html" class="Navbar__Link" >
-            作品案例
-            
-          </a>
+          <a href="side-project.html" class="Navbar__Link" >作品案例</a>
         
       
         
@@ -383,8 +363,8 @@
               </div>
               <h3 class="FeatureTitle">數據策略規劃</h3>
               <p class="FeatureDesc">
-                不只是看數字，而是從繁雜數據中挖掘商業線索。曾協助 IKEA
-                北亞區透過個人化工具創造 460 萬美元額外營收。
+                精通數據分析工具與技術，善於從大量數據中提煉關鍵洞察，
+                制定切實可行的數據策略以支持業務目標。
               </p>
             </div>
             <div class="FeatureCard">
@@ -454,22 +434,30 @@
                 Circles.Life
                 服務。除了工作，我也熱愛閱讀商業書籍與自助旅行，這些經歷培養了我廣闊的國際視野。
               </p>
-              <a href="about.html" class="Btn Btn--text"
-                >閱讀更多關於我的經歷 →</a
-              >
+              <div class="AboutCTA">
+                <a href="about.html" class="Btn Btn--primary-outline">
+                  <span>閱讀完整經歷與專業背景</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
             </div>
             <div class="AboutStats">
               <div class="StatItem">
                 <div class="StatNumber">US$4.6M</div>
                 <div class="StatLabel">額外營收創造</div>
+                <div class="StatDesc">透過個人化推薦系統與數據驅動策略，為 IKEA 北亞區創造的實際營收增長</div>
               </div>
               <div class="StatItem">
                 <div class="StatNumber">60%</div>
                 <div class="StatLabel">作業效率提升</div>
+                <div class="StatDesc">藉由自動化報表與智能儀表板，大幅減少團隊手動作業時間</div>
               </div>
               <div class="StatItem">
                 <div class="StatNumber">30+</div>
                 <div class="StatLabel">A/B 測試實戰</div>
+                <div class="StatDesc">累積執行超過 30 次 A/B 測試，持續優化產品體驗與轉換率</div>
               </div>
             </div>
           </div>
@@ -1450,6 +1438,34 @@
         box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
       }
 
+      .Btn--primary-outline {
+        border: 2px solid var(--lp-primary);
+        color: var(--lp-primary);
+        background: white;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 28px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+      }
+
+      .Btn--primary-outline:hover {
+        background: var(--lp-primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(44, 62, 80, 0.25);
+      }
+
+      .Btn--primary-outline svg {
+        transition: transform 0.3s ease;
+      }
+
+      .Btn--primary-outline:hover svg {
+        transform: translateX(4px);
+      }
+
       /* HERO SECTION */
       .HeroSection {
         padding: 100px 0 60px;
@@ -1691,6 +1707,24 @@
         font-size: 1rem;
       }
 
+      .AboutCTA {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .AboutCTAHint {
+        font-size: 0.9rem;
+        color: #6b7280;
+        font-weight: 500;
+        padding-left: 4px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
       .AboutStats {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1707,6 +1741,10 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
       
       .StatItem::after {
@@ -1752,6 +1790,15 @@
         color: #64748b;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .StatDesc {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: #94a3b8;
+        font-weight: 400;
+        margin-top: 8px;
       }
 
       /* Featured Articles Section */

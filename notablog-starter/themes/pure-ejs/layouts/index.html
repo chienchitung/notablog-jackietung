@@ -28,7 +28,14 @@
         <div class="Container HeroGrid">
           <div class="HeroContent">
             <div class="HeroBadge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
               </svg>
               Data Analyst & AI Builder
@@ -95,8 +102,8 @@
               </div>
               <h3 class="FeatureTitle">數據策略規劃</h3>
               <p class="FeatureDesc">
-                不只是看數字，而是從繁雜數據中挖掘商業線索。曾協助 IKEA
-                北亞區透過個人化工具創造 460 萬美元額外營收。
+                精通數據分析工具與技術，善於從大量數據中提煉關鍵洞察，
+                制定切實可行的數據策略以支持業務目標。
               </p>
             </div>
             <div class="FeatureCard">
@@ -166,22 +173,44 @@
                 Circles.Life
                 服務。除了工作，我也熱愛閱讀商業書籍與自助旅行，這些經歷培養了我廣闊的國際視野。
               </p>
-              <a href="about.html" class="Btn Btn--text"
-                >閱讀更多關於我的經歷 →</a
-              >
+              <div class="AboutCTA">
+                <a href="about.html" class="Btn Btn--primary-outline">
+                  <span>閱讀完整經歷與專業背景</span>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
             </div>
             <div class="AboutStats">
               <div class="StatItem">
                 <div class="StatNumber">US$4.6M</div>
                 <div class="StatLabel">額外營收創造</div>
+                <div class="StatDesc">
+                  透過個人化推薦系統與數據驅動策略，為 IKEA
+                  北亞區創造的實際營收增長
+                </div>
               </div>
               <div class="StatItem">
                 <div class="StatNumber">60%</div>
                 <div class="StatLabel">作業效率提升</div>
+                <div class="StatDesc">
+                  藉由自動化報表與智能儀表板，大幅減少團隊手動作業時間
+                </div>
               </div>
               <div class="StatItem">
                 <div class="StatNumber">30+</div>
                 <div class="StatLabel">A/B 測試實戰</div>
+                <div class="StatDesc">
+                  累積執行超過 30 次 A/B 測試，持續優化產品體驗與轉換率
+                </div>
               </div>
             </div>
           </div>
@@ -320,26 +349,42 @@
           <div class="NewsletterWrapper">
             <div class="NewsletterContent">
               <div class="NewsletterBadge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
                 每週精選內容
               </div>
               <h2 class="NewsletterTitle">訂閱電子報，獲取最新洞察</h2>
               <p class="NewsletterDesc">
-                每週精選數據分析、AI 應用與職涯發展的深度內容，直接送到您的信箱。
+                每週精選數據分析、AI
+                應用與職涯發展的深度內容，直接送到您的信箱。
               </p>
             </div>
             <div class="NewsletterForm">
-              <iframe 
-                src="https://www.jtdatastoryteller.com/embed" 
-                width="480" 
-                height="150" 
-                style="border:1px solid #EEE; background:white; border-radius: 12px; max-width: 100%;" 
-                frameborder="0" 
+              <iframe
+                src="https://www.jtdatastoryteller.com/embed"
+                width="480"
+                height="150"
+                style="
+                  border: 1px solid #eee;
+                  background: white;
+                  border-radius: 12px;
+                  max-width: 100%;
+                "
+                frameborder="0"
                 scrolling="no"
-                title="訂閱電子報">
+                title="訂閱電子報"
+              >
               </iframe>
             </div>
           </div>
@@ -360,20 +405,26 @@
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
                 課程中有穿插互動橋段很不錯可以現學現用課堂所學&集中精神~
               </div>
               <div class="TestimonialMeta">
-                <div class="TestimonialRole">Digital Optimization Specialist</div>
+                <div class="TestimonialRole">
+                  Digital Optimization Specialist
+                </div>
               </div>
             </div>
 
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
                 能幫助自我思考的實用技巧, 感謝講師
@@ -386,10 +437,13 @@
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
-                整體都還不錯! 內容豐富、時間就偏短，課程拆細一點上可能更好消化一些。辛苦了，謝謝
+                整體都還不錯!
+                內容豐富、時間就偏短，課程拆細一點上可能更好消化一些。辛苦了，謝謝
               </div>
               <div class="TestimonialMeta">
                 <div class="TestimonialRole">Data Analytics Leader</div>
@@ -399,10 +453,13 @@
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
-                我覺得Jackie 都會很細心的觀察大家有沒有跟上，很讚！教材也會用公司內部的資料讓我可以一邊學習工具使用時，順便認識公司不同部門的知識。
+                我覺得Jackie
+                都會很細心的觀察大家有沒有跟上，很讚！教材也會用公司內部的資料讓我可以一邊學習工具使用時，順便認識公司不同部門的知識。
               </div>
               <div class="TestimonialMeta">
                 <div class="TestimonialRole">IB Assitant</div>
@@ -412,7 +469,9 @@
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
                 教材很用心製作, 在課程跟不上時或忘記也可之後再研究.
@@ -425,7 +484,9 @@
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
                 學到很多實用小技巧 可以運用在實際工作上~
@@ -438,7 +499,9 @@
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
                 喜歡互動回答的環節，增加參與感
@@ -451,7 +514,9 @@
             <div class="TestimonialCard">
               <div class="TestimonialQuote">"”</div>
               <div class="TestimonialRating">
-                <span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span><span class="Star">★</span>
+                <span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span><span class="Star">★</span
+                ><span class="Star">★</span>
               </div>
               <div class="TestimonialContent">
                 了解到團隊的性格特質與偏好的溝通方式。相信對我在職場溝通及團隊合作上都會有很大的幫助。期待未來在與團隊互動時能更順暢，並進一步建立良好的關係。
@@ -473,41 +538,76 @@
               <div class="ContactIntro__Content">
                 <h2 class="ContactIntro__Title">讓我們開始對話</h2>
                 <p class="ContactIntro__Desc">
-                  無論是專案合作、課程培訓，或是單純想聊聊數據與 AI，都歡迎與我聯絡。
+                  無論是專案合作、課程培訓，或是單純想聊聊數據與
+                  AI，都歡迎與我聯絡。
                 </p>
-                
+
                 <div class="ContactInfo">
                   <div class="ContactInfo__Item">
                     <div class="ContactInfo__Icon">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                        ></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                       </svg>
                     </div>
                     <div class="ContactInfo__Text">
                       <div class="ContactInfo__Label">電子郵件</div>
-                      <div class="ContactInfo__Value">jtdatastoryteller@gmail.com</div>
+                      <div class="ContactInfo__Value">
+                        jtdatastoryteller@gmail.com
+                      </div>
                     </div>
                   </div>
-                  
+
                   <div class="ContactInfo__Item">
                     <div class="ContactInfo__Icon">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                        ></path>
                         <rect x="2" y="9" width="4" height="12"></rect>
                         <circle cx="4" cy="4" r="2"></circle>
                       </svg>
                     </div>
                     <div class="ContactInfo__Text">
                       <div class="ContactInfo__Label">LinkedIn</div>
-                      <a href="https://www.linkedin.com/in/chien-chi-tung/" target="_blank" class="ContactInfo__Link">查看個人檔案</a>
+                      <a
+                        href="https://www.linkedin.com/in/chien-chi-tung/"
+                        target="_blank"
+                        class="ContactInfo__Link"
+                        >查看個人檔案</a
+                      >
                     </div>
                   </div>
-                  
+
                   <div class="ContactInfo__Item">
                     <div class="ContactInfo__Icon">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                        ></path>
                       </svg>
                     </div>
                     <div class="ContactInfo__Text">
@@ -518,88 +618,88 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Right Side - Form -->
             <div class="FormCard">
-            <!-- Success Message Container (Hidden by default) -->
-            <div
-              id="form-success-message"
-              style="display: none; text-align: center; padding: 40px 0"
-            >
-              <div style="font-size: 4rem; margin-bottom: 24px">🎉</div>
-              <h2 class="FormTitle">訊息已成功送出！</h2>
-              <p class="FormSubtitle">
-                謝謝您的來信，我已經收到您的訊息，會盡快回覆您。
-              </p>
-              <button
-                type="button"
-                id="back-to-form-btn"
-                class="Btn Btn--outline"
-                style="margin-top: 32px"
+              <!-- Success Message Container (Hidden by default) -->
+              <div
+                id="form-success-message"
+                style="display: none; text-align: center; padding: 40px 0"
               >
-                發送另一則訊息
-              </button>
-            </div>
-
-            <form
-              id="contact-form"
-              action="https://formspree.io/f/mojjjree"
-              method="POST"
-              class="ContactForm"
-            >
-              <div class="FormHeader">
-                <h3 class="FormTitle">傳送訊息</h3>
-                <p class="FormSubtitle">填寫下方表單，我將盡快回覆您</p>
+                <div style="font-size: 4rem; margin-bottom: 24px">🎉</div>
+                <h2 class="FormTitle">訊息已成功送出！</h2>
+                <p class="FormSubtitle">
+                  謝謝您的來信，我已經收到您的訊息，會盡快回覆您。
+                </p>
+                <button
+                  type="button"
+                  id="back-to-form-btn"
+                  class="Btn Btn--outline"
+                  style="margin-top: 32px"
+                >
+                  發送另一則訊息
+                </button>
               </div>
 
-              <div class="FormGrid">
+              <form
+                id="contact-form"
+                action="https://formspree.io/f/mojjjree"
+                method="POST"
+                class="ContactForm"
+              >
+                <div class="FormHeader">
+                  <h3 class="FormTitle">傳送訊息</h3>
+                  <p class="FormSubtitle">填寫下方表單，我將盡快回覆您</p>
+                </div>
+
+                <div class="FormGrid">
+                  <div class="FormGroup">
+                    <label for="name">姓名</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="請輸入姓名"
+                      required
+                    />
+                  </div>
+                  <div class="FormGroup">
+                    <label for="email">電子郵件</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="請輸入電子郵件"
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div class="FormGroup">
-                  <label for="name">姓名</label>
+                  <label for="subject">主旨</label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    placeholder="請輸入姓名"
+                    id="subject"
+                    name="subject"
+                    placeholder="請輸入主旨"
                     required
                   />
                 </div>
+
                 <div class="FormGroup">
-                  <label for="email">電子郵件</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="請輸入電子郵件"
+                  <label for="message">訊息</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="請輸入訊息"
+                    rows="6"
                     required
-                  />
+                  ></textarea>
                 </div>
-              </div>
 
-              <div class="FormGroup">
-                <label for="subject">主旨</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="請輸入主旨"
-                  required
-                />
-              </div>
-
-              <div class="FormGroup">
-                <label for="message">訊息</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="請輸入訊息"
-                  rows="6"
-                  required
-                ></textarea>
-              </div>
-
-              <button type="submit" class="Btn Btn--submit">送出訊息</button>
-            </form>
-          </div>
+                <button type="submit" class="Btn Btn--submit">送出訊息</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -869,6 +969,34 @@
         box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
       }
 
+      .Btn--primary-outline {
+        border: 2px solid var(--lp-primary);
+        color: var(--lp-primary);
+        background: white;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 28px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+      }
+
+      .Btn--primary-outline:hover {
+        background: var(--lp-primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(44, 62, 80, 0.25);
+      }
+
+      .Btn--primary-outline svg {
+        transition: transform 0.3s ease;
+      }
+
+      .Btn--primary-outline:hover svg {
+        transform: translateX(4px);
+      }
+
       /* HERO SECTION */
       .HeroSection {
         padding: 100px 0 60px;
@@ -888,7 +1016,11 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.1) 100%);
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.1) 0%,
+          rgba(147, 197, 253, 0.1) 100%
+        );
         color: var(--lp-accent);
         padding: 10px 20px;
         border-radius: 30px;
@@ -900,7 +1032,7 @@
         border: 1px solid rgba(59, 130, 246, 0.2);
         box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
       }
-      
+
       .HeroBadge svg {
         width: 16px;
         height: 16px;
@@ -1017,7 +1149,7 @@
         position: relative;
         overflow: hidden;
       }
-      
+
       .FeatureCard::before {
         content: '';
         position: absolute;
@@ -1035,11 +1167,11 @@
         box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
         border-color: rgba(59, 130, 246, 0.2);
       }
-      
+
       .FeatureCard:hover::before {
         transform: scaleX(1);
       }
-      
+
       .FeatureNumber {
         position: absolute;
         top: 24px;
@@ -1110,6 +1242,24 @@
         font-size: 1rem;
       }
 
+      .AboutCTA {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .AboutCTAHint {
+        font-size: 0.9rem;
+        color: #6b7280;
+        font-weight: 500;
+        padding-left: 4px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
       .AboutStats {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1126,8 +1276,12 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
-      
+
       .StatItem::after {
         content: '';
         position: absolute;
@@ -1143,13 +1297,13 @@
       .StatItem:first-child {
         grid-column: 1 / -1;
       }
-      
+
       .StatItem:hover {
         transform: translateY(-4px);
         box-shadow: 0 12px 32px rgba(59, 130, 246, 0.15);
         border-color: rgba(59, 130, 246, 0.3);
       }
-      
+
       .StatItem:hover::after {
         transform: scaleX(1);
       }
@@ -1171,6 +1325,15 @@
         color: #64748b;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .StatDesc {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: #94a3b8;
+        font-weight: 400;
+        margin-top: 8px;
       }
 
       /* Featured Articles Section */
@@ -1336,24 +1499,24 @@
         padding: 100px 0;
         background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%);
       }
-      
+
       .ContactWrapper {
         display: grid;
         grid-template-columns: 1fr 1.1fr;
         gap: 60px;
         align-items: start;
       }
-      
+
       /* Contact Intro (Left Side) */
       .ContactIntro {
         position: sticky;
         top: 100px;
       }
-      
+
       .ContactIntro__Content {
         padding-right: 40px;
       }
-      
+
       .ContactIntro__Title {
         font-size: 2.5rem;
         font-weight: 800;
@@ -1361,26 +1524,26 @@
         margin-bottom: 20px;
         line-height: 1.2;
       }
-      
+
       .ContactIntro__Desc {
         font-size: 1.15rem;
         line-height: 1.8;
         color: #64748b;
         margin-bottom: 48px;
       }
-      
+
       .ContactInfo {
         display: flex;
         flex-direction: column;
         gap: 28px;
       }
-      
+
       .ContactInfo__Item {
         display: flex;
         gap: 16px;
         align-items: flex-start;
       }
-      
+
       .ContactInfo__Icon {
         width: 48px;
         height: 48px;
@@ -1392,12 +1555,12 @@
         color: #3b82f6;
         flex-shrink: 0;
       }
-      
+
       .ContactInfo__Text {
         flex: 1;
         padding-top: 4px;
       }
-      
+
       .ContactInfo__Label {
         font-size: 0.85rem;
         font-weight: 600;
@@ -1406,13 +1569,13 @@
         letter-spacing: 0.5px;
         margin-bottom: 4px;
       }
-      
+
       .ContactInfo__Value {
         font-size: 1rem;
         font-weight: 600;
         color: #1e293b;
       }
-      
+
       .ContactInfo__Link {
         font-size: 1rem;
         font-weight: 600;
@@ -1420,7 +1583,7 @@
         text-decoration: none;
         transition: color 0.2s ease;
       }
-      
+
       .ContactInfo__Link:hover {
         color: #2563eb;
         text-decoration: underline;
@@ -1506,16 +1669,16 @@
           grid-template-columns: 1fr;
           gap: 48px;
         }
-        
+
         .ContactIntro {
           position: static;
         }
-        
+
         .ContactIntro__Content {
           padding-right: 0;
           text-align: center;
         }
-        
+
         .ContactInfo {
           max-width: 500px;
           margin: 0 auto;
@@ -1528,7 +1691,7 @@
         .FeaturedContent {
           padding: 24px 28px;
         }
-        
+
         .HeroGrid {
           grid-template-columns: 1fr;
           text-align: center;
@@ -1783,7 +1946,7 @@
         overflow: hidden;
         padding: 80px 0;
       }
-      
+
       .NewsletterSection::before {
         content: '';
         position: absolute;
@@ -1794,7 +1957,7 @@
         background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>');
         opacity: 0.4;
       }
-      
+
       .NewsletterWrapper {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1803,11 +1966,11 @@
         position: relative;
         z-index: 1;
       }
-      
+
       .NewsletterContent {
         color: white;
       }
-      
+
       .NewsletterBadge {
         display: inline-flex;
         align-items: center;
@@ -1824,12 +1987,12 @@
         border: 1px solid rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(10px);
       }
-      
+
       .NewsletterBadge svg {
         width: 16px;
         height: 16px;
       }
-      
+
       .NewsletterTitle {
         font-size: 2.5rem;
         font-weight: 800;
@@ -1837,61 +2000,61 @@
         margin-bottom: 20px;
         line-height: 1.2;
       }
-      
+
       .NewsletterDesc {
         font-size: 1.15rem;
         line-height: 1.7;
         color: rgba(255, 255, 255, 0.9);
         max-width: 480px;
       }
-      
+
       .NewsletterForm {
         display: flex;
         justify-content: center;
         align-items: center;
       }
-      
+
       .NewsletterForm iframe {
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         transition: transform 0.3s ease;
       }
-      
+
       .NewsletterForm iframe:hover {
         transform: translateY(-4px);
       }
-      
+
       @media (max-width: 1024px) {
         .NewsletterWrapper {
           grid-template-columns: 1fr;
           gap: 40px;
           text-align: center;
         }
-        
+
         .NewsletterContent {
           display: flex;
           flex-direction: column;
           align-items: center;
         }
-        
+
         .NewsletterDesc {
           max-width: 600px;
         }
       }
-      
+
       @media (max-width: 600px) {
         .NewsletterSection {
           padding: 60px 0;
         }
-        
+
         .NewsletterTitle {
           font-size: 1.85rem;
           margin-bottom: 16px;
         }
-        
+
         .NewsletterDesc {
           font-size: 1rem;
         }
-        
+
         .NewsletterForm iframe {
           width: 100% !important;
           max-width: 100%;
@@ -1961,7 +2124,7 @@
       }
 
       .TestimonialContent {
-        font-size: 1.0rem;
+        font-size: 1rem;
         line-height: 1.75;
         color: #1f2937;
         margin-bottom: 20px;
@@ -1999,7 +2162,7 @@
           grid-template-columns: repeat(2, 1fr);
           gap: 24px;
         }
-        
+
         .TestimonialCard {
           min-height: 280px;
         }
@@ -2016,7 +2179,7 @@
           padding: 28px 24px 24px;
           min-height: 240px;
         }
-        
+
         .TestimonialQuote {
           font-size: 3rem;
           top: 16px;
