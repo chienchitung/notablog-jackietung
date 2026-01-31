@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
-<head>
-  <base href="../">
-  <meta charset="utf-8">
+  <head>
+    <base href="../" />
+    <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- iOS Safari -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,15 +25,21 @@
     font-size: 20px;
   }
 </style>
-  <title>#Web | 董建祺 (Jackie Tung)</title>
-  <meta property="og:type" content="blog">
-  <meta property="og:title" content="#Web | 董建祺 (Jackie Tung)">
-  <meta name="description" content="標籤為 #Web 的相關文章">
-  <meta property="og:description" content="標籤為 #Web 的相關文章">
-</head>
+    <title>#Web | 董建祺 (Jackie Tung)</title>
+    <meta property="og:type" content="blog" />
+    <meta
+      property="og:title"
+      content="#Web | 董建祺 (Jackie Tung)"
+    />
+    <meta name="description" content="標籤為 #Web 的相關文章" />
+    <meta
+      property="og:description"
+      content="標籤為 #Web 的相關文章"
+    />
+  </head>
 
-<body>
-  <nav class="Navbar">
+  <body>
+    <nav class="Navbar">
   <div class="Container Navbar__Content">
     <a href="index.html" class="Navbar__Logo">
       
@@ -97,9 +102,17 @@
         
           
           <a href="side-project.html" class="Navbar__Link" >
-            個人專案
+            作品案例
             
           </a>
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -292,15 +305,15 @@
     }
   });
 </script>
-  
-  <div class="Container GlobalTagLayout">
-    <header class="TagHeader">
-      <h1 class="TagHeader__Title">文章分類：Web</h1>
-      <p class="TagHeader__Subtitle">共有 1 篇相關文章</p>
-    </header>
 
-    <div class="TagArticleList">
-      <div class="ArticleList">
+    <div class="Container GlobalTagLayout">
+      <header class="TagHeader">
+        <h1 class="TagHeader__Title">文章分類：Web</h1>
+        <p class="TagHeader__Subtitle">共有 1 篇相關文章</p>
+      </header>
+
+      <div class="TagArticleList">
+        <div class="ArticleList">
 
   <article class="ArticleItem">
     <div class="ArticleItem__Date">
@@ -413,9 +426,9 @@
 .Tag--pink { background: var(--color-bg-pink); color: var(--color-text-pink); }
 .Tag--red { background: var(--color-bg-red); color: var(--color-text-red); }
 </style>
-    </div>
-    
-    <footer class="Footer">
+      </div>
+
+      <footer class="Footer">
   <div class="Container">
     <div class="Footer__Content">
       <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="ScrollTopBtn" aria-label="Scroll to top">
@@ -449,7 +462,15 @@
           
         
           
-            <a href="side-project.html" class="Footer__Link">個人專案</a>
+            <a href="side-project.html" class="Footer__Link">作品案例</a>
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           
@@ -594,87 +615,86 @@
 }
 </style>
 
-  </div>
+    </div>
 
-<style>
-/* Layout Container */
-.GlobalTagLayout {
-  max-width: 800px;
-  margin: 0 auto;
-  padding-bottom: 80px;
-}
+    <style>
+      /* Layout Container */
+      .GlobalTagLayout {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+      }
 
-/* Header Styling */
-.TagHeader {
-  margin-top: 80px;
-  margin-bottom: 60px;
-  text-align: center;
-}
+      /* Header Styling */
+      .TagHeader {
+        margin-top: 80px;
+        margin-bottom: 60px;
+        text-align: center;
+      }
 
-.TagHeader__Title {
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--color-text-default);
-  margin-bottom: 16px;
-}
+      .TagHeader__Title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--color-text-default);
+        margin-bottom: 16px;
+      }
 
-.TagHeader__Subtitle {
-  font-size: 1.1rem;
-  color: var(--color-text-gray);
-}
+      .TagHeader__Subtitle {
+        font-size: 1.1rem;
+        color: var(--color-text-gray);
+      }
 
-/* 
+      /* 
  * UX Design: Card Layout Override 
  * Targeting the structure within articleList.html 
  */
-.TagArticleList .ArticleList {
-  display: flex;
-  flex-direction: column;
-  gap: 32px; /* Tighter gap for cards */
-}
+      .TagArticleList .ArticleList {
+        display: flex;
+        flex-direction: column;
+        gap: 32px; /* Tighter gap for cards */
+      }
 
-.TagArticleList .ArticleItem {
-  background: white;
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: 1px solid transparent;
-}
+      .TagArticleList .ArticleItem {
+        background: white;
+        padding: 32px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 1px solid transparent;
+      }
 
-.TagArticleList .ArticleItem:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-  border-color: var(--color-border);
-}
+      .TagArticleList .ArticleItem:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        border-color: var(--color-border);
+      }
 
-/* Adjust article typography for cards */
-.TagArticleList .ArticleItem__Title {
-  margin-top: 4px;
-}
+      /* Adjust article typography for cards */
+      .TagArticleList .ArticleItem__Title {
+        margin-top: 4px;
+      }
 
-.TagArticleList .ArticleItem__Date {
-  font-size: 0.8rem;
-  opacity: 0.7;
-  margin-bottom: 12px;
-}
+      .TagArticleList .ArticleItem__Date {
+        font-size: 0.8rem;
+        opacity: 0.7;
+        margin-bottom: 12px;
+      }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .TagHeader {
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
-  
-  .TagHeader__Title {
-    font-size: 2.2rem;
-  }
-  
-  .TagArticleList .ArticleItem {
-    padding: 24px;
-  }
-}
-</style>
-</body>
+      /* Responsive */
+      @media (max-width: 768px) {
+        .TagHeader {
+          margin-top: 40px;
+          margin-bottom: 40px;
+        }
 
+        .TagHeader__Title {
+          font-size: 2.2rem;
+        }
+
+        .TagArticleList .ArticleItem {
+          padding: 24px;
+        }
+      }
+    </style>
+  </body>
 </html>

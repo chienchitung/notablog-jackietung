@@ -181,6 +181,132 @@
         </div>
       </section>
 
+      <!-- Featured Articles Section -->
+      <section class="Section FeaturedSection">
+        <div class="Container">
+          <div class="SectionHeader text-center">
+            <h2 class="SectionTitle">精選文章</h2>
+            <p class="SectionSubtitle">
+              探索數據分析、AI 應用與職涯發展的深度洞察
+            </p>
+          </div>
+
+          <div class="FeaturedCarousel">
+            <div class="CarouselContainer">
+              <div class="CarouselTrack" id="carouselTrack">
+                <!-- Article 1 -->
+                <div class="FeaturedCard">
+                  <a
+                    href="https://www.jtdatastoryteller.com/p/ai-agent-trends-report-2026"
+                    target="_blank"
+                    class="FeaturedCardLink"
+                  >
+                    <div class="FeaturedImageWrapper">
+                      <img
+                        src="https://substackcdn.com/image/fetch/$s_!p8IQ!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96e6d34f-5aef-4c39-8323-901a80108289_2096x1182.webp"
+                        alt="【2026 AI 趨勢報告】Google 揭示 5 大變革：從「對話」到「行動」，AI Agent 如何重塑企業與工作的未來？"
+                        class="FeaturedImage"
+                      />
+                    </div>
+                    <div class="FeaturedContent">
+                      <h3 class="FeaturedTitle">
+                        【2026 AI 趨勢報告】Google 揭示 5
+                        大變革：從「對話」到「行動」，AI Agent
+                        如何重塑企業與工作的未來？
+                      </h3>
+                      <span class="ReadMore">閱讀全文 →</span>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="FeaturedCard">
+                  <a
+                    href="https://www.jtdatastoryteller.com/p/2025-retrospective-ai-career-growth"
+                    target="_blank"
+                    class="FeaturedCardLink"
+                  >
+                    <div class="FeaturedImageWrapper">
+                      <img
+                        src="https://substackcdn.com/image/fetch/$s_!KG0W!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fde6e2585-004c-4cf4-a453-d0e32589f22e_2816x1536.png"
+                        alt="翻頁之後：用 AI 思維重構工作，用寫作定義自己"
+                        class="FeaturedImage"
+                      />
+                    </div>
+                    <div class="FeaturedContent">
+                      <h3 class="FeaturedTitle">
+                        翻頁之後：用 AI 思維重構工作，用寫作定義自己
+                      </h3>
+                      <span class="ReadMore">閱讀全文 →</span>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="FeaturedCard">
+                  <a
+                    href="https://www.jtdatastoryteller.com/p/build-workplace-personal-brand"
+                    target="_blank"
+                    class="FeaturedCardLink"
+                  >
+                    <div class="FeaturedImageWrapper">
+                      <img
+                        src="https://substackcdn.com/image/fetch/$s_!dGIZ!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd620f6f4-704b-40cf-9fec-5d8987a79690_2816x1536.png"
+                        alt="打造個人職場品牌？這 4 個步驟，讓機會主動找上你"
+                        class="FeaturedImage"
+                      />
+                    </div>
+                    <div class="FeaturedContent">
+                      <h3 class="FeaturedTitle">
+                        打造個人職場品牌？這 4 個步驟，讓機會主動找上你
+                      </h3>
+                      <span class="ReadMore">閱讀全文 →</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carousel Navigation -->
+            <div class="CarouselNav">
+              <button
+                class="CarouselBtn CarouselBtn--prev"
+                id="prevBtn"
+                aria-label="Previous"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="CarouselDots" id="carouselDots"></div>
+              <button
+                class="CarouselBtn CarouselBtn--next"
+                id="nextBtn"
+                aria-label="Next"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Contact Section -->
       <section class="Section ContactSection" id="contact">
         <div class="Container">
@@ -273,6 +399,92 @@
     </div>
 
     <script>
+      // Featured Articles Carousel
+      ;(function () {
+        const track = document.getElementById('carouselTrack')
+        const prevBtn = document.getElementById('prevBtn')
+        const nextBtn = document.getElementById('nextBtn')
+        const dotsContainer = document.getElementById('carouselDots')
+
+        if (!track || !prevBtn || !nextBtn || !dotsContainer) return
+
+        const cards = track.querySelectorAll('.FeaturedCard')
+        const totalSlides = cards.length
+        let currentIndex = 0
+
+        // Create dots
+        cards.forEach((_, index) => {
+          const dot = document.createElement('div')
+          dot.classList.add('CarouselDot')
+          if (index === 0) dot.classList.add('active')
+          dot.addEventListener('click', () => goToSlide(index))
+          dotsContainer.appendChild(dot)
+        })
+
+        const dots = dotsContainer.querySelectorAll('.CarouselDot')
+
+        function updateCarousel() {
+          const offset = -currentIndex * 100
+          track.style.transform = `translateX(${offset}%)`
+
+          // Update dots
+          dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex)
+          })
+
+          // Update buttons
+          prevBtn.disabled = currentIndex === 0
+          nextBtn.disabled = currentIndex === totalSlides - 1
+        }
+
+        function goToSlide(index) {
+          currentIndex = index
+          updateCarousel()
+        }
+
+        function nextSlide() {
+          if (currentIndex < totalSlides - 1) {
+            currentIndex++
+            updateCarousel()
+          }
+        }
+
+        function prevSlide() {
+          if (currentIndex > 0) {
+            currentIndex--
+            updateCarousel()
+          }
+        }
+
+        nextBtn.addEventListener('click', nextSlide)
+        prevBtn.addEventListener('click', prevSlide)
+
+        // Auto-play (optional)
+        let autoplayInterval = setInterval(nextSlide, 5000)
+
+        // Pause autoplay on hover
+        track.addEventListener('mouseenter', () => {
+          clearInterval(autoplayInterval)
+        })
+
+        track.addEventListener('mouseleave', () => {
+          autoplayInterval = setInterval(nextSlide, 5000)
+        })
+
+        // Reset to first slide when reaching the end
+        const resetCarousel = () => {
+          if (currentIndex === totalSlides - 1) {
+            setTimeout(() => {
+              currentIndex = 0
+              updateCarousel()
+            }, 5000)
+          }
+        }
+
+        // Initial update
+        updateCarousel()
+      })()
+
       // AJAX Form Submission
       window.addEventListener('DOMContentLoaded', function () {
         var form = document.getElementById('contact-form')
@@ -678,6 +890,165 @@
         text-transform: uppercase;
       }
 
+      /* Featured Articles Section */
+      .FeaturedSection {
+        padding: 80px 0;
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      }
+
+      .FeaturedCarousel {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .CarouselContainer {
+        overflow: hidden;
+        border-radius: 20px;
+      }
+
+      .CarouselTrack {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+
+      .FeaturedCard {
+        min-width: 100%;
+        padding: 0 20px;
+        display: flex;
+      }
+
+      .FeaturedCardLink {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .FeaturedCardLink:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .FeaturedImageWrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1200 / 630;
+        overflow: hidden;
+        background: var(--lp-bg-light);
+      }
+
+      .FeaturedImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .FeaturedCardLink:hover .FeaturedImage {
+        transform: scale(1.05);
+      }
+
+      .FeaturedContent {
+        padding: 28px 32px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .FeaturedTitle {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--lp-primary);
+        margin-bottom: 16px;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex-grow: 1;
+      }
+
+      .ReadMore {
+        display: inline-flex;
+        align-items: center;
+        color: var(--lp-accent);
+        font-weight: 600;
+        font-size: 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .FeaturedCardLink:hover .ReadMore {
+        transform: translateX(5px);
+      }
+
+      /* Carousel Navigation */
+      .CarouselNav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 40px;
+      }
+
+      .CarouselBtn {
+        background: white;
+        border: 2px solid var(--lp-border, #e5e7eb);
+        color: var(--lp-primary);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .CarouselBtn:hover:not(:disabled) {
+        background: var(--lp-primary);
+        color: white;
+        border-color: var(--lp-primary);
+        transform: scale(1.1);
+      }
+
+      .CarouselBtn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .CarouselDots {
+        display: flex;
+        gap: 12px;
+      }
+
+      .CarouselDot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #d1d5db;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .CarouselDot.active {
+        background: var(--lp-accent);
+        width: 32px;
+        border-radius: 6px;
+      }
+
+      .CarouselDot:hover {
+        background: var(--lp-accent);
+        opacity: 0.7;
+      }
+
       /* Contact Form Section */
       .ContactSection {
         padding-bottom: 80px;
@@ -821,6 +1192,19 @@
         .FormCard {
           padding: 40px;
         }
+
+        /* Featured Articles - Tablet */
+        .FeaturedImageWrapper {
+          aspect-ratio: 1200 / 630;
+        }
+
+        .FeaturedTitle {
+          font-size: 1.5rem;
+        }
+
+        .FeaturedContent {
+          padding: 24px;
+        }
       }
 
       @media (max-width: 600px) {
@@ -944,6 +1328,50 @@
         .Btn--submit {
           padding: 14px;
           font-size: 1.05rem;
+
+          /* Featured Articles - Mobile */
+          .FeaturedSection {
+            padding: 60px 0;
+          }
+
+          .FeaturedCard {
+            padding: 0 8px;
+          }
+
+          .FeaturedImageWrapper {
+            aspect-ratio: 1200 / 630;
+          }
+
+          .FeaturedTitle {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            -webkit-line-clamp: 2;
+            line-height: 1.4;
+          }
+
+          .FeaturedExcerpt {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+          }
+
+          .FeaturedContent {
+            padding: 20px;
+          }
+
+          .CarouselBtn {
+            width: 40px;
+            height: 40px;
+          }
+
+          .CarouselBtn svg {
+            width: 20px;
+            height: 20px;
+          }
+
+          .CarouselNav {
+            gap: 16px;
+            margin-top: 24px;
+          }
           margin-top: 8px;
           border-radius: 8px;
         }

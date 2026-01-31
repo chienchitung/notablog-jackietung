@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <%- include('partials/head.html', { fontSize: 18, favicon: siteMeta.iconUrl }) %>
-  <title><%= post.title %>&nbsp;|&nbsp;<%= siteMeta.title %></title>
-  <meta property="og:type" content="blog">
-  <meta property="og:title" content="<%= post.title %>">
-  <% if (post.description) { %>
-    <meta name="description" content="<%= post.descriptionPlain %>">
-    <meta property="og:description" content="<%= post.descriptionPlain %>">
-  <% } %>
-  <% if (post.iconUrl) { %>
-    <meta property="og:image" content="<%= post.iconUrl %>">
-  <% } %>
-  <style>
-    .DateTagBar {
-      margin-top: 1.0rem;
-    }
-  </style>
-</head>
+  <head>
+    <%- include('partials/head.html', { fontSize: 18, favicon: siteMeta.iconUrl
+    }) %>
+    <title><%= post.title %>&nbsp;|&nbsp;<%= siteMeta.title %></title>
+    <meta property="og:type" content="blog" />
+    <meta property="og:title" content="<%= post.title %>" />
+    <% if (post.description) { %>
+    <meta name="description" content="<%= post.descriptionPlain %>" />
+    <meta property="og:description" content="<%= post.descriptionPlain %>" />
+    <% } %> <% if (post.iconUrl) { %>
+    <meta property="og:image" content="<%= post.iconUrl %>" />
+    <% } %>
+    <style>
+      .DateTagBar {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
 
   <div id="reading-progress-bar"></div>
   <%- include('partials/navbar.html', { siteMeta }) %>
-  
+
   <div class="Container GlobalLayout">
     <article class="Post">
       <header class="Post__Header">
@@ -48,37 +47,50 @@
         <h1 class="Post__Title"><%= post.title %></h1>
 
         <% if (post.date || post.tags.length) { %>
-          <div class="Post__Meta">
-            <% if (post.date) { %>
-              <span class="Post__Date"><%= post.dateString %></span>
-            <% } %>
-            
-            <div class="Post__Tags">
-              <% post.tags.forEach(function(tag) { %>
-                <a href="tag/<%= tag.value %>.html" class="Tag Tag--<%= tag.color %>"><%= tag.value %></a>
-              <% }) %>
-            </div>
+        <div class="Post__Meta">
+          <% if (post.date) { %>
+          <span class="Post__Date"><%= post.dateString %></span>
+          <% } %>
+
+          <div class="Post__Tags">
+            <% post.tags.forEach(function(tag) { %>
+            <a
+              href="tag/<%= tag.value %>.html"
+              class="Tag Tag--<%= tag.color %>"
+              ><%= tag.value %></a
+            >
+            <% }) %>
           </div>
+        </div>
         <% } %>
       </header>
 
-      <div class="Post__Content">
-        <%- post.contentHTML %>
-      </div>
+      <div class="Post__Content"><%- post.contentHTML %></div>
     </article>
 
     <!-- 浮動目錄 -->
     <aside class="TOC" id="toc">
       <button class="TOC__Close" id="tocClose" aria-label="隱藏目錄">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path
+            d="M12 4L4 12M4 4L12 12"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
         </svg>
       </button>
       <div class="TOC__Header">
         <h3 class="TOC__Title">目錄</h3>
         <button class="TOC__Toggle" id="tocToggle" aria-label="切換目錄">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M6 8L10 12L14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              d="M6 8L10 12L14 8"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
       </div>
@@ -93,75 +105,87 @@
   <!-- 重新開啟目錄按鈕（固定在視窗右側） -->
   <button class="TOC__Trigger" id="tocTrigger" aria-label="顯示目錄">
     <span class="TOC__Trigger__Text">目錄</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <polyline points="15 18 9 12 15 6"></polyline>
     </svg>
   </button>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const containers = document.querySelectorAll('.Post__Content');
+      const containers = document.querySelectorAll('.Post__Content')
 
       containers.forEach(container => {
-        const links = container.querySelectorAll('a');
+        const links = container.querySelectorAll('a')
         links.forEach(link => {
-          const images = link.querySelectorAll('img');
+          const images = link.querySelectorAll('img')
           if (images.length === 1 && link.textContent.trim() === '') {
-            link.replaceWith(images[0]);
+            link.replaceWith(images[0])
           }
-        });
+        })
 
-        const codeBlocks = container.querySelectorAll('pre');
+        const codeBlocks = container.querySelectorAll('pre')
         codeBlocks.forEach(pre => {
-          if (pre.querySelector('.CopyButton')) return;
+          if (pre.querySelector('.CopyButton')) return
 
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'CopyButton';
-          button.textContent = 'Copy';
+          const button = document.createElement('button')
+          button.type = 'button'
+          button.className = 'CopyButton'
+          button.textContent = 'Copy'
 
           button.addEventListener('click', async () => {
-            const codeElement = pre.querySelector('code');
-            const text = codeElement ? codeElement.innerText : pre.innerText;
+            const codeElement = pre.querySelector('code')
+            const text = codeElement ? codeElement.innerText : pre.innerText
 
             try {
-              await navigator.clipboard.writeText(text.trimEnd());
-              button.textContent = 'Copied';
+              await navigator.clipboard.writeText(text.trimEnd())
+              button.textContent = 'Copied'
             } catch (error) {
-              const textarea = document.createElement('textarea');
-              textarea.value = text;
-              textarea.setAttribute('readonly', '');
-              textarea.style.position = 'absolute';
-              textarea.style.left = '-9999px';
-              document.body.appendChild(textarea);
-              textarea.select();
-              document.execCommand('copy');
-              document.body.removeChild(textarea);
-              button.textContent = 'Copied';
+              const textarea = document.createElement('textarea')
+              textarea.value = text
+              textarea.setAttribute('readonly', '')
+              textarea.style.position = 'absolute'
+              textarea.style.left = '-9999px'
+              document.body.appendChild(textarea)
+              textarea.select()
+              document.execCommand('copy')
+              document.body.removeChild(textarea)
+              button.textContent = 'Copied'
             }
 
             window.setTimeout(() => {
-              button.textContent = 'Copy';
-            }, 1500);
-          });
+              button.textContent = 'Copy'
+            }, 1500)
+          })
 
-          pre.classList.add('has-copy-button');
-          pre.appendChild(button);
-        });
-      });
-    });
+          pre.classList.add('has-copy-button')
+          pre.appendChild(button)
+        })
+      })
+    })
     // Reading Progress Bar
     window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-      const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
-      
-      const scrolled = (scrollTop / (scrollHeight - clientHeight)) * 100;
-      const progressBar = document.getElementById('reading-progress-bar');
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+      const scrollHeight =
+        document.documentElement.scrollHeight || document.body.scrollHeight
+      const clientHeight =
+        document.documentElement.clientHeight || document.body.clientHeight
+
+      const scrolled = (scrollTop / (scrollHeight - clientHeight)) * 100
+      const progressBar = document.getElementById('reading-progress-bar')
       if (progressBar) {
-        progressBar.style.width = scrolled + '%';
+        progressBar.style.width = scrolled + '%'
       }
-    });
+    })
   </script>
 
   <style>
@@ -278,19 +302,30 @@
       line-height: 1.8;
       color: var(--color-text-default);
       background-color: #ffffff;
-      padding: 48px; 
+      padding: 48px;
       border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
       /* Better CJK text handling */
       word-break: keep-all;
       overflow-wrap: break-word;
     }
-    
+
     /* Ensure paragraphs flow naturally */
     .Post__Content p,
     .Post__Content .Text__Content {
       word-break: keep-all;
       overflow-wrap: break-word;
+    }
+
+    /* Paragraph Spacing (Synced with Profile) */
+    .Post__Content p {
+      margin-bottom: 16px;
+    }
+
+    /* Protect Callout and Blockquote from Paragraph Spacing */
+    .Post__Content .Callout p,
+    .Post__Content blockquote p {
+      margin-bottom: 0;
     }
 
     /* Responsive adjustments for the card */
@@ -300,7 +335,7 @@
         border-radius: 12px;
       }
     }
-    
+
     /* Adjustments for Notion Content */
     .Post__Content img {
       max-width: 100%;
@@ -331,12 +366,14 @@
       opacity: 0.85;
       transform: translateY(-1px);
     }
-    
-    .Post__Content h1, .Post__Content h2, .Post__Content h3 {
-      margin-top: 1em;
+
+    .Post__Content h1,
+    .Post__Content h2,
+    .Post__Content h3 {
+      margin-top: 0.5em;
       margin-bottom: 0.5em;
     }
-    
+
     /* First heading should have no top margin */
     .Post__Content h1:first-child,
     .Post__Content h2:first-child,
@@ -352,6 +389,13 @@
       padding: 16px 24px;
       border-radius: 0 8px 8px 0;
       font-style: normal;
+    }
+
+    /* Reduce spacing between heading and blockquote */
+    .Post__Content h1 + blockquote,
+    .Post__Content h2 + blockquote,
+    .Post__Content h3 + blockquote {
+      margin-top: 12px;
     }
 
     /* ========== 浮動目錄樣式 ========== */
@@ -555,18 +599,18 @@
     }
 
     /* 標題層級縮進 */
-    .TOC__Item[data-level="2"] {
+    .TOC__Item[data-level='2'] {
       padding-left: 12px;
     }
 
-    .TOC__Item[data-level="3"] {
+    .TOC__Item[data-level='3'] {
       padding-left: 24px;
       font-size: 0.8125rem;
     }
 
-    .TOC__Item[data-level="4"],
-    .TOC__Item[data-level="5"],
-    .TOC__Item[data-level="6"] {
+    .TOC__Item[data-level='4'],
+    .TOC__Item[data-level='5'],
+    .TOC__Item[data-level='6'] {
       padding-left: 36px;
       font-size: 0.75rem;
     }
@@ -598,92 +642,92 @@
   </style>
 
   <script>
-    (function() {
-      'use strict';
+    ;(function () {
+      'use strict'
 
       // 等待 DOM 加載完成
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initTOC);
+        document.addEventListener('DOMContentLoaded', initTOC)
       } else {
-        initTOC();
+        initTOC()
       }
 
       function initTOC() {
-        const content = document.querySelector('.Post__Content');
-        const tocNav = document.getElementById('tocNav');
-        const tocContainer = document.getElementById('toc');
-        const tocToggle = document.getElementById('tocToggle');
-        const tocClose = document.getElementById('tocClose');
-        const tocTrigger = document.getElementById('tocTrigger');
+        const content = document.querySelector('.Post__Content')
+        const tocNav = document.getElementById('tocNav')
+        const tocContainer = document.getElementById('toc')
+        const tocToggle = document.getElementById('tocToggle')
+        const tocClose = document.getElementById('tocClose')
+        const tocTrigger = document.getElementById('tocTrigger')
 
-        if (!content || !tocNav || !tocContainer) return;
+        if (!content || !tocNav || !tocContainer) return
 
         // 提取所有標題
-        const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        
+        const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6')
+
         if (headings.length === 0) {
-          tocContainer.style.display = 'none';
-          return;
+          tocContainer.style.display = 'none'
+          return
         }
 
         // 檢查是否為桌面版
-        const isDesktop = () => window.innerWidth > 1200;
+        const isDesktop = () => window.innerWidth > 1200
 
         // 隱藏目錄功能（桌面版）
         if (tocClose && tocTrigger) {
-          tocClose.addEventListener('click', function() {
+          tocClose.addEventListener('click', function () {
             if (isDesktop()) {
-              tocContainer.classList.add('hidden');
-              document.body.classList.add('toc-hidden');
-              tocTrigger.classList.add('visible');
+              tocContainer.classList.add('hidden')
+              document.body.classList.add('toc-hidden')
+              tocTrigger.classList.add('visible')
             }
-          });
+          })
 
-          tocTrigger.addEventListener('click', function() {
+          tocTrigger.addEventListener('click', function () {
             if (isDesktop()) {
-              tocTrigger.classList.remove('visible');
-              tocContainer.classList.remove('hidden');
-              document.body.classList.remove('toc-hidden');
+              tocTrigger.classList.remove('visible')
+              tocContainer.classList.remove('hidden')
+              document.body.classList.remove('toc-hidden')
             }
-          });
+          })
         }
 
         // 響應式調整
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
           if (!isDesktop()) {
-            tocContainer.classList.remove('hidden');
-            document.body.classList.remove('toc-hidden');
+            tocContainer.classList.remove('hidden')
+            document.body.classList.remove('toc-hidden')
             if (tocTrigger) {
-              tocTrigger.classList.remove('visible');
+              tocTrigger.classList.remove('visible')
             }
           } else {
             // 桌面版確保按鈕狀態正確
             if (tocContainer.classList.contains('hidden')) {
-              tocTrigger.classList.add('visible');
+              tocTrigger.classList.add('visible')
             }
           }
-        });
+        })
 
         // 為每個標題添加 ID（如果沒有的話）
-        const tocItems = [];
+        const tocItems = []
         headings.forEach((heading, index) => {
           if (!heading.id) {
-            heading.id = `heading-${index}`;
+            heading.id = `heading-${index}`
           }
 
-          const level = parseInt(heading.tagName.substring(1));
-          const text = heading.textContent.trim();
+          const level = parseInt(heading.tagName.substring(1))
+          const text = heading.textContent.trim()
 
           tocItems.push({
             id: heading.id,
             text: text,
             level: level,
-            element: heading
-          });
-        });
+            element: heading,
+          })
+        })
 
         // 生成目錄 HTML
-        let tocHTML = '';
+        let tocHTML = ''
         tocItems.forEach(item => {
           tocHTML += `
             <a href="#${item.id}" 
@@ -692,74 +736,76 @@
                data-target="${item.id}">
               ${item.text}
             </a>
-          `;
-        });
-        tocNav.innerHTML = tocHTML;
+          `
+        })
+        tocNav.innerHTML = tocHTML
 
         // 平滑滾動
-        const tocLinks = tocNav.querySelectorAll('.TOC__Item');
+        const tocLinks = tocNav.querySelectorAll('.TOC__Item')
         tocLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('data-target');
-            const targetElement = document.getElementById(targetId);
-            
+          link.addEventListener('click', function (e) {
+            e.preventDefault()
+            const targetId = this.getAttribute('data-target')
+            const targetElement = document.getElementById(targetId)
+
             if (targetElement) {
-              const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 100;
+              const offsetTop =
+                targetElement.getBoundingClientRect().top +
+                window.pageYOffset -
+                100
               window.scrollTo({
                 top: offsetTop,
-                behavior: 'smooth'
-              });
+                behavior: 'smooth',
+              })
 
               // 更新 URL hash（不觸發跳轉）
-              history.pushState(null, null, `#${targetId}`);
+              history.pushState(null, null, `#${targetId}`)
             }
-          });
-        });
+          })
+        })
 
         // 滾動監聽 - 高亮當前標題
-        let ticking = false;
-        window.addEventListener('scroll', function() {
+        let ticking = false
+        window.addEventListener('scroll', function () {
           if (!ticking) {
-            window.requestAnimationFrame(function() {
-              updateActiveHeading(headings, tocLinks);
-              ticking = false;
-            });
-            ticking = true;
+            window.requestAnimationFrame(function () {
+              updateActiveHeading(headings, tocLinks)
+              ticking = false
+            })
+            ticking = true
           }
-        });
+        })
 
         // 初始化時設定活動標題
-        updateActiveHeading(headings, tocLinks);
+        updateActiveHeading(headings, tocLinks)
 
         // 折疊/展開功能（移動端）
         if (tocToggle) {
-          tocToggle.addEventListener('click', function() {
-            tocContainer.classList.toggle('collapsed');
-          });
+          tocToggle.addEventListener('click', function () {
+            tocContainer.classList.toggle('collapsed')
+          })
         }
       }
 
       function updateActiveHeading(headings, tocLinks) {
-        const scrollPosition = window.scrollY + 120;
+        const scrollPosition = window.scrollY + 120
 
-        let activeIndex = -1;
+        let activeIndex = -1
         headings.forEach((heading, index) => {
-          const headingTop = heading.offsetTop;
+          const headingTop = heading.offsetTop
           if (scrollPosition >= headingTop - 50) {
-            activeIndex = index;
+            activeIndex = index
           }
-        });
+        })
 
         tocLinks.forEach((link, index) => {
           if (index === activeIndex) {
-            link.classList.add('active');
+            link.classList.add('active')
           } else {
-            link.classList.remove('active');
+            link.classList.remove('active')
           }
-        });
+        })
       }
-    })();
+    })()
   </script>
-
 </html>

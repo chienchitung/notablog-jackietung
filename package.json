@@ -22,7 +22,9 @@
     "release": "npm run build && npm publish",
     "release:beta": "npm run build && npm publish --tag beta",
     "upgrade": "node tools/upgrade-deps.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "sync": "node bin/cli.js generate --fresh notablog-starter",
+    "start": "node bin/cli.js preview notablog-starter"
   },
   "dependencies": {
     "@dnpr/cli": "^2.0.0",

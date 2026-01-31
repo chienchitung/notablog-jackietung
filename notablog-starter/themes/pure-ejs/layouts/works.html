@@ -213,14 +213,19 @@
       max-height: none !important;
     }
 
-    /* Col 3: READ MORE Link (URL) */
+    /* Col 3: Publish checkbox - HIDE */
     .Works__Content td:nth-child(3) {
+      display: none !important;
+    }
+
+    /* Col 4: READ MORE Link (URL) */
+    .Works__Content td:nth-child(4) {
       order: 2;
       margin-top: auto;
       padding-bottom: 20px;
     }
 
-    .Works__Content td:nth-child(3) a {
+    .Works__Content td:nth-child(4) a {
       display: inline-flex;
       align-items: center;
       text-decoration: none;
@@ -232,7 +237,7 @@
       transition: opacity 0.2s;
     }
 
-    .Works__Content td:nth-child(3) a::after {
+    .Works__Content td:nth-child(4) a::after {
       content: 'READ MORE';
       color: var(--color-text-default);
       font-size: 0.65rem;
@@ -241,12 +246,12 @@
       text-transform: uppercase;
     }
 
-    .Works__Content td:nth-child(3) a:hover::after {
+    .Works__Content td:nth-child(4) a:hover::after {
       opacity: 0.6;
     }
 
-    /* Col 4: Image - HIDE */
-    .Works__Content td:nth-child(4) {
+    /* Col 5: Image - HIDE */
+    .Works__Content td:nth-child(5) {
       display: none !important;
     }
 
@@ -306,9 +311,30 @@
         const rows = table.querySelectorAll('tr')
         rows.forEach(row => {
           const cells = row.querySelectorAll('td')
-          // Works table has 4 columns, image is in 4th (index 3)
-          if (cells.length >= 4) {
-            const imageCell = cells[3]
+
+          // Check if this row should be published
+          // The publish checkbox is in the 3rd column (index 2)
+          // When checked, it has class "Table__CellCheckbox--Yes"
+          // When unchecked, it has class "Table__CellCheckbox--No"
+          if (cells.length >= 3) {
+            const publishCell = cells[2] // 3rd column is publish checkbox
+
+            // Check if the publish checkbox is checked
+            const isPublished = publishCell.classList.contains(
+              'Table__CellCheckbox--Yes'
+            )
+
+            // If not published, hide the row
+            if (!isPublished) {
+              row.style.display = 'none'
+              return // Skip processing this row
+            }
+          }
+
+          // Works table has 5 columns: Title, Description, Publish, URL, Image
+          // Image is in 5th column (index 4)
+          if (cells.length >= 5) {
+            const imageCell = cells[4]
             const link = imageCell.querySelector('a')
 
             if (link) {

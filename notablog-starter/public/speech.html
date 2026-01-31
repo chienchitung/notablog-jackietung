@@ -101,9 +101,17 @@
         
           
           <a href="side-project.html" class="Navbar__Link" >
-            個人專案
+            作品案例
             
           </a>
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -369,7 +377,15 @@
           
         
           
-            <a href="side-project.html" class="Footer__Link">個人專案</a>
+            <a href="side-project.html" class="Footer__Link">作品案例</a>
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           
@@ -719,6 +735,17 @@
       overflow-wrap: break-word;
     }
 
+    /* Paragraph Spacing (Synced with Profile) */
+    .Post__Content p {
+      margin-bottom: 16px;
+    }
+
+    /* Protect Callout and Blockquote from Paragraph Spacing */
+    .Post__Content .Callout p,
+    .Post__Content blockquote p {
+      margin-bottom: 0;
+    }
+
     /* Responsive adjustments for the card */
     @media (max-width: 768px) {
       .Post__Content {
@@ -759,7 +786,7 @@
     }
     
     .Post__Content h1, .Post__Content h2, .Post__Content h3 {
-      margin-top: 1em;
+      margin-top: 0.5em;
       margin-bottom: 0.5em;
     }
     
@@ -778,6 +805,13 @@
       padding: 16px 24px;
       border-radius: 0 8px 8px 0;
       font-style: normal;
+    }
+
+    /* Reduce spacing between heading and blockquote */
+    .Post__Content h1 + blockquote,
+    .Post__Content h2 + blockquote,
+    .Post__Content h3 + blockquote {
+      margin-top: 12px;
     }
 
     /* ========== 浮動目錄樣式 ========== */

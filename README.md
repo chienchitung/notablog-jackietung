@@ -74,26 +74,54 @@ cd my-blog
 
 ### 3. 生成並預覽網站
 
+#### 方式一：使用 npm scripts（推薦）⭐
+
 ```bash
-# 從專案根目錄執行生成命令
-node bin/cli.js generate my-blog
+# 從 Notion 同步數據並生成網站（不使用緩存）
+npm run sync
 
 # 啟動本地預覽伺服器
-node bin/cli.js preview my-blog
+npm start
 ```
 
-執行 `preview` 命令後，打開瀏覽器訪問 **http://localhost:3000** 即可查看您的網站。
+#### 方式二：使用完整命令
 
-**預覽工作流程**：
+```bash
+# 從專案根目錄執行生成命令
+node bin/cli.js generate notablog-starter
 
-1. 在 Notion 中修改內容
-2. 執行 `node bin/cli.js generate my-blog` 重新生成
-3. 在瀏覽器中按 `Cmd + Shift + R` (Mac) 或 `Ctrl + Shift + R` (Windows) 強制刷新頁面
-4. 查看更新後的內容
+# 啟動本地預覽伺服器
+node bin/cli.js preview notablog-starter
+```
 
-> 💡 **提示**：預覽伺服器會持續運行，按 `Ctrl + C` 可停止伺服器。
+執行預覽命令後，打開瀏覽器訪問 **http://localhost:3000** 即可查看您的網站。
+
+**推薦工作流程**：
+
+1. 在 Notion 中修改內容（例如：勾選/取消勾選發布狀態）
+2. 執行 `npm run sync` 從 Notion 同步最新數據並重新生成
+3. 執行 `npm start` 啟動預覽服務器
+4. 在瀏覽器中訪問 `http://localhost:3000` 查看更新後的內容
+
+> 💡 **提示**：
+>
+> - `npm run sync` 會自動使用 `--fresh` 選項，不使用緩存，確保獲取 Notion 的最新數據
+> - 預覽伺服器會持續運行，按 `Ctrl + C` 可停止伺服器
+> - 如果只是修改了主題樣式，也需要執行 `npm run sync` 重新生成頁面
 
 ## 📖 使用說明
+
+### 快捷命令（推薦）
+
+為了方便使用，專案提供了以下 npm scripts：
+
+```bash
+# 從 Notion 同步數據並生成網站（自動使用 --fresh 選項）
+npm run sync
+
+# 啟動本地預覽伺服器
+npm start
+```
 
 ### 命令列工具
 
@@ -107,6 +135,12 @@ node bin/cli.js generate <path_to_blog> [options]
   --fresh          清除快取重新生成
 ```
 
+**等同於**：
+
+```bash
+npm run sync  # 相當於 node bin/cli.js generate --fresh notablog-starter
+```
+
 #### `preview` - 本地預覽
 
 ```bash
@@ -115,6 +149,37 @@ node bin/cli.js preview <path_to_blog> [options]
 選項：
   -v, --verbose    顯示詳細日誌
 ```
+
+**等同於**：
+
+```bash
+npm start  # 相當於 node bin/cli.js preview notablog-starter
+```
+
+### Notion 數據同步
+
+當您在 Notion 中更新內容後，需要重新生成網站才能看到變化：
+
+**方式一：使用 npm script（推薦）**
+
+```bash
+npm run sync
+```
+
+**方式二：使用完整命令**
+
+```bash
+# 使用 --fresh 選項強制重新抓取 Notion 數據
+node bin/cli.js generate --fresh notablog-starter
+
+# 或者手動刪除緩存後生成
+rm -rf notablog-starter/cache
+node bin/cli.js generate notablog-starter
+```
+
+> 💡 **為什麼需要 `--fresh` 選項？**
+>
+> Notablog 使用緩存機制來提高性能，避免每次都重新從 Notion API 抓取數據。當您在 Notion 中更新內容後，需要使用 `--fresh` 選項或刪除緩存來強制重新抓取最新數據。
 
 ### 外部連結功能
 
