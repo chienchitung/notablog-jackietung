@@ -102,8 +102,8 @@
               </div>
               <h3 class="FeatureTitle">數據策略規劃</h3>
               <p class="FeatureDesc">
-                精通數據分析工具與技術，善於從大量數據中提煉關鍵洞察，
-                制定切實可行的數據策略以支持業務目標。
+                精通數據分析工具與技術，善於從大量數據中找出關鍵洞察，
+                制定可執行的數據策略來支持業務目標。
               </p>
             </div>
             <div class="FeatureCard">
@@ -1734,6 +1734,21 @@
           max-width: 100%;
         }
 
+        .AboutCTA {
+          align-items: center;
+        }
+
+        .AboutStats {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        .StatItem:first-child {
+          grid-column: 1;
+        }
+
         /* Tablet: 2 Columns for features */
         .Grid--3 {
           grid-template-columns: 1fr 1fr;
@@ -1801,6 +1816,12 @@
           font-size: 1rem;
         }
 
+        .AvatarWrapper {
+          width: 240px;
+          height: 240px;
+          margin: 0 auto 24px;
+        }
+
         /* Features Section Mobile */
         .Section {
           padding: 60px 0;
@@ -1844,8 +1865,14 @@
           margin-bottom: 20px;
         }
 
+        .AboutStats {
+          max-width: 100%;
+          gap: 16px;
+        }
+
         .StatItem {
-          padding: 24px 16px;
+          padding: 28px 20px;
+          min-height: 160px;
         }
 
         .StatNumber {
@@ -1854,6 +1881,10 @@
         }
 
         .StatLabel {
+          font-size: 0.8rem;
+        }
+
+        .StatDesc {
           font-size: 0.8rem;
         }
 
@@ -1936,6 +1967,94 @@
         .Grid--3 > :last-child {
           grid-column: auto;
           max-width: none;
+        }
+      }
+
+      /* Extra small screens optimization (480px and below) */
+      @media (max-width: 480px) {
+        .HeroSection {
+          padding: 40px 0 30px;
+        }
+
+        .HeroBadge {
+          font-size: 0.75rem;
+          padding: 6px 14px;
+        }
+
+        .HeroTitle {
+          font-size: 1.95rem;
+        }
+
+        .HeroDesc {
+          font-size: 0.95rem;
+          margin-bottom: 28px;
+        }
+
+        .AvatarWrapper {
+          width: 200px;
+          height: 200px;
+        }
+
+        .AvatarWrapper img {
+          border-radius: 20px;
+        }
+
+        .DecorCircle {
+          width: 150px;
+          height: 150px;
+          top: -30px;
+          right: -30px;
+        }
+
+        .Section {
+          padding: 50px 0;
+        }
+
+        .SectionTitle {
+          font-size: 1.7rem;
+        }
+
+        .FeatureCard {
+          padding: 20px 16px;
+        }
+
+        /* 統計數據區塊 - 極小螢幕優化 */
+        .StatItem {
+          padding: 24px 18px;
+          min-height: 140px;
+        }
+
+        .StatNumber {
+          font-size: 1.85rem;
+        }
+
+        .StatLabel {
+          font-size: 0.75rem;
+        }
+
+        .StatDesc {
+          font-size: 0.75rem;
+          line-height: 1.5;
+        }
+
+        /* Newsletter iframe 高度調整 */
+        .NewsletterForm iframe {
+          height: 180px !important;
+        }
+
+        .NewsletterWrapper {
+          gap: 28px;
+        }
+
+        /* 表單輸入框 padding 優化 */
+        .FormGroup input,
+        .FormGroup textarea {
+          padding: 14px 16px;
+          font-size: 1rem;
+        }
+
+        .FormCard {
+          padding: 28px 18px;
         }
       }
 
@@ -2058,6 +2177,10 @@
         .NewsletterForm iframe {
           width: 100% !important;
           max-width: 100%;
+        }
+
+        .NewsletterWrapper {
+          gap: 32px;
         }
       }
 
