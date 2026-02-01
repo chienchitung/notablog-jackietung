@@ -45,7 +45,9 @@ body {
   color: var(--color-text-default);
   background-color: #f8f9fa;
   fill: currentColor;
-  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
   margin: 0;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -71,9 +73,9 @@ body {
 }
 
 .GlobalLayout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 code {
@@ -181,7 +183,7 @@ p {
 }
 
 /* Add a subtle border to colored callouts for better definition */
-.Callout[class*="--Bg"] {
+.Callout[class*='--Bg'] {
   border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
@@ -216,7 +218,7 @@ p {
     padding-left: 46px; /* 16px + 20px icon + 10px gap */
     margin: 12px 0;
   }
-  
+
   .Callout__Icon {
     width: 20px;
     height: 20px;
@@ -228,7 +230,7 @@ p {
 
 /* Fix "highlighted text" issue by ensuring inner blocks don't have their own backgrounds */
 .Callout__Content .ColorfulBlock,
-.Callout__Content .SemanticString span[class*="SemanticString__Fragment--Bg"],
+.Callout__Content .SemanticString span[class*='SemanticString__Fragment--Bg'],
 .Callout__Content .SemanticString,
 .Callout .ColorfulBlock--BgGray,
 .Callout .ColorfulBlock--BgBlue,
@@ -277,7 +279,6 @@ p {
   display: inline;
 }
 
-
 /* Code */
 
 /* Code */
@@ -303,7 +304,7 @@ pre.Code code {
 
 /* Ensure ALL text inside Code blocks has transparent background by default */
 pre.Code .SemanticString,
-pre.Code span[class*="SemanticString__Fragment--Bg"],
+pre.Code span[class*='SemanticString__Fragment--Bg'],
 pre.Code .token {
   background-color: transparent !important;
 }
@@ -317,7 +318,6 @@ pre.Code .SemanticString__Fragment--Commented {
 .Code.Code--NoWrap .SemanticString {
   white-space: pre;
 }
-
 
 /* Collection */
 
@@ -631,7 +631,7 @@ pre.Code .SemanticString__Fragment--Commented {
   .ColumnList {
     gap: 12px;
   }
-  
+
   .Column {
     flex: 1 1 calc(50% - 12px); /* 2 columns on tablet */
     min-width: calc(50% - 12px);
@@ -644,7 +644,7 @@ pre.Code .SemanticString__Fragment--Commented {
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .Column {
     width: 100% !important;
     margin-left: 0 !important;
@@ -834,7 +834,7 @@ pre.Code .SemanticString__Fragment--Commented {
 }
 
 /* 置中對齊 */
-.Image--Normal[style*="align-self: center"],
+.Image--Normal[style*='align-self: center'],
 .Image--Normal.align-center {
   text-align: center;
   margin-left: auto;
@@ -842,7 +842,7 @@ pre.Code .SemanticString__Fragment--Commented {
 }
 
 /* 右對齊 */
-.Image--Normal[style*="align-self: flex-end"],
+.Image--Normal[style*='align-self: flex-end'],
 .Image--Normal.align-right {
   text-align: right;
   margin-left: auto;
@@ -896,11 +896,11 @@ pre.Code .SemanticString__Fragment--Commented {
     padding: 3rem 0;
     margin: 2rem 0 0 0;
   }
-  
+
   .Newsletter__Title {
     font-size: 1.8rem;
   }
-  
+
   .Newsletter__Subtitle {
     font-size: 1rem;
     margin-bottom: 2rem;
@@ -912,21 +912,20 @@ pre.Code .SemanticString__Fragment--Commented {
     padding: 2.5rem 0;
     margin: 2rem 0 0 0;
   }
-  
+
   .Newsletter__Title {
     font-size: 1.5rem;
   }
-  
+
   .Newsletter__Subtitle {
     font-size: 0.95rem;
   }
-  
+
   .Newsletter__Embed iframe {
     width: 100%;
     height: 280px;
   }
 }
-
 
 .Image--PageWidth {
   width: 100%;
@@ -1121,7 +1120,6 @@ pre.Code .SemanticString__Fragment--Commented {
 }
 
 /* Removed quote mark decoration per request */
-
 
 /* SemanticStringArray */
 
