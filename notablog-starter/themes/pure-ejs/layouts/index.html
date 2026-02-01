@@ -58,7 +58,7 @@
             <% if (siteMeta.iconUrl) { %>
             <div class="AvatarWrapper">
               <img
-                src="img/jackie.jpg"
+                src="img/jackie.png"
                 onerror="this.src='<%= siteMeta.iconUrl %>'"
                 alt="Jackie Tung"
               />
@@ -194,8 +194,7 @@
                 <div class="StatNumber">US$4.6M</div>
                 <div class="StatLabel">額外營收創造</div>
                 <div class="StatDesc">
-                  透過個人化推薦系統與數據驅動策略，為 IKEA
-                  北亞區創造的實際營收增長
+                  透過個人化推薦系統與數據驅動策略，創造實際營收增長
                 </div>
               </div>
               <div class="StatItem">
@@ -374,7 +373,7 @@
               <iframe
                 src="https://www.jtdatastoryteller.com/embed"
                 width="480"
-                height="150"
+                height="320"
                 style="
                   border: 1px solid #eee;
                   background: white;
@@ -999,7 +998,7 @@
 
       /* HERO SECTION */
       .HeroSection {
-        padding: 100px 0 60px;
+        padding: 100px 0 0;
         background: linear-gradient(135deg, #fff 0%, #f7f9fc 100%);
         position: relative;
         overflow: hidden;
@@ -1009,7 +1008,8 @@
         display: grid;
         grid-template-columns: 1.2fr 1fr;
         gap: 60px;
-        align-items: center;
+        align-items: flex-end;
+        min-height: 500px;
       }
 
       .HeroBadge {
@@ -1066,44 +1066,53 @@
         gap: 16px;
       }
 
+      .HeroContent {
+        padding-bottom: 60px;
+      }
+
       .HeroVisual {
         position: relative;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
+        align-items: flex-end;
+        height: 100%;
+        overflow: visible;
       }
 
       .AvatarWrapper {
         position: relative;
-        width: 380px;
-        height: 380px;
+        width: 600px;
+        height: 650px;
         z-index: 2;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
       }
 
       .AvatarWrapper img {
-        width: 100%;
+        width: auto;
         height: 100%;
-        object-fit: cover;
-        border-radius: 30px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        transform: rotate(-3deg);
-        transition: transform 0.5s ease;
-      }
-
-      .AvatarWrapper:hover img {
-        transform: rotate(0deg) scale(1.02);
+        max-height: 650px;
+        object-fit: contain;
+        object-position: bottom center;
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
       }
 
       .DecorCircle {
         position: absolute;
-        top: -40px;
-        right: -40px;
-        width: 200px;
-        height: 200px;
-        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        top: 10%;
+        right: -5%;
+        width: 350px;
+        height: 350px;
+        background: linear-gradient(
+          135deg,
+          rgba(168, 237, 234, 0.3) 0%,
+          rgba(254, 214, 227, 0.3) 100%
+        );
         border-radius: 50%;
-        opacity: 0.5;
+        opacity: 0.6;
         z-index: 1;
-        filter: blur(40px);
+        filter: blur(60px);
       }
 
       /* SECTIONS */
@@ -1663,8 +1672,43 @@
       }
 
       /* Responsive */
+      /* Responsive - Tablet Large (769px - 1024px) */
+      @media (max-width: 1024px) and (min-width: 769px) {
+        .Container {
+          padding: 0 40px;
+        }
+
+        .HeroGrid {
+          grid-template-columns: 1fr 0.9fr;
+          gap: 40px;
+        }
+
+        .HeroTitle {
+          font-size: 2.8rem;
+          line-height: 1.15;
+        }
+
+        .HeroDesc {
+          font-size: 1.1rem;
+          line-height: 1.7;
+        }
+
+        .HeroActions {
+          flex-wrap: wrap;
+        }
+
+        .AvatarWrapper {
+          width: 420px;
+          height: 480px;
+        }
+
+        .AvatarWrapper img {
+          max-height: 480px;
+        }
+      }
+
       /* Responsive - Tablet & Mobile */
-      @media (max-width: 1024px) {
+      @media (max-width: 768px) {
         .ContactWrapper {
           grid-template-columns: 1fr;
           gap: 48px;
@@ -1692,25 +1736,34 @@
           padding: 24px 28px;
         }
 
+        .HeroSection {
+          padding: 60px 0 0;
+        }
+
         .HeroGrid {
           grid-template-columns: 1fr;
           text-align: center;
-          gap: 32px;
+          gap: 40px;
+          min-height: auto;
         }
 
         .HeroTitle {
-          font-size: 2.8rem;
+          font-size: 2.5rem;
+          line-height: 1.2;
         }
 
         .HeroContent {
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding-bottom: 40px;
         }
 
         .HeroDesc {
           max-width: 100%;
           text-align: center;
+          font-size: 1.1rem;
+          line-height: 1.7;
         }
 
         .HeroActions {
@@ -1718,10 +1771,27 @@
           flex-wrap: wrap;
         }
 
+        .HeroVisual {
+          justify-content: center;
+          height: 380px;
+        }
+
         .AvatarWrapper {
-          width: 280px;
-          height: 280px;
+          width: 350px;
+          height: 380px;
           margin: 0 auto;
+        }
+
+        .AvatarWrapper img {
+          height: 110%;
+          max-height: 480px;
+        }
+
+        .DecorCircle {
+          width: 250px;
+          height: 250px;
+          top: 8%;
+          right: -8%;
         }
 
         .AboutGrid {
@@ -1816,10 +1886,28 @@
           font-size: 1rem;
         }
 
+        .HeroVisual {
+          justify-content: center;
+          align-items: flex-end;
+          height: 380px;
+        }
+
         .AvatarWrapper {
-          width: 240px;
-          height: 240px;
-          margin: 0 auto 24px;
+          width: 320px;
+          height: 380px;
+          margin: 0 auto;
+        }
+
+        .AvatarWrapper img {
+          height: 105%;
+          max-height: 420px;
+        }
+
+        .DecorCircle {
+          width: 200px;
+          height: 200px;
+          top: 5%;
+          right: -10%;
         }
 
         /* Features Section Mobile */
@@ -1990,20 +2078,26 @@
           margin-bottom: 28px;
         }
 
+        .HeroVisual {
+          height: 300px;
+          align-items: flex-end;
+        }
+
         .AvatarWrapper {
-          width: 200px;
-          height: 200px;
+          width: 260px;
+          height: 300px;
         }
 
         .AvatarWrapper img {
-          border-radius: 20px;
+          height: 105%;
+          max-height: 330px;
         }
 
         .DecorCircle {
-          width: 150px;
-          height: 150px;
-          top: -30px;
-          right: -30px;
+          width: 160px;
+          height: 160px;
+          top: 0%;
+          right: -15%;
         }
 
         .Section {

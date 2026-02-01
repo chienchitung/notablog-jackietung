@@ -98,7 +98,32 @@
         <!-- 目錄項目將由 JavaScript 動態生成 -->
       </nav>
     </aside>
+  </div>
 
+  <!-- Newsletter Subscription -->
+  <section class="NewsletterSection">
+    <div class="Container">
+      <div class="Newsletter__Content">
+        <h2 class="Newsletter__Title">訂閱電子報</h2>
+        <p class="Newsletter__Subtitle">
+          獲取最新數據洞察與 AI 應用與職涯發展的深度內容
+        </p>
+        <div class="Newsletter__Embed">
+          <iframe
+            src="https://www.jtdatastoryteller.com/embed"
+            width="480"
+            height="320"
+            style="border: 1px solid #eee; background: white"
+            frameborder="0"
+            scrolling="no"
+            title="Newsletter Subscription"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="Container">
     <%- include('partials/footer.html', { siteMeta }) %>
   </div>
 
@@ -807,5 +832,50 @@
         })
       }
     })()
+  </script>
+
+  <!--Image Alignment Detection Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 檢測Notion圖片並根據data-align屬性或圖片特徵應用對齊方式
+      const images = document.querySelectorAll('.Post__Content .Image--Normal')
+
+      images.forEach(imageBlock => {
+        // 1. 優先檢查data-align屬性
+        let dataAlign = imageBlock.getAttribute('data-align')
+
+        // 2. 如果沒有data-align，根據特定圖片ID或URL來判斷
+        if (!dataAlign) {
+          const blockId = imageBlock.getAttribute('id') || ''
+          const img = imageBlock.querySelector('img')
+          const imgSrc = img ? img.getAttribute('src') : ''
+
+          // 檢查特定圖片 (stories頁面底部的圖片)
+          if (
+            blockId.includes('2ed34b4293698011af56e7911e1be363') ||
+            imgSrc.includes('2ed34b42-9369-8011-af56-e7911e1be363')
+          ) {
+            dataAlign = 'right'
+          }
+        }
+
+        // 應用對齊樣式
+        if (dataAlign === 'right') {
+          imageBlock.style.textAlign = 'right'
+          imageBlock.style.marginLeft = 'auto'
+          imageBlock.style.marginRight = '0'
+          imageBlock.style.display = 'block'
+        } else if (dataAlign === 'left') {
+          imageBlock.style.textAlign = 'left'
+          imageBlock.style.marginLeft = '0'
+          imageBlock.style.marginRight = 'auto'
+        } else {
+          // center (default)
+          imageBlock.style.textAlign = 'center'
+          imageBlock.style.marginLeft = 'auto'
+          imageBlock.style.marginRight = 'auto'
+        }
+      })
+    })
   </script>
 </html>

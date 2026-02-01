@@ -9,6 +9,37 @@ import { toDashID } from './utils/notion'
 import { log, objAccess } from './utils/misc'
 import { RenderPostTask, SiteContext } from './types'
 
+interface AccessFunction {
+  (value: unknown): AccessFunction
+  (): unknown
+}
+
+interface NodeWithAlignment {
+  type?: string
+  id?: string
+  format?: {
+    block_alignment_horizontal?: string
+  }
+  children?: NodeWithAlignment[]
+}
+
+function findImageAlignment(
+  node: NodeWithAlignment,
+  alignmentMap: Map<string, string>
+): void {
+  if (
+    node.type === 'image' &&
+    node.id &&
+    node.format?.block_alignment_horizontal
+  ) {
+    alignmentMap.set(node.id, node.format.block_alignment_horizontal)
+  }
+
+  if (node.children && Array.isArray(node.children)) {
+    node.children.forEach(child => findImageAlignment(child, alignmentMap))
+  }
+}
+
 function createLinkTransformer(siteContext: SiteContext) {
   /** Get no dash page id. */
   function getPageIdFromUri(uri: string): string | undefined {
@@ -42,8 +73,11 @@ function createLinkTransformer(siteContext: SiteContext) {
       const richTextStr = richTextStrs[i]
 
       /** Inline mention page. */
-      const access = objAccess as any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+      const access = objAccess as AccessFunction
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       if ('‣' === richTextStr[0] && 'p' === access(richTextStr)(1)(0)(0)()) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const pageInline = access(richTextStr)(1)(0)(1)() as NAST.Page
         if (!pageInline) continue
 
@@ -142,13 +176,13 @@ export async function renderPost(task: RenderPostTask): Promise<number> {
       log.info(`Fetch data of page "${pageID}"`)
 
       tree = await getOnePageAsTree(pageID, notionAgent)
-      
-      /** Download assets from Notion for block content. */
+
       /** Download assets from Notion for block content. */
       await downloadAssets(tree, config.outDir)
 
       /** Use internal links for pages in the table. */
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - visit types from unist-util-visit don't match NAST types
       visit(tree, createLinkTransformer(siteContext))
       cache.set('notion', pageID, tree)
 
@@ -177,10 +211,24 @@ Cache of page "${pageID}" is corrupted, run "notablog generate --fresh <path_to_
       const outDir = config.outDir
       const outPath = path.join(outDir, pageMetadata.url)
 
-      const contentHTML = renderToHTML(tree).replace(
-        /<img /g,
-        '<img loading="lazy" decoding="async" '
-      )
+      // Helper function to find alignment info for image blocks
+      // Note: Currently nast-util-from-notionapi doesn't preserve format.block_alignment_horizontal
+      // This is kept for future compatibility if the library is updated
+      const alignmentMap = new Map<string, string>()
+      findImageAlignment(tree as NodeWithAlignment, alignmentMap)
+
+      const contentHTML = renderToHTML(tree)
+        .replace(/<img /g, '<img loading="lazy" decoding="async" ')
+        .replace(
+          /<div id="([^"]+)" class="Image Image--Normal">/g,
+          (match, id: string) => {
+            const alignment = alignmentMap.get(id)
+            return alignment
+              ? `<div id="${id}" class="Image Image--Normal" data-align="${alignment}">`
+              : match
+          }
+        )
+
       const pageHTML = renderer.render(pageMetadata.template, {
         siteMeta: siteContext,
         post: {
