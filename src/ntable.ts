@@ -262,7 +262,13 @@ export class NTable implements Table {
   constructor(rawTable: NAST.Collection) {
     this.id = getPageIDFromPageURL(rawTable.uri)
 
-    const rawTableColumnProps = rawTable.views[0].format.table_properties
+    if (!rawTable.schema) {
+      throw new Error(
+        `Table schema is missing. This may be due to API changes or permissions issues.`
+      )
+    }
+
+    const rawTableColumnProps = rawTable.views[0]?.format?.table_properties
     /**
      * Using rawTableColumnProps to initialize schema make the order of
      * properties match the order of columns in the UI.
@@ -270,7 +276,10 @@ export class NTable implements Table {
     if (rawTableColumnProps) {
       this.properties = rawTableColumnProps
         /** Filter out properties that do not exist in schema. */
-        .filter(tableProperty => rawTable.schema[tableProperty.property])
+        .filter(
+          tableProperty =>
+            tableProperty.property && rawTable.schema[tableProperty.property]
+        )
         .map(tableProperty => {
           const propertyId = tableProperty.property
           const rawProperty = rawTable.schema[propertyId]

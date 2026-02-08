@@ -28,6 +28,51 @@ export async function parseTable(
     pageID,
     notionAgent
   )) as NAST.CollectionPage
+
+  // Workaround: If schema is missing, fetch it from collection via API
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+  if (
+    !pageCollection.schema &&
+    pageCollection.views &&
+    pageCollection.views[0]
+  ) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+    const viewFormat = pageCollection.views[0].format as any
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    const collectionPointer = viewFormat?.collection_pointer
+    if (collectionPointer) {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        const collectionId = collectionPointer.id
+        const pageChunk = await notionAgent.loadPageChunk({
+          pageId: pageID,
+          limit: 100,
+          cursor: { stack: [] },
+          chunkNumber: 0,
+          verticalColumns: false,
+        })
+
+        if (pageChunk.recordMap && pageChunk.recordMap.collection) {
+          const collections = pageChunk.recordMap.collection
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          const collectionData = collections[collectionId]
+
+          if (collectionData && collectionData.value) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+            const collection = collectionData.value as any
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            if (collection.schema) {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+              ;(pageCollection as any).schema = collection.schema
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch collection schema:', error)
+      }
+    }
+  }
+
   const table = new NTable(pageCollection)
 
   const propertyAccessMap = new Map<string, NProperty>()
