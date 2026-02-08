@@ -186,6 +186,12 @@ export async function generate(
   /** Prune orphaned files. */
   pruneOrphanedFiles(siteContext, dirs)
 
+  /** Update sitemap.xml. */
+  writeSitemapXml({
+    outDir,
+    siteUrl: config.get('siteUrl') || 'https://www.chienchitung.com',
+  })
+
   return 0
 }
 
@@ -232,4 +238,54 @@ function pruneOrphanedFiles(
 
   scanAndDelete(dirs.outDir)
   scanAndDelete(dirs.tagDir, 'tag')
+}
+
+type SitemapOptions = {
+  outDir: string
+  siteUrl: string
+}
+
+function writeSitemapXml(options: SitemapOptions): void {
+  const { outDir, siteUrl } = options
+  log.info('Generate sitemap.xml')
+
+  const urls = new Set<string>()
+  const normalizedBase = siteUrl.replace(/\/$/, '')
+
+  const collectHtmlFiles = (dir: string) => {
+    if (!fs.existsSync(dir)) return
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+    entries.forEach(entry => {
+      const entryPath = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        collectHtmlFiles(entryPath)
+      } else if (entry.isFile() && entry.name.endsWith('.html')) {
+        const relativePath = path
+          .relative(outDir, entryPath)
+          .split(path.sep)
+          .join('/')
+
+        if (relativePath === 'index.html') {
+          urls.add(`${normalizedBase}/`)
+        } else {
+          urls.add(`${normalizedBase}/${relativePath}`)
+        }
+      }
+    })
+  }
+
+  collectHtmlFiles(outDir)
+
+  const urlEntries = Array.from(urls)
+    .sort()
+    .map(url => `  <url>\n    <loc>${url}</loc>\n  </url>`)
+    .join('\n')
+
+  const sitemapXml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    `${urlEntries}\n` +
+    `</urlset>\n`
+
+  fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemapXml, 'utf-8')
 }
