@@ -23,6 +23,7 @@
     "release:beta": "npm run build && npm publish --tag beta",
     "upgrade": "node tools/upgrade-deps.js",
     "prepare": "husky install",
+    "postinstall": "node patches/patch-nast-util.cjs",
     "sync": "node bin/cli.js generate --fresh notablog-starter",
     "start": "node bin/cli.js preview notablog-starter"
   },
