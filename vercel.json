@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build && node bin/cli.js generate notablog-starter",
+  "buildCommand": "echo 'Static files already generated'",
   "outputDirectory": "notablog-starter/public",
   "installCommand": "npm install --legacy-peer-deps",
   "cleanUrls": true,
