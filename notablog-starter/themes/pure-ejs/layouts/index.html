@@ -17,6 +17,11 @@
     <meta property="og:image" content="<%= siteMeta.iconUrl %>" />
     <% } %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
   </head>
 
   <body>
@@ -694,6 +699,13 @@
                   ></textarea>
                 </div>
 
+                <div class="TurnstileWrapper">
+                  <div
+                    class="cf-turnstile"
+                    data-sitekey="0x4AAAAAADiA3-xffwUJG3Uy"
+                  ></div>
+                </div>
+
                 <button type="submit" class="Btn Btn--submit">送出訊息</button>
               </form>
             </div>
@@ -801,7 +813,6 @@
 
         async function handleSubmit(event) {
           event.preventDefault()
-          var status = document.createElement('div') // For error handling if needed
           var originalBtnContent = form.querySelector(
             'button[type="submit"]'
           ).innerHTML
@@ -843,6 +854,7 @@
             .finally(() => {
               submitBtn.disabled = false
               submitBtn.innerHTML = originalBtnContent
+              turnstile.reset()
             })
         }
 
@@ -948,6 +960,12 @@
         background: #f0f0f0;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .TurnstileWrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
       }
 
       .Btn--submit {
