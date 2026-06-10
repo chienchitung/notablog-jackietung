@@ -26,15 +26,14 @@
 
 ```bash
 # 克隆專案
-git clone https://github.com/YOUR_USERNAME/notablog.git
-cd notablog
+git clone https://github.com/chienchitung/notablog-jackietung.git
+cd notablog-jackietung
 
 # 安裝依賴
 npm install --legacy-peer-deps
-
-# 編譯專案
-npm run build:module
 ```
+
+> 💡 **注意**：`npm run build:module` 只有在修改 `src/` 原始碼後才需要執行，一般使用者無需手動編譯。
 
 ## 🚀 快速開始
 
@@ -68,9 +67,17 @@ cd my-blog
 {
   "url": "你的 Notion 資料庫網址",
   "theme": "pure-ejs",
-  "autoSlug": true
+  "autoSlug": true,
+  "previewBrowser": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 }
 ```
+
+> 💡 **說明**：`previewBrowser` 為選填，指定 `npm start` 預覽時自動開啟的瀏覽器路徑。macOS 常見路徑：
+>
+> - Chrome：`/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
+> - Safari：`/Applications/Safari.app/Contents/MacOS/Safari`
+>
+> 若不填此欄位，預覽伺服器仍會正常啟動，手動開啟 `http://localhost:3000` 即可。
 
 ### 3. 生成並預覽網站
 
@@ -111,18 +118,6 @@ node bin/cli.js preview notablog-starter
 
 ## 📖 使用說明
 
-### 快捷命令（推薦）
-
-為了方便使用，專案提供了以下 npm scripts：
-
-```bash
-# 從 Notion 同步數據並生成網站（自動使用 --fresh 選項）
-npm run sync
-
-# 啟動本地預覽伺服器
-npm start
-```
-
 ### 命令列工具
 
 #### `generate` - 生成靜態網站
@@ -158,28 +153,14 @@ npm start  # 相當於 node bin/cli.js preview notablog-starter
 
 ### Notion 數據同步
 
-當您在 Notion 中更新內容後，需要重新生成網站才能看到變化：
+Notablog 使用快取機制提高效能，每次執行 `npm run sync` 時會自動帶上 `--fresh` 選項，略過快取強制從 Notion API 重新抓取最新資料。
 
-**方式一：使用 npm script（推薦）**
-
-```bash
-npm run sync
-```
-
-**方式二：使用完整命令**
+若需要手動清除快取：
 
 ```bash
-# 使用 --fresh 選項強制重新抓取 Notion 數據
-node bin/cli.js generate --fresh notablog-starter
-
-# 或者手動刪除緩存後生成
 rm -rf notablog-starter/cache
 node bin/cli.js generate notablog-starter
 ```
-
-> 💡 **為什麼需要 `--fresh` 選項？**
->
-> Notablog 使用緩存機制來提高性能，避免每次都重新從 Notion API 抓取數據。當您在 Notion 中更新內容後，需要使用 `--fresh` 選項或刪除緩存來強制重新抓取最新數據。
 
 ### 外部連結功能
 
@@ -209,7 +190,7 @@ node bin/cli.js generate notablog-starter
 2. 編輯頁面內容（例如加個空格再刪除）來觸發 `lastEditedTime` 更新
 3. 執行生成命令：
    ```bash
-   node bin/cli.js generate my-blog
+   npm run sync
    ```
 
 **強制重新下載所有圖片**：
@@ -225,15 +206,16 @@ node bin/cli.js generate my-blog
 ```
 
 > 💡 **提示**：圖片檔案會儲存在 `<your-blog>/public/assets/notion/` 目錄中，檔名格式為 `{blockId}-{filename}`
-> 161:
-> 162: #### 🧹 自動同步清理 (Pruning)
-> 163:
-> 164: Notablog 會自動保持本地檔案與 Notion 的一致性：
-> 165: - 當您在 Notion 中刪除頁面、取消發布、或更改 URL 時
-> 166: - 執行 `generate` 命令後，系統會自動識別並刪除 `public/` 中過時的 `.html` 檔案
-> 167: - 同時也會清理 `public/tag/` 中不再需要的標籤頁面
-> 168:
-> 169: 這確保了您的部署目錄始終保持乾淨，不會累積無用的舊檔案。
+
+#### 🧹 自動同步清理 (Pruning)
+
+Notablog 會自動保持本地檔案與 Notion 的一致性：
+
+- 當您在 Notion 中刪除頁面、取消發布、或更改 URL 時
+- 執行 `generate` 命令後，系統會自動識別並刪除 `public/` 中過時的 `.html` 檔案
+- 同時也會清理 `public/tag/` 中不再需要的標籤頁面
+
+這確保了您的部署目錄始終保持乾淨，不會累積無用的舊檔案。
 
 ## 🛠️ 開發指南
 
@@ -262,10 +244,10 @@ notablog/
 ### 修改源碼
 
 ```bash
-# 開發模式（監聽檔案變更）
+# 監聽 src/ TypeScript 原始碼並自動重新編譯（僅修改 notablog 工具本身時使用，與部落格預覽無關）
 npm run dev
 
-# 編譯
+# 手動編譯一次
 npm run build:module
 
 # 執行測試
@@ -319,7 +301,7 @@ themes/pure-ejs/
 1. 生成網站：
 
 ```bash
-node bin/cli.js generate notablog-starter
+npm run sync
 ```
 
 2. 部署 `notablog-starter/public/` 目錄到 GitHub Pages
