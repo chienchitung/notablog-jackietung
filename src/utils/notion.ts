@@ -1,5 +1,72 @@
+import { createAgent } from 'notionapi-agent'
+import { getOnePageAsTree } from 'nast-util-from-notionapi'
+
+import { log } from './misc'
+
 const dashIDLen = '0eeee000-cccc-bbbb-aaaa-123450000000'.length
 const noDashIDLen = '0eeee000ccccbbbbaaaa123450000000'.length
+const retryableNotionErrorPattern =
+  /(?:\b429\b|\b500\b|\b503\b|\b504\b|\b529\b|rate_limited|service_overload|ECONNRESET|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|MemcachedCrossCellError|Something went wrong|timeout)/i
+
+function wait(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+function isRetryableNotionError(error: unknown): boolean {
+  if (error && typeof error === 'object') {
+    const candidate = error as {
+      code?: unknown
+      status?: unknown
+      message?: unknown
+    }
+    if (
+      candidate.status === 429 ||
+      candidate.status === 500 ||
+      candidate.status === 503 ||
+      candidate.status === 504 ||
+      candidate.status === 529
+    ) {
+      return true
+    }
+    if (
+      candidate.code === 'ECONNRESET' ||
+      candidate.code === 'ETIMEDOUT' ||
+      candidate.code === 'ENOTFOUND' ||
+      candidate.code === 'EAI_AGAIN'
+    ) {
+      return true
+    }
+  }
+
+  return retryableNotionErrorPattern.test(String(error))
+}
+
+export async function getOnePageAsTreeWithRetry(
+  pageID: string,
+  notionAgent: ReturnType<typeof createAgent>,
+  maxAttempts = 8
+): Promise<NAST.Block> {
+  let lastError: unknown
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await getOnePageAsTree(pageID, notionAgent)
+    } catch (error) {
+      lastError = error
+      if (attempt === maxAttempts || !isRetryableNotionError(error)) {
+        throw error
+      }
+
+      const delayMs = Math.min(10000, 1000 * 2 ** (attempt - 1))
+      log.info(
+        `Retry Notion page fetch "${pageID}" after transient error (${attempt}/${maxAttempts}, wait ${delayMs}ms)`
+      )
+      await wait(delayMs)
+    }
+  }
+
+  throw lastError
+}
 
 export function getPageIDFromPageURL(str: string): string {
   let splitArr = str.split('/')

@@ -834,46 +834,20 @@
     })()
   </script>
 
-  <!--Image Alignment Detection Script -->
+  <!-- Image Alignment Class Normalizer -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 檢測Notion圖片並根據data-align屬性或圖片特徵應用對齊方式
       const images = document.querySelectorAll('.Post__Content .Image--Normal')
 
       images.forEach(imageBlock => {
-        // 1. 優先檢查data-align屬性
-        let dataAlign = imageBlock.getAttribute('data-align')
+        const dataAlign = imageBlock.getAttribute('data-align')
 
-        // 2. 如果沒有data-align，根據特定圖片ID或URL來判斷
-        if (!dataAlign) {
-          const blockId = imageBlock.getAttribute('id') || ''
-          const img = imageBlock.querySelector('img')
-          const imgSrc = img ? img.getAttribute('src') : ''
-
-          // 檢查特定圖片 (stories頁面底部的圖片)
-          if (
-            blockId.includes('2ed34b4293698011af56e7911e1be363') ||
-            imgSrc.includes('2ed34b42-9369-8011-af56-e7911e1be363')
-          ) {
-            dataAlign = 'right'
-          }
-        }
-
-        // 應用對齊樣式
-        if (dataAlign === 'right') {
-          imageBlock.style.textAlign = 'right'
-          imageBlock.style.marginLeft = 'auto'
-          imageBlock.style.marginRight = '0'
-          imageBlock.style.display = 'block'
-        } else if (dataAlign === 'left') {
-          imageBlock.style.textAlign = 'left'
-          imageBlock.style.marginLeft = '0'
-          imageBlock.style.marginRight = 'auto'
-        } else {
-          // center (default)
-          imageBlock.style.textAlign = 'center'
-          imageBlock.style.marginLeft = 'auto'
-          imageBlock.style.marginRight = 'auto'
+        if (
+          dataAlign === 'left' ||
+          dataAlign === 'center' ||
+          dataAlign === 'right'
+        ) {
+          imageBlock.classList.add('align-' + dataAlign)
         }
       })
     })

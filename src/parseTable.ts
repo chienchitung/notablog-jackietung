@@ -1,5 +1,4 @@
 import { createAgent } from 'notionapi-agent'
-import { getOnePageAsTree } from 'nast-util-from-notionapi'
 import { renderToHTML } from 'nast-util-to-react'
 import { SemanticString } from 'nast-types'
 
@@ -14,7 +13,10 @@ import {
   NTable,
   NTextProperty,
 } from './ntable'
-import { getPageIDFromCollectionPageURL } from './utils/notion'
+import {
+  getOnePageAsTreeWithRetry,
+  getPageIDFromCollectionPageURL,
+} from './utils/notion'
 import { SiteContext, PageMetadata } from './types'
 
 /** Extract interested data for blog generation from a Notion table. */
@@ -24,7 +26,7 @@ export async function parseTable(
   config: Config
 ): Promise<SiteContext> {
   const pageID = getPageIDFromCollectionPageURL(collectionPageURL)
-  const pageCollection = (await getOnePageAsTree(
+  const pageCollection = (await getOnePageAsTreeWithRetry(
     pageID,
     notionAgent
   )) as NAST.CollectionPage

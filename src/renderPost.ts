@@ -1,11 +1,10 @@
 import { promises as fsPromises } from 'fs'
 import path from 'path'
 import visit from 'unist-util-visit'
-import { getOnePageAsTree } from 'nast-util-from-notionapi'
 import { renderToHTML } from 'nast-util-to-react'
 
 import { downloadAssets } from './utils/downloadAssets'
-import { toDashID } from './utils/notion'
+import { getOnePageAsTreeWithRetry, toDashID } from './utils/notion'
 import { log, objAccess } from './utils/misc'
 import { RenderPostTask, SiteContext } from './types'
 
@@ -17,22 +16,54 @@ interface AccessFunction {
 interface NodeWithAlignment {
   type?: string
   id?: string
+  uri?: string
   format?: {
     block_alignment_horizontal?: string
   }
   children?: NodeWithAlignment[]
 }
 
+function normalizeBlockID(id: string): string {
+  const cleanID = id.replace(/-/g, '').toLowerCase()
+  const match = /[0-9a-f]{32}$/.exec(cleanID)
+  return match ? match[0] : cleanID
+}
+
+function normalizeImageAlignment(alignment: string): string | undefined {
+  if (alignment === 'left' || alignment === 'center' || alignment === 'right') {
+    return alignment
+  }
+
+  return undefined
+}
+
+function addImageAlignment(
+  alignmentMap: Map<string, string>,
+  id: string | undefined,
+  alignment: string
+): void {
+  const normalizedAlignment = normalizeImageAlignment(alignment)
+  if (!id || !normalizedAlignment) return
+
+  alignmentMap.set(id, normalizedAlignment)
+  alignmentMap.set(normalizeBlockID(id), normalizedAlignment)
+}
+
 function findImageAlignment(
   node: NodeWithAlignment,
   alignmentMap: Map<string, string>
 ): void {
-  if (
-    node.type === 'image' &&
-    node.id &&
-    node.format?.block_alignment_horizontal
-  ) {
-    alignmentMap.set(node.id, node.format.block_alignment_horizontal)
+  if (node.type === 'image' && node.format?.block_alignment_horizontal) {
+    addImageAlignment(
+      alignmentMap,
+      node.id,
+      node.format.block_alignment_horizontal
+    )
+    addImageAlignment(
+      alignmentMap,
+      node.uri,
+      node.format.block_alignment_horizontal
+    )
   }
 
   if (node.children && Array.isArray(node.children)) {
@@ -163,19 +194,21 @@ function createLinkTransformer(siteContext: SiteContext) {
  * @param task
  */
 export async function renderPost(task: RenderPostTask): Promise<number> {
+  const { pageMetadata } = task.data
+  const pageID = toDashID(pageMetadata.id)
+
   try {
-    const { doFetchPage, pageMetadata, siteContext } = task.data
+    const { doFetchPage, siteContext } = task.data
     const { cache, notionAgent, renderer } = task.tools
     const config = task.config
 
-    const pageID = toDashID(pageMetadata.id)
     let tree: NAST.Block
 
     /** Fetch page. */
     if (doFetchPage) {
       log.info(`Fetch data of page "${pageID}"`)
 
-      tree = await getOnePageAsTree(pageID, notionAgent)
+      tree = await getOnePageAsTreeWithRetry(pageID, notionAgent)
 
       /** Download assets from Notion for block content. */
       await downloadAssets(tree, config.outDir)
@@ -211,9 +244,8 @@ Cache of page "${pageID}" is corrupted, run "notablog generate --fresh <path_to_
       const outDir = config.outDir
       const outPath = path.join(outDir, pageMetadata.url)
 
-      // Helper function to find alignment info for image blocks
-      // Note: Currently nast-util-from-notionapi doesn't preserve format.block_alignment_horizontal
-      // This is kept for future compatibility if the library is updated
+      // Helper function to find alignment info for image blocks.
+      // The local nast-util patch preserves format.block_alignment_horizontal.
       const alignmentMap = new Map<string, string>()
       findImageAlignment(tree as NodeWithAlignment, alignmentMap)
 
@@ -222,9 +254,10 @@ Cache of page "${pageID}" is corrupted, run "notablog generate --fresh <path_to_
         .replace(
           /<div id="([^"]+)" class="Image Image--Normal">/g,
           (match, id: string) => {
-            const alignment = alignmentMap.get(id)
+            const alignment =
+              alignmentMap.get(id) || alignmentMap.get(normalizeBlockID(id))
             return alignment
-              ? `<div id="${id}" class="Image Image--Normal" data-align="${alignment}">`
+              ? `<div id="${id}" class="Image Image--Normal align-${alignment}" data-align="${alignment}">`
               : match
           }
         )
@@ -244,6 +277,11 @@ Cache of page "${pageID}" is corrupted, run "notablog generate --fresh <path_to_
       return 1
     }
   } catch (error) {
+    log.error(
+      `Failed to render page "${pageMetadata.title || pageID}" (${pageID}, ${
+        pageMetadata.url
+      })`
+    )
     log.error(error)
     return 2
   }

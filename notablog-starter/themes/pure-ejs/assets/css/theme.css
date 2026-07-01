@@ -829,12 +829,17 @@ pre.Code .SemanticString__Fragment--Commented {
 }
 
 /* 左對齊 */
-.Image--Normal {
+.Image--Normal,
+.Image--Normal[data-align='left'],
+.Image--Normal.align-left {
   text-align: left;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 /* 置中對齊 */
 .Image--Normal[style*='align-self: center'],
+.Image--Normal[data-align='center'],
 .Image--Normal.align-center {
   text-align: center;
   margin-left: auto;
@@ -843,6 +848,7 @@ pre.Code .SemanticString__Fragment--Commented {
 
 /* 右對齊 */
 .Image--Normal[style*='align-self: flex-end'],
+.Image--Normal[data-align='right'],
 .Image--Normal.align-right {
   text-align: right;
   margin-left: auto;
@@ -1089,23 +1095,6 @@ pre.Code .SemanticString__Fragment--Commented {
 
 /* Quote */
 
-/* Quote */
-
-.Quote {
-  position: relative;
-  background: transparent;
-  border-left: 3px solid var(--color-text-default); /* Thinner border per request */
-  border-radius: 0;
-  margin: 2rem 0;
-  padding: 4px 0 4px 20px;
-  font-size: 1.15rem; /* Slightly reduced size for better balance */
-  line-height: 1.7;
-  font-style: normal; /* Removed italic for Chinese text */
-  color: var(--color-text-default);
-}
-
-/* Quote */
-
 .Quote {
   position: relative;
   background: transparent;
@@ -1118,8 +1107,6 @@ pre.Code .SemanticString__Fragment--Commented {
   font-style: normal;
   color: var(--color-text-default);
 }
-
-/* Removed quote mark decoration per request */
 
 /* SemanticStringArray */
 
@@ -1443,94 +1430,4 @@ pre.Code .SemanticString__Fragment--Commented {
   margin-left: 0 !important;
   margin-right: 0 !important;
   overflow-x: visible !important;
-}
-
-/* ===========================
-   Newsletter Subscription
-   =========================== */
-
-.Newsletter {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 4rem 0;
-  margin: 4rem 0;
-  border-radius: 16px;
-}
-
-.Newsletter__Content {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.Newsletter__Title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 0.5rem 0;
-  letter-spacing: -0.02em;
-}
-
-.Newsletter__Subtitle {
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 2rem 0;
-  line-height: 1.6;
-}
-
-.Newsletter__Embed {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.Newsletter__Embed iframe {
-  max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .Newsletter {
-    padding: 3rem 0;
-    margin: 3rem 0;
-    border-radius: 12px;
-  }
-
-  .Newsletter__Content {
-    padding: 0 1.5rem;
-  }
-
-  .Newsletter__Title {
-    font-size: 2rem;
-  }
-
-  .Newsletter__Subtitle {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .Newsletter__Embed iframe {
-    width: 100% !important;
-    height: 280px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .Newsletter {
-    padding: 2.5rem 0;
-  }
-
-  .Newsletter__Title {
-    font-size: 1.75rem;
-  }
-
-  .Newsletter__Subtitle {
-    font-size: 0.9375rem;
-  }
-
-  .Newsletter__Embed iframe {
-    height: 260px !important;
-  }
 }

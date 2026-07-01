@@ -37,7 +37,7 @@ program
         workDir,
         verbose: options.verbose,
         ignoreCache: options.fresh,
-        concurrency: 3
+        concurrency: 1
       })
       const endTime = Date.now()
       const timeElapsed = (endTime - startTime) / 1000

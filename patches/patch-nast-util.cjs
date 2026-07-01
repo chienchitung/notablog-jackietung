@@ -23,12 +23,7 @@ const filePath = path.join(
 )
 
 let code = fs.readFileSync(filePath, 'utf-8')
-
-// Check if already patched
-if (code.includes('/** PATCHED: unwrap nested value */')) {
-  console.log('nast-util-from-notionapi is already patched.')
-  process.exit(0)
-}
+let changed = false
 
 // Helper function to add at the top of the file
 const helperFn = `
@@ -59,77 +54,105 @@ function unwrapRecordMapEntries(recordMap) {
 }
 `
 
-// 1. Insert helper functions after the first 'use strict' or at the beginning
-const insertPoint = code.indexOf("'use strict';")
-if (insertPoint !== -1) {
-  code =
-    code.slice(0, insertPoint + "'use strict';".length) +
-    '\n' +
-    helperFn +
-    code.slice(insertPoint + "'use strict';".length)
-} else {
-  code = helperFn + '\n' + code
-}
+if (!code.includes('/** PATCHED: unwrap nested value */')) {
+  // 1. Insert helper functions after the first 'use strict' or at the beginning
+  const insertPoint = code.indexOf("'use strict';")
+  if (insertPoint !== -1) {
+    code =
+      code.slice(0, insertPoint + "'use strict';".length) +
+      '\n' +
+      helperFn +
+      code.slice(insertPoint + "'use strict';".length)
+  } else {
+    code = helperFn + '\n' + code
+  }
+  changed = true
 
-// 2. Patch the queryCollection result - unwrap recordMap.collection entries
-// Original: Object.values(queryResult.recordMap.collection)[0].value
-code = code.replace(
-  /const collection = queryResult\.recordMap\.collection && Object\.values\(queryResult\.recordMap\.collection\)\[0\]\.value;/g,
-  `unwrapRecordMapEntries(queryResult.recordMap);
+  // 2. Patch the queryCollection result - unwrap recordMap.collection entries
+  // Original: Object.values(queryResult.recordMap.collection)[0].value
+  code = code.replace(
+    /const collection = queryResult\.recordMap\.collection && Object\.values\(queryResult\.recordMap\.collection\)\[0\]\.value;/g,
+    `unwrapRecordMapEntries(queryResult.recordMap);
     const collection = queryResult.recordMap.collection && Object.values(queryResult.recordMap.collection)[0].value;`
-)
+  )
 
-// 3. Patch getCollectionViews - unwrap results from getRecordValues
-// Original: collectionViews.push(record.value);
-code = code.replace(
-  /return results\.reduce\(\(collectionViews, record\) => \{\s*if \(record\.role !== "none"\)\s*collectionViews\.push\(record\.value\);/,
-  `return results.reduce((collectionViews, record) => {
+  // 3. Patch getCollectionViews - unwrap results from getRecordValues
+  // Original: collectionViews.push(record.value);
+  code = code.replace(
+    /return results\.reduce\(\(collectionViews, record\) => \{\s*if \(record\.role !== "none"\)\s*collectionViews\.push\(record\.value\);/,
+    `return results.reduce((collectionViews, record) => {
         record = unwrapValue(record);
         if (record.role !== "none")
             collectionViews.push(record.value);`
-)
+  )
 
-// 4. Patch getPageBlocks - unwrap results from getRecordValues
-// Original: pageBlocks.push(record.value);
-code = code.replace(
-  /return results\.reduce\(\(pageBlocks, record\) => \{\s*if \(record\.role !== "none"\)\s*pageBlocks\.push\(record\.value\);/,
-  `return results.reduce((pageBlocks, record) => {
+  // 4. Patch getPageBlocks - unwrap results from getRecordValues
+  // Original: pageBlocks.push(record.value);
+  code = code.replace(
+    /return results\.reduce\(\(pageBlocks, record\) => \{\s*if \(record\.role !== "none"\)\s*pageBlocks\.push\(record\.value\);/,
+    `return results.reduce((pageBlocks, record) => {
         record = unwrapValue(record);
         if (record.role !== "none")
             pageBlocks.push(record.value);`
-)
+  )
 
-// 5. Patch getAllBlocksInOnePage - unwrap record from getRecordValues
-code = code.replace(
-  /const record = response\.results\[0\];\s*if \(record\.role === "none"\) \{/,
-  `let record = unwrapValue(response.results[0]);
+  // 5. Patch getAllBlocksInOnePage - unwrap record from getRecordValues
+  code = code.replace(
+    /const record = response\.results\[0\];\s*if \(record\.role === "none"\) \{/,
+    `let record = unwrapValue(response.results[0]);
     if (record.role === "none") {`
-)
+  )
 
-// 6. Patch getChildrenBlocks - unwrap results from getRecordValues
-code = code.replace(
-  /const validBlocks = childrenRecords\s*\.reduce\(\(blocks, record, index\) => \{\s*if \(record\.role !== "none"\)\s*blocks\.push\(record\.value\);/,
-  `const validBlocks = childrenRecords
+  // 6. Patch getChildrenBlocks - unwrap results from getRecordValues
+  code = code.replace(
+    /const validBlocks = childrenRecords\s*\.reduce\(\(blocks, record, index\) => \{\s*if \(record\.role !== "none"\)\s*blocks\.push\(record\.value\);/,
+    `const validBlocks = childrenRecords
         .reduce((blocks, record, index) => {
         record = unwrapValue(record);
         if (record.role !== "none")
             blocks.push(record.value);`
-)
+  )
 
-// 7. Patch transformPageOrAlias - unwrap record from getRecordValues
-code = code.replace(
-  /const page = resp\.results\[0\]\.value;/,
-  `const page = unwrapValue(resp.results[0]).value;`
-)
+  // 7. Patch transformPageOrAlias - unwrap record from getRecordValues
+  code = code.replace(
+    /const page = resp\.results\[0\]\.value;/,
+    `const page = unwrapValue(resp.results[0]).value;`
+  )
 
-// 8. Patch getUser - unwrap record
-code = code.replace(
-  /if \(resp\.results\[0\]\.role === "none"\) \{/,
-  `resp.results[0] = unwrapValue(resp.results[0]);
+  // 8. Patch getUser - unwrap record
+  code = code.replace(
+    /if \(resp\.results\[0\]\.role === "none"\) \{/,
+    `resp.results[0] = unwrapValue(resp.results[0]);
         if (resp.results[0].role === "none") {`
-)
+  )
+}
+
+const alignmentPatchPattern =
+  /\n\s*\/\*\* PATCHED: preserve visual block alignment \*\/\n\s*format: \{\n\s*block_alignment_horizontal: format\.block_alignment_horizontal\n\s*\},/g
+const codeWithoutAlignmentPatch = code.replace(alignmentPatchPattern, '')
+if (codeWithoutAlignmentPatch !== code) {
+  code = codeWithoutAlignmentPatch
+  changed = true
+}
+
+if (!code.includes('/** PATCHED: preserve visual block alignment */')) {
+  code = code.replace(
+    /(async function transformVisual\(node\) \{\s*const format = node\.format \|\| \{\};\s*return \{[\s\S]*?color: getBlockColor\(node\),)/,
+    `$1
+        /** PATCHED: preserve visual block alignment */
+        format: {
+            block_alignment_horizontal: format.block_alignment_horizontal
+        },`
+  )
+  changed = true
+}
+
+if (!changed) {
+  console.log('nast-util-from-notionapi is already patched.')
+  process.exit(0)
+}
 
 fs.writeFileSync(filePath, code, 'utf-8')
 console.log(
-  'Successfully patched nast-util-from-notionapi for new Notion API format.'
+  'Successfully patched nast-util-from-notionapi for new Notion API format and visual alignment.'
 )

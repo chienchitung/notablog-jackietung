@@ -38,7 +38,11 @@
     <meta property="og:image" content="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;attachment:c079ebd5-8886-4a6c-8995-d04851d68224:IMG_0406.png&lt;/text&gt;&lt;/svg&gt;" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
   </head>
 
   <body>
@@ -783,7 +787,7 @@
 
           <div class="TestimonialGrid">
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -798,7 +802,7 @@
             </div>
 
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -813,7 +817,7 @@
             </div>
 
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -829,7 +833,7 @@
             </div>
 
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -845,7 +849,7 @@
             </div>
 
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -860,7 +864,7 @@
             </div>
 
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -875,7 +879,7 @@
             </div>
 
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -890,7 +894,7 @@
             </div>
 
             <div class="TestimonialCard">
-              <div class="TestimonialQuote">"”</div>
+              <div class="TestimonialQuote">“</div>
               <div class="TestimonialRating">
                 <span class="Star">★</span><span class="Star">★</span
                 ><span class="Star">★</span><span class="Star">★</span
@@ -1557,13 +1561,13 @@
                       data['errors'].map(error => error['message']).join(', ')
                     )
                   } else {
-                    alert('送出失敗：' + JSON.stringify(data))
+                    alert('Oops! There was a problem submitting your form')
                   }
                 })
               }
             })
             .catch(error => {
-              alert('網路錯誤：' + error.message)
+              alert('Oops! There was a problem submitting your form')
             })
             .finally(() => {
               submitBtn.disabled = false

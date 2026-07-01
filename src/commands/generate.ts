@@ -23,6 +23,35 @@ type GenerateOptions = {
   ignoreCache?: boolean
 }
 
+function loadEnvFile(envPath: string): void {
+  if (!fs.existsSync(envPath)) return
+
+  const env = fs.readFileSync(envPath, { encoding: 'utf-8' })
+  env.split(/\r?\n/).forEach(line => {
+    const trimmedLine = line.trim()
+    if (!trimmedLine || trimmedLine.startsWith('#')) return
+
+    const normalizedLine = trimmedLine.startsWith('export ')
+      ? trimmedLine.slice('export '.length).trim()
+      : trimmedLine
+    const equalsIndex = normalizedLine.indexOf('=')
+    if (equalsIndex === -1) return
+
+    const key = normalizedLine.slice(0, equalsIndex).trim()
+    let value = normalizedLine.slice(equalsIndex + 1).trim()
+    if (!key || typeof process.env[key] !== 'undefined') return
+
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1)
+    }
+
+    process.env[key] = value
+  })
+}
+
 /** Generate a Notablog static site. */
 export async function generate(
   workDir: string,
@@ -30,9 +59,26 @@ export async function generate(
 ): Promise<number> {
   const { concurrency, verbose, ignoreCache } = opts
 
+  loadEnvFile(path.resolve('.env'))
+  loadEnvFile(path.resolve(workDir, '.env'))
+
+  const notionToken = process.env.token_v2 || process.env.NOTION_TOKEN
+
+  if (notionToken) {
+    log.info(
+      `Use Notion token from ${
+        process.env.token_v2 ? 'token_v2' : 'NOTION_TOKEN'
+      }`
+    )
+  } else {
+    log.warn(
+      'No Notion token found. Set NOTION_TOKEN or token_v2 if the Notion pages are private.'
+    )
+  }
+
   const notionAgent = createAgent({
     debug: verbose,
-    token: process.env.NOTION_TOKEN || process.env.token_v2,
+    token: notionToken,
   })
   const cache = new Cache(path.join(workDir, 'cache'))
   const config = new Config(path.join(workDir, 'config.json'))
@@ -134,7 +180,7 @@ export async function generate(
   log.info(`${pagePublishedCount} of ${pageTotalCount} posts are published`)
 
   const tm2 = new TaskManager2({ concurrency })
-  const tasks = []
+  const tasks: Array<Promise<number>> = []
   pagesUpdated.forEach(pageMetadata => {
     tasks.push(
       tm2.queue(
@@ -155,7 +201,7 @@ export async function generate(
             },
           } as RenderPostTask),
         []
-      ) as never
+      ) as Promise<number>
     )
   })
   pagesNotUpdated.forEach(pageMetadata => {
@@ -178,10 +224,16 @@ export async function generate(
             },
           } as RenderPostTask),
         []
-      ) as never
+      ) as Promise<number>
     )
   })
-  await Promise.all(tasks)
+  const results = await Promise.all(tasks)
+  const failedCount = results.filter(result => result === 2).length
+  if (failedCount > 0) {
+    throw new Error(
+      `${failedCount} page(s) failed to render. See the page errors above.`
+    )
+  }
 
   /** Prune orphaned files. */
   pruneOrphanedFiles(siteContext, dirs)
