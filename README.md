@@ -1,3 +1,5 @@
+
+
 # Notablog - 從 Notion 生成靜態部落格
 
 > 一個強大的靜態網站生成器，將 Notion 資料庫轉換為精美的部落格網站
@@ -133,7 +135,7 @@ node bin/cli.js generate <path_to_blog> [options]
 **等同於**：
 
 ```bash
-npm run sync  # 相當於 node bin/cli.js generate --fresh notablog-starter
+npm run sync:fresh  # 相當於 node bin/cli.js generate --fresh notablog-starter
 ```
 
 #### `preview` - 本地預覽
