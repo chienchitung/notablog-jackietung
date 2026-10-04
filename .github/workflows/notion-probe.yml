@@ -1,0 +1,31 @@
+name: Notion API probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths:
+      - '.github/workflows/notion-probe.yml'
+      - 'tools/notion-probe.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Probe Notion API variants
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          PROBE_ROUNDS: '8'
+        run: node tools/notion-probe.mjs
