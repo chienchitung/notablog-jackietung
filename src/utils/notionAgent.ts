@@ -3,6 +3,7 @@
 import { createAgent } from 'notionapi-agent'
 
 import { log } from './misc'
+import { withNotionRetry } from './notion'
 
 type NotionAgent = ReturnType<typeof createAgent>
 type RecordPointer = { table: string; id: string }
@@ -13,7 +14,7 @@ const USER_AGENT =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'
 const SYNC_BATCH_SIZE = 100
 
-/** Node 18+ provides fetch; @types/node 16 does not declare it. */
+/** Node 18+ (see package.json engines) provides fetch; @types/node 16 does not declare it. */
 const runtimeFetch = (
   globalThis as unknown as {
     fetch: (
@@ -106,13 +107,15 @@ export async function createNotionAgent(opts: {
   const loadPageChunk = (request: unknown) => post('loadPageChunk', request)
 
   /** Find the workspace that owns the root page. */
-  const rootChunk = await loadPageChunk({
-    pageId: opts.rootPageID,
-    limit: 30,
-    cursor: { stack: [] },
-    chunkNumber: 0,
-    verticalColumns: false,
-  })
+  const rootChunk = await withNotionRetry('Notion workspace discovery', () =>
+    loadPageChunk({
+      pageId: opts.rootPageID,
+      limit: 30,
+      cursor: { stack: [] },
+      chunkNumber: 0,
+      verticalColumns: false,
+    })
+  )
   const rootRecord = rootChunk.recordMap?.block?.[opts.rootPageID]
   const spaceId: string | undefined =
     rootRecord?.spaceId ||

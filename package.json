@@ -83,7 +83,7 @@
     "url": "https://github.com/dragonman225/notablog/issues"
   },
   "engines": {
-    "node": ">=15"
+    "node": ">=18"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --cache --fix",

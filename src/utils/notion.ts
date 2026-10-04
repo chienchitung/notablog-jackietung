@@ -18,6 +18,11 @@ function isRetryableNotionError(error: unknown): boolean {
       code?: unknown
       status?: unknown
       message?: unknown
+      cause?: unknown
+    }
+    /** fetch() wraps network failures in TypeError('fetch failed'). */
+    if (candidate.cause && isRetryableNotionError(candidate.cause)) {
+      return true
     }
     if (
       candidate.status === 429 ||
@@ -41,16 +46,17 @@ function isRetryableNotionError(error: unknown): boolean {
   return retryableNotionErrorPattern.test(String(error))
 }
 
-export async function getOnePageAsTreeWithRetry(
-  pageID: string,
-  notionAgent: ReturnType<typeof createAgent>,
+/** Run a Notion request, retrying transient failures with backoff. */
+export async function withNotionRetry<T>(
+  label: string,
+  request: () => Promise<T>,
   maxAttempts = 8
-): Promise<NAST.Block> {
+): Promise<T> {
   let lastError: unknown
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      return await getOnePageAsTree(pageID, notionAgent)
+      return await request()
     } catch (error) {
       lastError = error
       if (attempt === maxAttempts || !isRetryableNotionError(error)) {
@@ -59,13 +65,25 @@ export async function getOnePageAsTreeWithRetry(
 
       const delayMs = Math.min(10000, 1000 * 2 ** (attempt - 1))
       log.info(
-        `Retry Notion page fetch "${pageID}" after transient error (${attempt}/${maxAttempts}, wait ${delayMs}ms)`
+        `Retry ${label} after transient error (${attempt}/${maxAttempts}, wait ${delayMs}ms)`
       )
       await wait(delayMs)
     }
   }
 
   throw lastError
+}
+
+export async function getOnePageAsTreeWithRetry(
+  pageID: string,
+  notionAgent: ReturnType<typeof createAgent>,
+  maxAttempts = 8
+): Promise<NAST.Block> {
+  return withNotionRetry(
+    `Notion page fetch "${pageID}"`,
+    () => getOnePageAsTree(pageID, notionAgent),
+    maxAttempts
+  )
 }
 
 export function getPageIDFromPageURL(str: string): string {
