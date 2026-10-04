@@ -1,0 +1,59 @@
+name: Sync Notion website
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-notion.yml'
+      - 'src/**'
+      - 'patches/**'
+      - 'bin/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'notablog-starter/config.json'
+      - 'notablog-starter/themes/**'
+      - 'tools/validate-site.mjs'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: notion-website-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      - name: Build generator
+        run: npm run build:module
+      - name: Fetch fresh Notion content and generate website
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: npm run sync:fresh
+      - name: Validate generated website
+        run: node tools/validate-site.mjs
+      - name: Publish changed website files
+        run: |
+          git add -A -- notablog-starter/public
+          if git diff --cached --quiet; then
+            echo "No website changes; deployment skipped." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: sync website from Notion'
+          git push origin HEAD:main
+          echo "Updated website files pushed to main for Vercel deployment." >> "$GITHUB_STEP_SUMMARY"

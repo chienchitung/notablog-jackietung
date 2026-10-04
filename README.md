@@ -294,6 +294,18 @@ themes/pure-ejs/
 5. **專案結構整理**：移除未使用的檔案和重複配置
 6. **自動同步清理**：新增 `pruneOrphanedFiles` 邏輯，自動刪除 Notion 中已移除的本地 HTML 檔案
 
+## 自動同步 Notion 網站
+
+`.github/workflows/sync-notion.yml` 每小時第 17 分鐘（UTC）重新同步 Notion；排程可能因 GitHub 負載而延遲。也可以到 GitHub → Actions → **Sync Notion website** → **Run workflow** 立即更新。
+
+流程會安裝鎖定的依賴、編譯產生器、執行 `npm run sync:fresh`，並驗證首頁、作品案例頁與 sitemap。只有成功完成且 `notablog-starter/public/` 有變更時，才提交產出的網站檔案至 `main`，交由既有 Vercel Git 整合部署。同步或驗證失敗時不提交、不發布；Actions 頁面可查看失敗原因。
+
+公開 Notion 網站不需要額外設定密鑰。若來源改為私人頁面，請在 Repository secrets 設定 `NOTION_TOKEN`（此產生器使用 Notion session token，而不是官方 integration token）。不要把憑證提交到 Git。
+
+GitHub 公開 repository 的排程可能在長時間沒有活動後停用；若停用，可到 Actions 重新啟用。若分支保護禁止機器人提交，需調整這個 workflow 的寫入權限或改用 PR 流程。
+
+`npm run sync` 和 `npm run sync:fresh` 都強制重新讀取來源，以確保內嵌資料庫的刪除與修改也能更新。
+
 ## 📤 部署
 
 ### GitHub Pages
