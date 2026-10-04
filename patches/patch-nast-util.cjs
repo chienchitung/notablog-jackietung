@@ -127,6 +127,20 @@ if (!code.includes('/** PATCHED: unwrap nested value */')) {
   )
 }
 
+/** Let mention lookups reuse the cell-aware agent created by notablog. */
+const sharedAgentCall =
+  '(globalThis.__notablogNotionAgent || notionapiAgent.createAgent())'
+if (!code.includes(sharedAgentCall)) {
+  const patched = code.replace(
+    /notionapiAgent\.createAgent\(\)/g,
+    sharedAgentCall
+  )
+  if (patched !== code) {
+    code = patched
+    changed = true
+  }
+}
+
 const alignmentPatchPattern =
   /\n\s*\/\*\* PATCHED: preserve visual block alignment \*\/\n\s*format: \{\n\s*block_alignment_horizontal: format\.block_alignment_horizontal\n\s*\},/g
 const codeWithoutAlignmentPatch = code.replace(alignmentPatchPattern, '')

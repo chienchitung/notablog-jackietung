@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import { createAgent } from 'notionapi-agent'
 import { TaskManager2 } from '@dnpr/task-manager'
 import { copyDirSync } from '@dnpr/fsutil'
 
@@ -11,7 +10,8 @@ import { EJSStrategy, Renderer } from '../renderer'
 import { renderIndex } from '../renderIndex'
 import { renderPost } from '../renderPost'
 import { log, parseJSON } from '../utils/misc'
-import { toDashID } from '../utils/notion'
+import { getPageIDFromCollectionPageURL, toDashID } from '../utils/notion'
+import { createNotionAgent } from '../utils/notionAgent'
 import { RenderPostTask, SiteContext, ThemeConfig } from '../types'
 
 type GenerateOptions = {
@@ -57,7 +57,7 @@ export async function generate(
   workDir: string,
   opts: GenerateOptions = {}
 ): Promise<number> {
-  const { concurrency, verbose, ignoreCache } = opts
+  const { concurrency, ignoreCache } = opts
 
   loadEnvFile(path.resolve('.env'))
   loadEnvFile(path.resolve(workDir, '.env'))
@@ -77,13 +77,9 @@ export async function generate(
   }
 
   const config = new Config(path.join(workDir, 'config.json'))
-  // Route public-site requests through their own host. The default
-  // www.notion.so host can fail to locate records stored in another cell.
-  const sourceOrigin = new URL(config.get('url')).origin
-  const notionAgent = createAgent({
-    debug: verbose,
+  const notionAgent = await createNotionAgent({
+    rootPageID: getPageIDFromCollectionPageURL(config.get('url')),
     token: notionToken,
-    server: sourceOrigin,
   })
   const cache = new Cache(path.join(workDir, 'cache'))
 
