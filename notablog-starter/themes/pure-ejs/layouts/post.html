@@ -65,7 +65,9 @@
         <% } %>
       </header>
 
-      <div class="Post__Content"><%- post.contentHTML %></div>
+      <div class="Post__Content"><%- post.title === '演講'
+        ? include('partials/speechCategoryIcons.html', { contentHTML: post.contentHTML })
+        : post.contentHTML %></div>
     </article>
 
     <!-- 浮動目錄 -->

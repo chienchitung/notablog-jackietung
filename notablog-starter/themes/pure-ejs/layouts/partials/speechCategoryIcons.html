@@ -1,0 +1,38 @@
+<%
+const categoryIcons = {
+  '校園分享': '<path d="m2 9 10-5 10 5-10 5L2 9Zm4 2v6c3.5 2.7 8.5 2.7 12 0v-6M22 9v7"/>',
+  '企業內部分享': '<rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12a23 23 0 0 0 18 0M12 11v4"/>',
+  '對外活動／受邀分享': '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/>'
+}
+const speechHTML = contentHTML.replace(/(<h[1-3]\b[^>]*>)([\s\S]*?)(<\/h[1-3]>)/gi, (heading, opening, body, closing) => {
+  const label = body.replace(/<[^>]+>/g, '').replace(/[\s\u00a0]/g, '').replace(/^(?:🏫|💼|📔)\uFE0F?/u, '')
+  const paths = categoryIcons[label]
+  if (!paths) return heading
+  const icon = '<span class="Speech__CategoryIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + paths + '</svg></span>'
+  const cleanBody = body.replace(/(?:🏫|💼|📔)\uFE0F?[\s\u00a0]*/u, '')
+  // Preserve Notion heading anchors and rich text; only replace the leading emoji.
+  const anchorEnd = cleanBody.indexOf('</a>')
+  const decoratedBody = anchorEnd === -1 ? icon + cleanBody : cleanBody.slice(0, anchorEnd + 4) + icon + cleanBody.slice(anchorEnd + 4)
+  return opening + decoratedBody + closing
+})
+%><%- speechHTML %>
+<style>
+  .Post__Content .Speech__CategoryIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--color-primary);
+    vertical-align: middle;
+  }
+
+  .Post__Content .Speech__CategoryIcon svg {
+    display: block;
+    width: 25px;
+    height: 25px;
+  }
+</style>
