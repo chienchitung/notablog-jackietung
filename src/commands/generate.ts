@@ -12,7 +12,6 @@ import { renderIndex } from '../renderIndex'
 import { renderPost } from '../renderPost'
 import { log, parseJSON } from '../utils/misc'
 import { toDashID } from '../utils/notion'
-import { createPublicNotionAgent } from '../utils/publicNotionAgent'
 import { RenderPostTask, SiteContext, ThemeConfig } from '../types'
 
 type GenerateOptions = {
@@ -81,13 +80,11 @@ export async function generate(
   // Route public-site requests through their own host. The default
   // www.notion.so host can fail to locate records stored in another cell.
   const sourceOrigin = new URL(config.get('url')).origin
-  const notionAgent = !notionToken && sourceOrigin.endsWith('.notion.site')
-    ? await createPublicNotionAgent(config.get('url'))
-    : createAgent({
+  const notionAgent = createAgent({
     debug: verbose,
     token: notionToken,
     server: sourceOrigin,
-    })
+  })
   const cache = new Cache(path.join(workDir, 'cache'))
 
   /** Init dir paths. */

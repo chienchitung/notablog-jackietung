@@ -42,6 +42,10 @@ program
       const endTime = Date.now()
       const timeElapsed = (endTime - startTime) / 1000
       logger.info(`Done in ${timeElapsed}s. Run 'notablog preview ${workDir}' to preview`)
+      // The legacy HTTP client leaves live sessions behind after all awaited
+      // writes complete. Generation is a one-shot command; exit so CI can
+      // validate and publish instead of waiting on those idle sessions.
+      process.exit(0)
     } catch (error) {
       logger.error(error)
       process.exit(1)
