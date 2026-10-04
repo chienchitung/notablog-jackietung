@@ -24,7 +24,11 @@
       <% } %>
     </header>
 
-    <div class="Works__Content"><%- post.contentHTML %></div>
+    <% // Omit unpublished works from the generated HTML as well as the visible cards.
+    const publishedWorksHTML = post.contentHTML.replace(/<tr\b[^>]*>[\s\S]*?<\/tr>/gi, row =>
+      row.includes('Table__CellCheckbox--No') ? '' : row
+    ) %>
+    <div class="Works__Content"><%- publishedWorksHTML %></div>
 
     <%- include('partials/footer.html', { siteMeta }) %>
   </div>
