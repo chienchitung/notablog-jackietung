@@ -76,12 +76,16 @@ export async function generate(
     )
   }
 
+  const config = new Config(path.join(workDir, 'config.json'))
+  // Route public-site requests through their own host. The default
+  // www.notion.so host can fail to locate records stored in another cell.
+  const sourceOrigin = new URL(config.get('url')).origin
   const notionAgent = createAgent({
     debug: verbose,
     token: notionToken,
+    server: sourceOrigin,
   })
   const cache = new Cache(path.join(workDir, 'cache'))
-  const config = new Config(path.join(workDir, 'config.json'))
 
   /** Init dir paths. */
   const theme = config.get('theme')
